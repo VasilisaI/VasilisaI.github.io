@@ -1,184 +1,250 @@
-@@ -161,3 +161,29 @@ footer a {
-    gap: 0;
-  }
-/* =========================
-   Base reset
-   ========================= */
+@import "{{ site.theme }}";
+
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
+body {
 html, body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #f8f8f8;
+padding: 0;
 }
+
 
 /* =========================
-   Typography
-   ========================= */
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  background: #ffffff;
-  color: #333;
+  Typography
+  ========================= */
+@@ -28,114 +19,78 @@ body {
 }
 
 a {
-  color: #0066cc;
-  text-decoration: none;
+  color: #1a73e8;
+color: #0066cc;
+text-decoration: none;
 }
 
+@@ -27,163 +30,133 @@ a:hover {
 a:hover {
   text-decoration: underline;
 }
 
 /* =========================
-   Header
-   ========================= */
+  Header
+  ========================= */
+
 header {
-  text-align: center;
-  padding: 2rem 1rem 1rem;
+  background: #222;
+  color: #fff;
+  padding: 2.5rem 1rem 2rem;
+text-align: center;
+padding: 2rem 1rem 1rem;
 }
 
 header h1 {
-  margin: 0;
-  font-size: 2.2rem;
+margin: 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+font-size: 2.2rem;
 }
 
 header p {
-  margin: 0.5rem 0 0;
-  font-size: 1.1rem;
+  margin-top: 0.75rem;
+margin: 0.5rem 0 0;
+font-size: 1.1rem;
 }
 
 /* =========================
-   Banner
-   ========================= */
+  Banner
+  ========================= */
+
 #banner {
-  background: #222;
-  padding: 0.8rem 1rem;
-  text-align: center;
+  background: #333;
+  border-bottom: 4px solid #ffcc00;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+background: #222;
+padding: 0.8rem 1rem;
+text-align: center;
 }
 
 #banner .button {
-  color: #fff;
-  border: 1px solid #fff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  background: #ffcc00;
+  color: #000;
+  padding: 0.5rem 1rem;
+color: #fff;
+border: 1px solid #fff;
+padding: 0.4rem 0.8rem;
+border-radius: 4px;
+  font-weight: 600;
+font-size: 0.9rem;
 }
 
 #banner .button:hover {
-  background: #fff;
-  color: #222;
-  text-decoration: none;
+  background: #e6b800;
+background: #fff;
+color: #222;
+text-decoration: none;
 }
 
-/* =========================
-   Layout wrapper
-   ========================= */
+#logo {
+  flex: 1;
 .wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+max-width: 1000px;
+margin: 0 auto;
+padding: 2rem 1rem;
 }
 
+
+
+.wrapper {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 /* Hide unused nav cleanly */
 nav {
-  display: none;
+display: none;
 }
 
-/* =========================
-   Main content layout
-   ========================= */
+
+nav {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1.5rem;
 section {
-  width: 100%;
+width: 100%;
 }
 
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 /* Side-by-side layout */
 .content-row {
 display: flex;
-  gap: 2rem;
-  gap: 2.5rem;
+  gap: 1.5rem;
+gap: 2.5rem;
 align-items: flex-start;
 }
 
-/* Left column */
-/* =========================
-   Profile / Bio column
-   ========================= */
+nav li {
+  padding: 0.75rem 0;
+
 .profile {
 width: 30%;
-text-align: center;
-@@ -19,11 +110,69 @@
-.profile img {
-width: 100%;
-max-width: 180px;
-  border-radius: 8px;
-  border-radius: 10px;
+@@ -149,41 +104,25 @@ nav li {
 margin-bottom: 1rem;
 }
 
-/* Right column */
+  padding: 1.5rem 0;
 .profile h2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+margin-top: 0.5rem;
+margin-bottom: 0.5rem;
 }
 
+section h2 {
+  font-size: 1.6rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
 .profile p {
-  text-align: left;
-  font-size: 0.95rem;
+text-align: left;
+font-size: 0.95rem;
 }
 
-/* =========================
-   Labs column
-   ========================= */
+section p {
+  margin: 0.6rem 0;
+
 .labs {
 width: 70%;
 }
 
-.labs h2 {
-  margin-top: 0;
-}
-
-.labs p {
-  margin: 0.4rem 0;
-}
-
-.labs a {
+/* Lab links */
+section p a {
   font-weight: 500;
+.labs h2 {
+margin-top: 0;
 }
 
-/* =========================
-   Footer
-   ========================= */
-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid #ddd;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #777;
+/* About image */
+section img {
+  border-radius: 6px;
+  margin: 0.5rem 0 1rem;
+.labs p {
+margin: 0.4rem 0;
+}
+@@ -197,67 +136,26 @@ footer {
+margin-top: 3rem;
+padding-top: 1rem;
+border-top: 1px solid #ddd;
+  margin-top: 2rem;
+  padding: 1rem 0;
+text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+font-size: 0.85rem;
+color: #777;
 }
 
-/* =========================
-   Responsive behavior
-   ========================= */
+footer a {
+  color: #555;
+}
+
+
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
 @media (max-width: 768px) {
-  .content-row {
+.content-row {
+flex-direction: column;
+}
+
+  section h2 {
+    font-size: 1.4rem;
+.profile,
+.labs {
+width: 100%;
+}
+
+  nav ul {
     flex-direction: column;
-  }
+    gap: 0;
+.profile {
+text-align: center;
+}
+}
 
-  .profile,
-  .labs {
-    width: 100%;
-  }
 
-  .profile {
-    text-align: center;
-  }
+.content-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
 
-  .profile p {
-    text-align: center;
-  }
+/* Left column */
+.profile {
+  width: 30%;
+  text-align: center;
+}
+
+.profile img {
+  width: 100%;
+  max-width: 180px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Right column */
+.labs {
+  width: 70%;
+.profile p {
+text-align: center;
 }
