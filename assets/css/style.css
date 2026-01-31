@@ -1,16 +1,107 @@
-@@ -161,3 +161,29 @@ footer a {
-    gap: 0;
-  }
+/* =========================
+   Base reset
+   ========================= */
+* {
+  box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
+/* =========================
+   Typography
+   ========================= */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: #ffffff;
+  color: #333;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Header
+   ========================= */
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
+
+/* =========================
+   Banner
+   ========================= */
+#banner {
+  background: #222;
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+
+#banner .button {
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#banner .button:hover {
+  background: #fff;
+  color: #222;
+  text-decoration: none;
+}
+
+/* =========================
+   Layout wrapper
+   ========================= */
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Hide unused nav cleanly */
+nav {
+  display: none;
+}
+
+/* =========================
+   Main content layout
+   ========================= */
+section {
+  width: 100%;
+}
+
+/* Side-by-side layout */
 .content-row {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: flex-start;
 }
 
-/* Left column */
+/* =========================
+   Profile / Bio column
+   ========================= */
 .profile {
   width: 30%;
   text-align: center;
@@ -19,11 +110,69 @@
 .profile img {
   width: 100%;
   max-width: 180px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 1rem;
 }
 
-/* Right column */
+.profile h2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile p {
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Labs column
+   ========================= */
 .labs {
   width: 70%;
+}
+
+.labs h2 {
+  margin-top: 0;
+}
+
+.labs p {
+  margin: 0.4rem 0;
+}
+
+.labs a {
+  font-weight: 500;
+}
+
+/* =========================
+   Footer
+   ========================= */
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* =========================
+   Responsive behavior
+   ========================= */
+@media (max-width: 768px) {
+  .content-row {
+    flex-direction: column;
+  }
+
+  .profile,
+  .labs {
+    width: 100%;
+  }
+
+  .profile {
+    text-align: center;
+  }
+
+  .profile p {
+    text-align: center;
+  }
 }
