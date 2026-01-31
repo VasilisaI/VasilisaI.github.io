@@ -1,7 +1,4 @@
 @import "{{ site.theme }}";
-/* =========================
-   Base reset & typography
-   ========================= */
 
 * {
   box-sizing: border-box;
@@ -16,9 +13,7 @@ body {
   background-color: #f8f8f8;
 }
 
-/* =========================
-   Links
-   ========================= */
+
 
 a {
   color: #1a73e8;
