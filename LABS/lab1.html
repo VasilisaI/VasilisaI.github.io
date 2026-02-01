@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1</title>
+</head>
+<body>
+    <h1>Artemis</h1>
+    <p>This is a basic HTML page.</p>
+</body>
+</html>
+<h2>Lab t</h2>
+<section>
+    <h3>Objective</h3>
+    <p>Description of the lab objective goes here.</p>
+</section>
+<section>
+    <h3>Code Snippets</h3>
+    <pre><code>
+  case ECHO:
+           
+            char char_arr[MAX_MSG_SIZE];
+            tx_estring_value.clear();
+            tx_estring_value.append("Robot Says -> ");
+            
+            // Extract the next value from the command string as a character array
+            success = robot_cmd.get_next_value(char_arr);
+            Serial.println(char_arr);
+            if (!success) 
+                return;
+            tx_estring_value.append(char_arr);
+            tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+            Serial.print("Sent back: ");
+            Serial.println(tx_estring_value.c_str()); //prints the written value 
+           
+            break;
+
+    </code></pre>
+</section>
+<section>
+    <h3>Results</h3>
+    <p>Document your results here.</p>
+</section>
+<section>
+    <h3>Conclusion</h3>
+    <p>Summarize your findings here.</p>
+</section>
+</body>
+</html>
