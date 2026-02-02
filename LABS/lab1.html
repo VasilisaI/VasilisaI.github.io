@@ -21,27 +21,7 @@
 </section>
 <section>
     <h3>Code Snippets</h3>
-    <pre><code>
-  case ECHO:
-           
-            char char_arr[MAX_MSG_SIZE];
-            tx_estring_value.clear();
-            tx_estring_value.append("Robot Says -> ");
-            
-            // Extract the next value from the command string as a character array
-            success = robot_cmd.get_next_value(char_arr);
-            Serial.println(char_arr);
-            if (!success) 
-                return;
-            tx_estring_value.append(char_arr);
-            tx_characteristic_string.writeValue(tx_estring_value.c_str());
-
-            Serial.print("Sent back: ");
-            Serial.println(tx_estring_value.c_str()); //prints the written value 
-           
-            break;
-
-    </code></pre>
+    <script src="https://gist.github.com/VasilisaI/f3211184f1bc62db095170349edde9d6.js"></script>
 </section>
 <section>
     <h3>Results</h3>
