@@ -5,142 +5,93 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 1</title>
-
-  <!-- Correct CSS link -->
   <link rel="stylesheet" href="/LABS/style.css">
 </head>
 
 <body>
-
   <div class="wrapper">
-    
-</body>
-  <h1>Artemis</h1>
-  <p>This is a basic HTML page.</p>
+    <h1>Artemis</h1>
+    <p>This is a basic HTML page.</p>
 
-  <h2>Lab 1A</h2>
+    <h2>Lab 1A</h2>
+    <h3>Blink</h3>
+    <video controls width="40%"><source src="/assets/media/Blink.mov" type="video/mov"></video>
 
- <h3> Blink</h3>
+    <h3>Serial</h3>
+    <video controls width="40%"><source src="/assets/media/Serial_Example.mp4" type="video/mp4"></video>
 
-  <video controls width="40%">
-      <source src="/assets/media/Blink.mov" type="video/mov">
-      Your browser does not support the video tag.
-    </video>
+    <h3>Analog Read</h3>
+    <video controls width="40%"><source src="/assets/media/AnalogRead.mov" type="video/mov"></video>
 
+    <h3>Microphone</h3>
+    <video controls width="40%"><source src="/assets/media/mic.mov" type="video/mov"></video>
 
- <h3> Serial</h3>
+    <h3>Electronic Tuner</h3>
+    <video controls width="40%"><source src="/assets/media/Tuner.mov" type="video/mov"></video>
 
-    <video controls width="40%">
-        <source src="/assets/media/Serial_Example.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-        </video>
+    <h2>Lab 1B</h2>
+    <section>
+      <h3>Tasks</h3>
+      <p>Description of the lab objective goes here.</p>
+    </section>
 
-<h3> Analog Read</h3>
-    <video controls width="40%">
-        <source src="/assets/media/AnalogRead.mov" type="video/mov">
-        Your browser does not support the video tag.
-        </video>
-<h3> Microphone</h3>
-    <video controls width="40%">
-        <source src="/assets/media/mic.mov" type="video/mov">
-        Your browser does not support the video tag.
-        </video>
-<h3> Electronic Tuner</h3>
-    <video controls width="40%">
-        <source src="/assets/media/Tuner.mov" type="video/mov">
-        Your browser does not support the video tag.
-        </video>
+    <section>
+      <h3>Code Snippets</h3>
 
-  <h2>Lab 1B</h2>
+      <details>
+        <summary>ECHO</summary>
+        <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+          <div style="flex: 1; padding-right: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+            <script src="https://gist.github.com/VasilisaI/c2f948b66ef7b9dad31f0a535eee4c52.js"></script>
+          </div>
+          <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
+            <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
+            <img src="/assets/media/ECHO.png" alt="Python Code" style="width: 100%; height: auto; border-radius: 4px;"/>
+          </div>
+        </div>
+      </details>
 
- <h3>Lab Tasks</h3>
-    <p></p>
+      <details>
+        <summary>SEND_THREE_FLOATS</summary>
+        <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+          <div style="flex: 1; padding-right: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+            <script src="https://gist.github.com/VasilisaI/afb1abae2e61fd6565cfa910b63d9f1e.js"></script>
+          </div>
+          <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
+            <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
+            <img src="/assets/media/SEND_THREE_FLOATS.png" alt="Floats Output" style="width: 100%; height: auto; border-radius: 4px;"/>
+          </div>
+        </div>
+      </details>
 
+      <details>
+        <summary>GET_TIME_MILLIS</summary>
+        <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+          <div style="flex: 1; padding-right: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+            <script src="https://gist.github.com/VasilisaI/3cb290222bae1b95cc4ba1fcab5d48b6.js"></script>
+          </div>
+          <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
+            <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
+            <img src="/assets/media/TIME_MILLIS.png" alt="Time Millis Output" style="width: 100%; height: auto; border-radius: 4px;"/>
+          </div>
+        </div>
+      </details>
+    </section>
 
-  <section>
-    <h3>Tasks</h3>
-    <p>Description of the lab objective goes here.</p>
-  </section>
+    <section>
+      <h3>Results</h3>
+      <p>Document your results here.</p>
+      <video controls width="40%"><source src="/assets/media/Serial_Example.mp4" type="video/mp4"></video>
+      <video controls width="40%"><source src="/assets/media/Blink.mov" type="video/mov"></video>
+      <video controls width="40%"><source src="/assets/media/mic.mov" type="video/mov"></video>
+    </section>
 
-  <section>
-    <h3> Code Snippets</h3>
-    <details>
-      <summary>Code</summary>
-      <script src="https://gist.github.com/VasilisaI/f3211184f1bc62db095170349edde9d6.js"></script>
-    </details>
-  
-
-   <details>
-  <summary>ECHO</summary>
-  
-  <div style="display: flex; gap: 20px; align-items: flex-start; padding-top: 15px;">
-    
-    <div style="flex: 1;">
-      <h4 style="margin: 0 0 10px 0;">Source Code</h4>
-      <script src="https://gist.github.com/VasilisaI/c2f948b66ef7b9dad31f0a535eee4c52.js"></script>
-    </div>
-
-    <div style="flex: 1;">
-      <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
-      <img src="/assets/media/ECHO.png" alt="Python Code" style="width: 100%; height: auto; border-radius: 4px;"/>
-    </div>
-
-  </div>
-</details>
-
-</div>
-    <details>
-      <summary>SEND_THREE_FLOATS</summary>
-      <div style="display: flex; gap: 20px; align-items: flex-start; padding-top: 15px;"></div>
-      <script src="https://gist.github.com/VasilisaI/afb1abae2e61fd6565cfa910b63d9f1e.js"></script>
-       </div>
-
-    <div style="flex: 1;">
-      <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
-      <img src="/assets/media/ECHO.png" alt="Python Code" style="width: 100%; height: auto; border-radius: 4px;"/>
-    </div>
-    </div>
-    </details>
-
-
-    <details>
-      <summary>GET_TIME_MILLIS</summary>
-        <script src="https://gist.github.com/VasilisaI/3cb290222bae1b95cc4ba1fcab5d48b6.js"></script>
-    </details>
-
-    
-  </section>
-
-
-
-
-
-  <section>
-    <h3>Results</h3>
-    <p>Document your results here.</p>
-
-    <video controls width="40%">
-      <source src="/assets/media/Serial_Example.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <video controls width="40%">
-      <source src="/assets/media/Blink.mov" type="video/mov">
-      Your browser does not support the video tag.
-    </video>
-
-    <video controls width="40%">
-      <source src="/assets/media/mic.mov" type="video/mov">
-      Your browser does not support the video tag.
-    </video>
-
-
-  </section>
-
-  <section>
-    <h3>Conclusion</h3>
-    <p>Summarize your findings here.</p>
-  </section>
-
-</body>
+    <section>
+      <h3>Conclusion</h3>
+      <p>Summarize your findings here.</p>
+    </section>
+  </div> </body>
 </html>
