@@ -168,3 +168,11 @@ footer {
     text-align: center;
   }
 }
+.labs img,
+.labs video,
+.labs iframe,
+.labs .gist {
+  display: block !important;
+  margin: 2rem auto !important;
+  max-width: 900px;
+}
