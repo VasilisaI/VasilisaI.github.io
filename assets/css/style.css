@@ -17,7 +17,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  background: #ffffff;
+  background: #8d8d8a;
   color: #333;
 }
 
@@ -34,6 +34,7 @@ a:hover {
    Header
    ========================= */
 header {
+  background-color: #ffcc00;
   text-align: center;
   padding: 2rem 1rem 1rem;
 }
