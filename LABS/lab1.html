@@ -236,11 +236,11 @@
     </details>
 
 
-  The main difference between the two methods discussed above is individual versus batch data processing. The utility of each transfer method differs based on the specific application for which BLE is being used. For instance, if data collection is performed for later analysis, then the batch processing method is more effective. However, if the data is very time-sensitive meaning that each reading could lead to the robot making a decision,it is better to use the first method and process each reading individually.
+ <p> The main difference between the two methods discussed above is individual versus batch data processing. The utility of each transfer method differs based on the specific application for which BLE is being used. For instance, if data collection is performed for later analysis, then the batch processing method is more effective. However, if the data is very time-sensitive meaning that each reading could lead to the robot making a decision,it is better to use the first method and process each reading individually.
 
 The advantage of the first method is that it does not require a large amount of storage space to maintain lengthy arrays. However, it is significantly slower than its counterpart.
 
-The second method was able to send 10 messages in 9 ms, which corresponds to approximately 1111.1 messages per second. Each message was 22 bytes long, resulting in a data rate of 24,444.4 bytes per second. The main disadvantage of the second method is that it requires storing potentially large amounts of data on board a microcontroller with limited resources.The amount of data that can be stored and sent greatly depends on the type of data being communicated. The MCU has 393,216 bytes of memory, so if each message is maximized to 255 bytes, up to 1,542 messages can be sent before running out of memory.
+The second method was able to send 10 messages in 9 ms, which corresponds to approximately 1111.1 messages per second. Each message was 22 bytes long, resulting in a data rate of 24,444.4 bytes per second. The main disadvantage of the second method is that it requires storing potentially large amounts of data on board a microcontroller with limited resources.The amount of data that can be stored and sent greatly depends on the type of data being communicated. The MCU has 393,216 bytes of memory, so if each message is maximized to 255 bytes, up to 1,542 messages can be sent before running out of memory.</p>
 
 
 <details>
@@ -251,11 +251,9 @@ The second method was able to send 10 messages in 9 ms, which corresponds to app
       <script src="https://gist.github.com/VasilisaI/968f0261c77f03884835cf6fb49ef32d.js"></script>
       <img src="/assets/media/transfer_rate.png" alt="Temperature Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
       <p style="margin: 0;"></p>
-      </p> To test the impact of packekt size on the data ratE, I used the SET_VEL command already existing in the codebase to send string replies of various character lengths back to the computer. 
-      The data rate for the 5 byte packet was 0.0619512 seconds per message while the rate for the 120 byte packet was 0.0575078 seconds per message. 
-       Across the graph of packet sizes of 5,20,40,60,80,100, and 120 bytes, the effective rate did decrease slightly the medium sized packets of 40-80 bytes, but then started incresing
-       again with the 120 byte packet. This trend may be due to the overhead required to set up the BLE connection and notification handler, which becomes less significant as the packet size increases. 
+      </p> To test the impact of packet size on data rate, I used the existing SET_VEL command in the codebase to send string replies of various character lengths back to the computer. The data rate for the 5-byte packet was 0.0619512 seconds per message, while the rate for the 120-byte packet was 0.0575078 seconds per message.
 
+Across packet sizes of 5, 20, 40, 60, 80, 100, and 120 bytes, the effective rate decreased slightly for the medium-sized packets (40–80 bytes) but then began increasing again for the 120-byte packet. This trend could signify overhead required to set up the BLE connection and notification handler, which becomes less significant as packet size increases. </p>
 
     </div>
   </div>
@@ -266,10 +264,7 @@ The second method was able to send 10 messages in 9 ms, which corresponds to app
   <summary>Reliability</summary>
   <div style="display: flex; align-items: flex-start; padding-top: 15px;">
     <div style="flex: 1; padding-right: 20px;">
-      </p> If the robot sends data to a computer at a higher rate than the computer can read it, then data loss is very likely to occur. I tried testing this by using a counter loop 
-      to contunously transmit consequtive floats to the computer without delays and observe whether any numbers were missing. I was not able to see any data loss, likely due to 
-      the fact that I still had some delays like the time it takes to increment the counter, embedded in the system. 
-
+      </p> If the robot sends data to a computer at a higher rate than the computer can read it, data loss is likely to occur. I tested this by using a counter loop to continuously transmit consecutive floats to the computer without intentional delays and observed whether any numbers were missing. I did not observe any data loss, likely because there were still inherent delays in the system, such as the time it takes to increment the counter.</p>
     </div>
   </div>
 </details>
