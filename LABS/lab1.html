@@ -236,11 +236,11 @@
     </details>
 
 
-    The main difference between the two methods discussed above is the individual vs batch data processing. The utility of each transfer method diffes based on the specific application the BLE is being used for. For instance, if the data collection is perfoemed for later analysis, then the batch processing method would be more effective. However, if the data is very time sensitive 
-  meaning that each reading could lead to the robot making a decision, then it is better to use the first method and prcocess each reading one by one. The advatage of the first method is that it does not require a lot of storage space to keep lengthy arrays. However, it is signficiantly slower than its counterpart. 
-  The second method was able to send 10 messages in 9ms which is 1111.1 messages per second. Each message was 22 bytes long which gives the rate of 24444.4 bytes per second. The main disadvatnage of the second method is that it requires storage of potentially large amounts of data on board a microcontroller with limited resources. 
-  The amount of data that can be stored and send greatly depends on the type of data that you are trying to communicate. The MCU has 393216 bytes of memory, so if you maximize each message to 255 bytes, then you can srill send 1542 messages before running out of memory.
-     
+  The main difference between the two methods discussed above is individual versus batch data processing. The utility of each transfer method differs based on the specific application for which BLE is being used. For instance, if data collection is performed for later analysis, then the batch processing method is more effective. However, if the data is very time-sensitive meaning that each reading could lead to the robot making a decision,it is better to use the first method and process each reading individually.
+
+The advantage of the first method is that it does not require a large amount of storage space to maintain lengthy arrays. However, it is significantly slower than its counterpart.
+
+The second method was able to send 10 messages in 9 ms, which corresponds to approximately 1111.1 messages per second. Each message was 22 bytes long, resulting in a data rate of 24,444.4 bytes per second. The main disadvantage of the second method is that it requires storing potentially large amounts of data on board a microcontroller with limited resources.The amount of data that can be stored and sent greatly depends on the type of data being communicated. The MCU has 393,216 bytes of memory, so if each message is maximized to 255 bytes, up to 1,542 messages can be sent before running out of memory.
 
 
 <details>
