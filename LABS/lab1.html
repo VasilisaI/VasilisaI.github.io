@@ -6,214 +6,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 1</title>
   <link rel="stylesheet" href="/LABS/style.css">
+
+  <style>
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+  </style>
 </head>
 
 <body>
   <div class="wrapper">
     <h1>Artemis</h1>
-    
+
     <h2>Lab 1A</h2>
+
     <h3>Blink</h3>
-    <video controls width="50%"><source src="/assets/media/Blink.mp4" type="video/mp4"></video>
+    <div class="video-center">
+      <video controls width="50%">
+        <source src="/assets/media/Blink.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <h3>Serial</h3>
-    <video controls width="50%"><source src="/assets/media/Serial_Example.mp4" type="video/mp4"></video>
+    <div class="video-center">
+      <video controls width="50%">
+        <source src="/assets/media/Serial_Example.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <h3>Analog Read</h3>
-    <video controls width="50%"><source src="/assets/media/temp.mp4" type="video/mp4"></video>
-    <p>Increasing the temperature readings.</p>
-    <h3>Microphone</h3>
-    <video controls width="50%"><source src="/assets/media/mic.mp4" type="video/mp4"></video>
-    <p>Microphone response to snapping of fingers.</p>
-    <h3>Electronic Tuner</h3>
-    <video controls width="40%"><source src="/assets/media/Tuner.mp4" type="video/mp4"></video>
+    <div class="video-center">
+      <video controls width="50%">
+        <source src="/assets/media/temp.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p>Increasing temperature readings.</p>
 
-    
+    <h3>Microphone</h3>
+    <div class="video-center">
+      <video controls width="50%">
+        <source src="/assets/media/mic.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p>Microphone response to finger snapping.</p>
+
+    <h3>Electronic Tuner</h3>
+    <div class="video-center">
+      <video controls width="40%">
+        <source src="/assets/media/Tuner.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <h2>Lab 1B</h2>
+
     <section>
       <h3>Prelab</h3>
-      <h4>Set Up</h4>
+      <h4>Setup</h4>
 
-      <p>To set up the Arduino IDE for the Artemis board, I installed the Arduino Artemis package from the Arduino Board Manager.
-      Then, the codebase was dowloaded and added to a local FastRobots directory. I set up a virtual enviroment and dowloaded the necessary packages. 
-      </p> 
-      <img src="/assets/media/arduino_library.png" alt="Arduino Board Manager" style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
-      <img src="/assets/media/environment.png" alt="Fast Robots Codebase" style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
-
-      <h4>Code Base</h4>
-      The BLE library allows peripheral and central devices to communicate over Bluetooth Low Energy (BLE). 
-      cHARCTERISTIC that define how to send a particular type of data over BLE.  () commands help you easuly 
-      
-
-      <h3> Configuration</h3>
-      <h4> Updating MAC Address and UUID</h4>
-      <p>To identify the Artemis board, the device's MAC address was recorded the connection.yaml file and a unique UUID was
-        generated to differentiate my device from others. The BLE_UUID_TEST_SERVICE definition in the Artemis code and 
-        the ble_service variable in the Jupyter notebook were both updated to reflect this new UUID.
+      <p>
+        To set up the Arduino IDE for the Artemis board, I installed the Arduino Artemis
+        package from the Arduino Board Manager. Then, the codebase was downloaded and added
+        to a local FastRobots directory. I set up a virtual environment and downloaded the
+        necessary packages.
       </p>
-      <img src="/assets/media/MAC.png" alt="MAC Address" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
-      <img src="/assets/media/mac_service.png" alt="Connection YAML" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
 
-      <h4> Commands</h4>
+      <img src="/assets/media/arduino_library.png" alt="Arduino Board Manager"
+           style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+      <img src="/assets/media/environment.png" alt="Fast Robots Codebase"
+           style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
-      <p>The commands types list on both the Arduino side and Jupyter notebook were updated account for the rest of the tasks in this lab. 
-        </p>
-           <div style="display: flex; gap: 20px; align-items: flex-start;">
-  <img src="/assets/media/commands_python.png" alt="Artemis Setup" style="width: 20%; height: auto; border-radius: 4px;">
-  <img src="/assets/media/commands_arduino.png" alt="Jupyter Setup" style="width: 20%; height: auto; border-radius: 4px;">
-</div>
-    <section>
-      <h3>Tasks</h3>
-      
-        <details>
-  <summary>ECHO</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 15px;">
-      <h4 style="margin: 0 0 10px 0;">Artemis</h4>
-      <script src="https://gist.github.com/VasilisaI/c2f948b66ef7b9dad31f0a535eee4c52.js"></script>
-    </div>
-    <div style="flex: 1; padding-left: 5px; border-left: 1px solid #ccc;">
-      <h4 style="margin: 0 0 10px 0;">Jupyter</h4>
-      <img src="/assets/media/ECHO.png" alt="Python Code" style="width: 110%; height: auto; border-radius: 4px;"/>
-      <p>The returned message from Artemis is printed in Jupyter notebook.</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>SEND_THREE_FLOATS</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-      <script src="https://gist.github.com/VasilisaI/afb1abae2e61fd6565cfa910b63d9f1e.js"></script>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <h4 style="margin: 0 0 10px 0;">Jupyter Code</h4>
-      <img src="/assets/media/SEND_THREE_FLOATS.png" alt="Python Code Part 1" style="display: block; width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
-      <h4 style="margin: 0 0 10px 0;">Arduino Serial Output</h4>
-      <img src="/assets/media/floats_received.png" alt="Python Code Part 2" style="display: block; width: 100%; height: auto; border-radius: 4px;"/>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>GET_TIME_MILLIS</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Artemis</h4>
-      <script src="https://gist.github.com/VasilisaI/3cb290222bae1b95cc4ba1fcab5d48b6.js"></script>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <h4 style="margin: 0 0 10px 0;">Jupyter</h4>
-      <img src="/assets/media/GetMillis.png" alt="Time Millis Output" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
-      <h4 style="margin: 0 0 10px 0;">Arduino Serial Output</h4>
-      <img src="/assets/media/Time_Sent.png" alt="Arduino Serial Output" style="display: block; width: 100%; height: auto; border-radius: 4px;"/>
-      <p> The same time value is shown in the Arduino Serial Output and Jupyter notebook as it is sent from the Artemis board to the computer.</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>BLE Notification Handler</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1;">
-      <h4 style="margin: 0 0 10px 0;">Source Code</h4>
-      <img src="/assets/media/BLE_Notification.png" alt="BLE Notification Code" style="width: 80%; height: auto; border-radius: 4px;"/>
-      <p> A notification handler which can track when data changes is set up. As it receives raw byte data, it prints it. </p>
-      <img src="/assets/media/handler_return.png" alt="BLE Notification Code" style="width: 80%; height: auto; border-radius: 4px;"/>
-      <p> A BLE controller start_notify command is used to activate the notification handler.</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>Time Loop </summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Time Loop Source</h4>
-      <script src="https://gist.github.com/VasilisaI/b82fc787a290404f7bbedbd245c98026.js"></script> 
-      <h4 style="margin: 20px 0 10px 0;">GET_TIME_MILLIS (Reused)</h4>
-      <script src="https://gist.github.com/VasilisaI/361b2267b72710a7e6c46287c45db51c.js"></script>
-      <p>The loop logic is placed inside the previously created GET_TIME_MILLIS to have a controlled method of running the loop.</p>
-      <h4 style="margin: 0 0 10px 0;">Time Notification Results</h4>
-      <img src="/assets/media/time_notifications.png" alt="Time Notifications" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
-      <p>The code was able to send 26 messages in 602 ms meaning that the transfer rate is 23.15 ms per message. Each message is 7 bytes long, one byte for the ascii representation of each digit in the time value. Therefore, the effective transfer rate is about 302 bytes per second. There are other portions of the control loop like a Serial print statement that slow down the transfer of data, so a high transfer rate is achievable with greater code optimization.</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>SEND_TIME_DATA</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Source Code</h4>
-      <script src="https://gist.github.com/VasilisaI/85a1c05b11dfa790219b202645a70549.js"></script>
-      <img src="/assets/media/array_received.png" alt="Time Data Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <p style="margin: 0;">The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data was processed via the notification handler.</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>GET_TEMPERATURE_READINGS</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Source Code</h4>
-      <script src="https://gist.github.com/VasilisaI/3a64587370be4dc6d97e64eb90a57555.js"></script>
-      <img src="/assets/media/get_temp_readings.png" alt="Temperature Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
-      <img src="/assets/media/temp_notification_handler.png" alt="Time and Temperature Array Output" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
-      <h4 style="margin: 0 0 10px 0;">Results</h4>
-      <img src="/assets/media/temp_final_lists.png" alt="Time Notifications" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <p style="margin: 0;">The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data was processed via the notification handler. The data parsing 
-        occurs via python's split function which seperates the time and temperature values. The values are converted into ints before being stored in their 
-        proper lists.</p>
+      <h4>Codebase</h4>
+      <p>
+        The BLE library allows peripheral and central devices to communicate over Bluetooth
+        Low Energy (BLE). Characteristics define how specific types of data are sent over BLE.
+        The available commands allow data to be sent efficiently between the Artemis board
+        and the host computer.
       </p>
-    </div>
-  </div>
-</details>
 
-  The main difference between the two methods discussed above is the individual vs batch data processing. The utility of each transfer method diffes based on the specific application the BLE is being used for. For instance, if the data collection is perfoemed for later analysis, then the batch processing method would be more effective. However, if the data is very time sensitive 
-  meaning that each reading could lead to the robot making a decision, then it is better to use the first method and prcocess each reading one by one. The advatage of the first method is that it does not require a lot of storage space to keep lengthy arrays. However, it is signficiantly slower than its counterpart. 
-  The second method was able to send 10 messages in 9ms which is 1111.1 messages per second. Each message was 22 bytes long which gives the rate of 24444.4 bytes per second. The main disadvatnage of the second method is that it requires storage of potentially large amounts of data on board a microcontroller with limited resources. 
-  The amount of data that can be stored and send greatly depends on the type of data that you are trying to communicate. The MCU has 393216 bytes of memory, so if you maximize each message to 255 bytes, then you can srill send 1542 messages before running out of memory.
-     
+      <h3>Configuration</h3>
+      <h4>Updating MAC Address and UUID</h4>
+      <p>
+        To identify the Artemis board, the device’s MAC address was recorded in the
+        <code>connection.yaml</code> file, and a unique UUID was generated to differentiate
+        my device from others. The <code>BLE_UUID_TEST_SERVICE</code> definition in the Artemis
+        code and the <code>ble_service</code> variable in the Jupyter notebook were updated to
+        reflect this new UUID.
+      </p>
 
+      <img src="/assets/media/MAC.png" alt="MAC Address"
+           style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+      <img src="/assets/media/mac_service.png" alt="Connection YAML"
+           style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
-<details>
-  <summary>Effective Data Rate And Overhead</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Source Code</h4>
-      <script src="https://gist.github.com/VasilisaI/968f0261c77f03884835cf6fb49ef32d.js"></script>
-      <img src="/assets/media/transfer_rate.png" alt="Temperature Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
-      <p style="margin: 0;"></p>
-      </p> To test the impact of packekt size on the data ratE, I used the SET_VEL command already existing in the codebase to send string replies of various character lengths back to the computer. 
-      The data rate for the 5 byte packet was 0.0619512 seconds per message while the rate for the 120 byte packet was 0.0575078 seconds per message. 
-       Across the graph of packet sizes of 5,20,40,60,80,100, and 120 bytes, the effective rate did decrease slightly the medium sized packets of 40-80 bytes, but then started incresing
-       again with the 120 byte packet. This trend may be due to the overhead required to set up the BLE connection and notification handler, which becomes less significant as the packet size increases. 
+      <h4>Commands</h4>
+      <p>
+        The command type lists on both the Arduino side and the Jupyter notebook were updated
+        to account for the remaining tasks in this lab.
+      </p>
 
-
-    </div>
-  </div>
-</details>
-
-
-        
-
-
-
-     
-  
+      <div style="display: flex; gap: 20px; align-items: flex-start;">
+        <img src="/assets/media/commands_python.png" alt="Python Commands"
+             style="width: 20%; height: auto; border-radius: 4px;">
+        <img src="/assets/media/commands_arduino.png" alt="Arduino Commands"
+             style="width: 20%; height: auto; border-radius: 4px;">
+      </div>
     </section>
 
     <section>
       <h3>Discussion</h3>
-      The out is that bluetooth is a very convenient way to offboard a large amoutn of data at a fast rate. The lab also demosntrated that 
-      the methodology behind your data packing and trnasfer methods makes a signficant differnece in the effective transfer rate.
-  </div> </body>
+      <p>
+        The takeaway is that Bluetooth is a very convenient way to offload large amounts of
+        data at a fast rate. This lab demonstrated that the methodology behind data packing
+        and transfer significantly affects the effective transfer rate.
+      </p>
+    </section>
+
+  </div>
+</body>
 </html>
