@@ -134,8 +134,6 @@
       <script src="https://gist.github.com/VasilisaI/b82fc787a290404f7bbedbd245c98026.js"></script> 
       <h4 style="margin: 20px 0 10px 0;">GET_TIME_MILLIS (Reused)</h4>
       <script src="https://gist.github.com/VasilisaI/361b2267b72710a7e6c46287c45db51c.js"></script>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
       <h4 style="margin: 0 0 10px 0;">Time Notification Results</h4>
       <img src="/assets/media/time_notifications.png" alt="Time Notifications" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
       <p>The code was able to send 26 messages in 602 ms meaning that the transfer rate is 23.15 ms per message. Each message is 7 bytes long, one byte for the ascii representation of each digit in the time value. Therefore, the effective transfer rate is about 302 bytes per second. There are other portions of the control loop like a Serial print statement that slow down the transfer of data, so a high transfer rate is achievable with greater code optimization.</p>
