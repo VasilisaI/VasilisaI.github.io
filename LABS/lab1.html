@@ -134,6 +134,7 @@
       <script src="https://gist.github.com/VasilisaI/b82fc787a290404f7bbedbd245c98026.js"></script> 
       <h4 style="margin: 20px 0 10px 0;">GET_TIME_MILLIS (Reused)</h4>
       <script src="https://gist.github.com/VasilisaI/361b2267b72710a7e6c46287c45db51c.js"></script>
+      <p>The loop logic is placed inside the previously created GET_TIME_MILLIS to have a controlled method of running the loop.</p>
       <h4 style="margin: 0 0 10px 0;">Time Notification Results</h4>
       <img src="/assets/media/time_notifications.png" alt="Time Notifications" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
       <p>The code was able to send 26 messages in 602 ms meaning that the transfer rate is 23.15 ms per message. Each message is 7 bytes long, one byte for the ascii representation of each digit in the time value. Therefore, the effective transfer rate is about 302 bytes per second. There are other portions of the control loop like a Serial print statement that slow down the transfer of data, so a high transfer rate is achievable with greater code optimization.</p>
@@ -142,11 +143,12 @@
 </details>
 
 <details>
-  <summary>Time Array</summary>
+  <summary>SEND_TIME_DATA</summary>
   <div style="display: flex; align-items: flex-start; padding-top: 15px;">
     <div style="flex: 1; padding-right: 20px;">
       <h4 style="margin: 0 0 10px 0;">Source Code</h4>
       <script src="https://gist.github.com/VasilisaI/85a1c05b11dfa790219b202645a70549.js"></script>
+      <img src="/assets/media/array_received.png" alt="Time Data Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
     </div>
     <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
       <p style="margin: 0;">The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data was processed via the notification handler.</p>
@@ -155,14 +157,21 @@
 </details>
 
 <details>
-  <summary>Time and Temperature Arrays</summary>
+  <summary>GET_TEMPERATURE_READINGS</summary>
   <div style="display: flex; align-items: flex-start; padding-top: 15px;">
     <div style="flex: 1; padding-right: 20px;">
       <h4 style="margin: 0 0 10px 0;">Source Code</h4>
       <script src="https://gist.github.com/VasilisaI/3a64587370be4dc6d97e64eb90a57555.js"></script>
+      <img src="/assets/media/get_temp_readings.png" alt="Temperature Sent" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
+      <img src="/assets/media/temp_notification_handler.png" alt="Time and Temperature Array Output" style="width: 100%; height: auto; border-radius: 4px; margin-top: 15px;"/>
+      <h4 style="margin: 0 0 10px 0;">Results</h4>
+      <img src="/assets/media/temp_final_lists.png" alt="Time Notifications" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
     </div>
     <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <p style="margin: 0;">The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data was processed via the notification handler. The data parsing .</p>
+      <p style="margin: 0;">The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data was processed via the notification handler. The data parsing 
+        occurs via python's split function which seperates the time and temperature values. The values are converted into ints before being stored in their 
+        proper lists.</p>
+      </p>
     </div>
   </div>
 </details>
@@ -171,8 +180,10 @@
 
 
      Sending 10 messages in 9ms which is . 22 bytes long . The second method is significanntly faster
+     The amount of data that can be stored and send greatly depends on the type of data that you are trying to communicate.
 
-
+     393216 bytes of memory. If you maximize each message to 255 bytes, then you can srill send 1542 messages before running out of memory.
+     You can 
   
     </section>
 
