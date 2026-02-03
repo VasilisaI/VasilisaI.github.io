@@ -22,7 +22,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   background: #534573;
-  color: #333;
+  color: #000000;
 }
 
 a {
@@ -50,6 +50,27 @@ header h1 {
 header p {
   margin: 0.5rem 0 0;
   font-size: 1.1rem;
+}
+
+details {
+  background: #353434; /* White background for the card */
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional: adds a soft shadow */
+}
+
+/* This styles the clickable summary text */
+details summary {
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  color: #0066cc;
+}
+
+details summary:hover {
+  color: #004499;
 }
 
 /* =========================
