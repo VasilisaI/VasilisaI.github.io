@@ -11,8 +11,7 @@
 <body>
   <div class="wrapper">
     <h1>Artemis</h1>
-    <p>This is a basic HTML page.</p>
-
+    
     <h2>Lab 1A</h2>
     <h3>Blink</h3>
     <video controls width="40%"><source src="/assets/media/Blink.mp4" type="video/mp4"></video>
@@ -34,17 +33,33 @@
     <section>
       <h3>Prelab</h3>
       <h4>Set Up</h4>
+
+      <p>To set up the Arduino IDE for the Artemis board, I installed the Arduino Artemis package from the Arduino Board Manager.
+      Then, the codebase was dowloaded and added to a local FastRobots directory. I set up a virtual enviroment and dowloaded the necessary packages. 
+      </p> 
+      <img src="/assets/media/arduino_library.png" alt="Arduino Board Manager" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
+      <img src="/assets/media/environment.png" alt="Fast Robots Codebase" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
+
       <h4>Code Base</h4>
 
-      <p>T</p>
+      
+      <h3> Configuration</h3>
+      <h4> Updating MAC Address and UUID</h4>
+      <p>To identify the Artemis board, the device's MAC address was recorded the connection.yaml file and a unique UUID was
+        generated to differentiate my device from others. The BLE_UUID_TEST_SERVICE definition in the Artemis code and 
+        the ble_service variable in the Jupyter notebook were both updated to reflect this new UUID.
+      </p>
+      <img src="/assets/media/MAC.png" alt="MAC Address" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
+      <img src="/assets/media/mac_service.png" alt="Connection YAML" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
+
+      <h4> Commands</h4>
+
+      <p>The commands types list on both the Arduino side and Jupyter notebook were updated account for the rest of the tasks in this lab. 
+        </p>
+            <img src="/assets/media/commands_python.png" alt="Artemis Setup" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
+            <img src="/assets/media/commands_arduino.png" alt="Jupyter Setup" style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;"/>
     <section>
       <h3>Tasks</h3>
-      <p>Description of the lab objective goes here.</p>
-    </section>
-
-    <section>
-      <h4>Code Snippets</h4>
-
       
         <details>
   <summary>ECHO</summary>
@@ -148,7 +163,9 @@
 
 
 
-     
+     Sending 10 messages in 9ms which is . 22 bytes long . The second method is significanntly faster
+
+
   
     </section>
 
