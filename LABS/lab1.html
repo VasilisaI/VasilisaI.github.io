@@ -41,17 +41,19 @@
   <div class="video-center">
     <video controls width="50%">
       <source src="/assets/media/temp.mp4" type="video/mp4">
+      <p>Increasing temperature readings.</p>
     </video>
   </div>
-  <p>Increasing temperature readings.</p>
+  
 
   <h3>Microphone</h3>
   <div class="video-center">
     <video controls width="50%">
       <source src="/assets/media/mic.mp4" type="video/mp4">
+      <p>Microphone response to finger snapping.</p>
     </video>
   </div>
-  <p>Microphone response to finger snapping.</p>
+  
 
   <h3>Electronic Tuner</h3>
   <div class="video-center">
@@ -78,22 +80,14 @@
     <img src="/assets/media/environment.png" alt="Fast Robots Codebase"
          style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
-    <h4>Codebase</h4>
-    <p>
-      The BLE library allows peripheral and central devices to communicate over Bluetooth
-      Low Energy (BLE). Characteristics define how specific types of data are sent over BLE.
-      Commands are used to transmit data efficiently between the Artemis board and the host
-      computer.
-    </p>
 
     <h3>Configuration</h3>
     <h4>Updating MAC Address and UUID</h4>
 
     <p>
       To uniquely identify the Artemis board, the device’s MAC address was recorded in the
-      <code>connection.yaml</code> file, and a unique UUID was generated. The
-      <code>BLE_UUID_TEST_SERVICE</code> definition in the Artemis code and the
-      <code>ble_service</code> variable in the Jupyter notebook were updated accordingly.
+      connection.yaml file, and a unique UUID was generated. The BLE_UUID_TEST_SERVICE definition in the Artemis code and the
+      ble_service variable in the Jupyter notebook were updated accordingly.
     </p>
 
     <img src="/assets/media/MAC.png" alt="MAC Address"
@@ -199,11 +193,11 @@
       <summary>SEND_TIME_DATA</summary>
       <div style="display: flex; align-items: flex-start; padding-top: 15px;">
         <div style="flex: 1; padding-right: 20px;">
-          <h4>Source Code</h4>
+          <h4>Artemis</h4>
           <script src="https://gist.github.com/VasilisaI/85a1c05b11dfa790219b202645a70549.js"></script>
         </div>
         <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-          <h4>Results</h4>
+          <h4>Jupyter</h4>
           <img src="/assets/media/array_received.png"
                alt="Time Data Output"
                style="width: 100%; border-radius: 4px; margin-bottom: 15px;">
@@ -221,11 +215,11 @@
       <summary>GET_TEMPERATURE_READINGS</summary>
       <div style="display: flex; align-items: flex-start; padding-top: 15px;">
         <div style="flex: 1; padding-right: 20px;">
-          <h4>Source Code</h4>
+          <h4>Artemis</h4>
           <script src="https://gist.github.com/VasilisaI/3a64587370be4dc6d97e64eb90a57555.js"></script>
         </div>
         <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-          <h4>Results</h4>
+          <h4>Jupyter</h4>
           <img src="/assets/media/get_temp_readings.png" style="width: 100%; border-radius: 4px; margin-bottom: 15px;">
           <img src="/assets/media/temp_notification_handler.png" style="width: 100%; border-radius: 4px; margin-bottom: 15px;">
           <img src="/assets/media/temp_final_lists.png" style="width: 100%; border-radius: 4px; margin-bottom: 15px;">
