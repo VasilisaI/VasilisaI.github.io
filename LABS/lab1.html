@@ -131,16 +131,52 @@
 
 
       <details>
-        <summary>BLE Notification Handler</summary>
+        <summary>Time?</summary>
         <div style="display: flex; align-items: flex-start; padding-top: 15px;">
           <div style="flex: 1; padding-right: 20px;">
             <h4 style="margin: 0 0 10px 0;">Source Code</h4>
             <img src="/assets/media/time_notifications.png" alt="BLE Notification Code" style="width: 80%; height: auto; border-radius: 4px;"/>
         
         </div>
+        <p> The code was able to send 26 messages in 602 ms meaning that the transfer rate is 23.15 ms per message. 
+            Each message is 7 bytes long, one byte for the ascii representation of each digit in the time value. Therefore, 
+          the effective transfer rate is about 302 bytes per second. There are other portions of the control loop like a Serial print statement
+         that slow down the transfer of data, so a high transfer rate is achievable with greater code optimization. </p>
       </details>
 
-      
+
+      <details>
+        <summary>Time Stamp Array</summary>
+        <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+          <div style="flex: 1; padding-right: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+             <script src="https://gist.github.com/VasilisaI/85a1c05b11dfa790219b202645a70549.js"></script>
+          
+        </div>
+        
+        <p>The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data 
+          was processed via the notification handler.  </p>
+      </details>
+        
+      <details>
+        <summary>Time + Temp</summary>
+        <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+          <div style="flex: 1; padding-right: 20px;">
+            <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+             <script src="https://gist.github.com/VasilisaI/3a64587370be4dc6d97e64eb90a57555.js"></script>
+          
+        </div>
+        
+        <p>The loop populating the time stamps array was triggered by the GET_TIME_MILLIS like in the previous task. The data 
+          was processed via the notification handler. The data parsing .   </p>
+      </details>
+        
+
+
+
+     
+   
+
 
 
 
