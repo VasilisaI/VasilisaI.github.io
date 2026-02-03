@@ -1,80 +1,95 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 1 - Artemis</title>
+  <link rel="stylesheet" href="/LABS/style.css">
+</head>
+<body>
 
-<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>ECE 5160 | ECE5160</title>
-<meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="ECE 5160" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Fast Robots" />
-<meta property="og:description" content="Fast Robots" />
-<link rel="canonical" href="https://VasilisaI.github.io/" />
-<meta property="og:url" content="https://VasilisaI.github.io/" />
-<meta property="og:site_name" content="ECE5160" />
-<script type="application/ld+json">
-{"@type":"WebSite","url":"https://yl656.github.io/ECE4960/","headline":"ECE 5160","description":"Fast Robots","name":"ECE5160","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
+  <header>
+    <h1>Artemis</h1>
+    <p>Lab 1: Hardware & BLE Communication</p>
+  </header>
 
-    <link rel="shortcut icon" type="image/x-icon" href="/ECE4960/favicon.ico" />
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
-    <script src="/ECE4960/assets/js/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  </head>
-  <body>
-
-      <header>
-        <h1>ECE 5160</h1>
-        <p><a href="https://cei-lab.github.io/ECE4960/" style="color:#FFCC00;">Fast Robots</a></p>
-      </header>
-
-      <div id="banner">
-        <a href="https://yl656.github.io/ECE4960" class="button fork"><strong>Home</strong></a>
-      	<span id="logo"></span>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-       <section>
-  <div class="content-row">
-
-    <!-- LEFT: Photo + Bio -->
-    <div class="profile">
-      <img src="assets/css/TA_picture.jpg" alt="Profile photo" />
-      <h2 id="about-me">Vasilisa Ignatova</h2>
-      <p> Hi! I'm a first-year Robotics PhD student in the Helbling lab, where I'm interested in researching resource-constraint robots. Outside of grad school, I'm a proud member of the Big Red Barn's worst (occasionlly second-worst!) Trivia team.  </p>
-    </div>
-
-    <!-- RIGHT: Labs list -->
-    <div class="labs">
-      <h2 id="labs">Labs</h2>
-
-      <p><a href="/LABS/lab1.html">Lab 1, The Artemis Board</a></p>
-      <p><a href="/LABS/lab2.html">Lab 2</a></p>
-      <p><a href="/LABS/lab3.html">Lab 3</a></p>
-      <p><a href="/LABS/lab4.html">Lab 4</a></p>
-      <p><a href="/LABS/lab5.html">Lab 5</a></p>
-      <p><a href="/LABS/lab6.html">Lab 6</a></p>
-      <p><a href="/LABS/lab7.html">Lab 7</a></p>
-      <p><a href="/LABS/lab8.html">Lab 8</a></p>
-      <p><a href="/LABS/lab9.html">Lab 9</a></p>
-      <p><a href="/LABS/lab10.html">Lab 10</a></p>
-    </div>
-
+  <div id="banner">
+    <a href="#" class="button">GitHub Repository</a>
   </div>
-</section>
 
-    
-  </body>
+  <div class="wrapper">
+    <div class="content-row">
+      
+      <aside class="profile">
+        <img src="https://via.placeholder.com/180" alt="Artemis Nano">
+        <h2>About This Lab</h2>
+        <p>Documenting the peripheral setup and data transmission tasks for the Artemis Nano board.</p>
+      </aside>
+
+      <main class="labs">
+        <h2>Lab 1A: Peripherals</h2>
+        <div class="video-grid">
+          <div class="video-item">
+            <h4>Blink</h4>
+            <video controls><source src="/assets/media/Blink.mp4" type="video/mp4"></video>
+          </div>
+          <div class="video-item">
+            <h4>Serial</h4>
+            <video controls><source src="/assets/media/Serial_Example.mp4" type="video/mp4"></video>
+          </div>
+          <div class="video-item">
+            <h4>Analog Read</h4>
+            <video controls><source src="/assets/media/AnalogRead.mp4" type="video/mp4"></video>
+          </div>
+          <div class="video-item">
+            <h4>Electronic Tuner</h4>
+            <video controls><source src="/assets/media/Tuner.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+
+        <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #ccc;">
+
+        <h2>Lab 1B: BLE & Python</h2>
+        <section>
+          <details>
+            <summary><strong>ECHO Command</strong></summary>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; padding-top: 15px;">
+              <div style="flex: 1; min-width: 300px;">
+                <h4 style="margin: 0 0 10px 0;">Source Code</h4>
+                <script src="https://gist.github.com/VasilisaI/c2f948b66ef7b9dad31f0a535eee4c52.js"></script>
+              </div>
+              <div style="flex: 1; min-width: 250px;">
+                <h4 style="margin: 0 0 10px 0;">Output Preview</h4>
+                <img src="/assets/media/ECHO.png" alt="Echo Output" style="width: 100%; border-radius: 4px; border: 1px solid #ddd;"/>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>SEND_THREE_FLOATS</strong></summary>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; padding-top: 15px;">
+              <div style="flex: 1; min-width: 300px;">
+                <script src="https://gist.github.com/VasilisaI/afb1abae2e61fd6565cfa910b63d9f1e.js"></script>
+              </div>
+              <div style="flex: 1; min-width: 250px;">
+                <img src="/assets/media/SEND_THREE_FLOATS.png" alt="Floats" style="width: 100%; border-radius: 4px; border: 1px solid #ddd;"/>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <h3>Conclusion</h3>
+          <p>Successfully integrated the hardware sensors with the BLE software stack.</p>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Artemis Lab Reports</p>
+  </footer>
+
+</body>
 </html>
