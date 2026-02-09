@@ -19,79 +19,54 @@
 <body>
 <div class="wrapper">
 
-  <h1>Artemis</h1>
+  <h1>IMU</h1>
+  
 
-  <h2>Lab 1A</h2>
+  <section>
+    <h3>Set Up</h3>
+  
 
-  <h3>Blink</h3>
-  <div class="video-center">
+    
+
+    <img src="/assets/media2/IMG_6320.jpg" alt="IMU Connection"
+         style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+    
+    <p>
+      AD0_VAL represents the last bit of the I2C address used by the IMU and also the read/write flag. On our system the bit should be set to 1.
+    </p>
+    
+     <h3>Running Example Code</h3>
+    <div class="video-center">
     <video controls width="50%">
       <source src="/assets/media/Blink.mp4" type="video/mp4">
     </video>
-  </div>
-
-  <h3>Serial</h3>
-  <div class="video-center">
-    <video controls width="50%">
-      <source src="/assets/media/Serial_Example.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <h3>Analog Read</h3>
-  <div class="video-center">
-    <video controls width="50%">
-      <source src="/assets/media/temp.mp4" type="video/mp4">
-      
-    </video>
-   
-  </div>
-   <p>Increasing temperature readings.</p>
-  
-
-  <h3>Microphone</h3>
-  <div class="video-center">
-    <video controls width="50%">
-      <source src="/assets/media/mic.mp4" type="video/mp4">
-      
-    </video>
-   
-  </div>
-   <p>Microphone response to finger snapping.</p>
-
-  <h3>Electronic Tuner</h3>
-  <div class="video-center">
-    <video controls width="60%">
-      <source src="/assets/media/IMG_6312.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <h2>Lab 1B</h2>
-
-  <section>
-    <h3>Prelab</h3>
-    <h4>Setup</h4>
-
-    <p>
-      To set up the Arduino IDE for the Artemis board, I installed the Arduino Artemis
-      package from the Arduino Board Manager. The codebase was then downloaded and added
-      to a local FastRobots directory. I set up a virtual environment and downloaded the
-      required packages.
-    </p>
-
-    <img src="/assets/media/arduino_library.png" alt="Arduino Board Manager"
+   </div>
+     <p>
+      Explain what you see in both acceleration and gyroscope data.
+     </p>
+    <h3>Accelerometer</h3>
+    <h4>Pitch</h4>
+     <img src="/assets/media2/Pitch_0.png" alt="Pitch 0 Degrees"
          style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-    <img src="/assets/media/environment.png" alt="Fast Robots Codebase"
+      <img src="/assets/media2/Pitch_90.png" alt="Pitch 90 Degrees"
+         style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+      <img src="/assets/media2/Pitch_-90.png" alt="Pitch -90 Degrees"
          style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
 
-    <h3>Configuration</h3>
-    <h4>Updating MAC Address and UUID</h4>
-
     <p>
-      To uniquely identify the Artemis board, the device’s MAC address was recorded in the
-      connection.yaml file, and a unique UUID was generated. The BLE_UUID_TEST_SERVICE definition in the Artemis code and the
-      ble_service variable in the Jupyter notebook were updated accordingly.
+      
     </p>
+
+
+     <h3>Gyroscope</h3>
+
+
+     <h3>Sample Data</h3>
+
+
+     <h3>Stunt</h3>
+    
 
     <img src="/assets/media/MAC.png" alt="MAC Address"
          style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
