@@ -100,11 +100,37 @@
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
     <p> From the regular reading and the readign with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
-      at about 6 HZ. With this information, I chose the cutoff frequency of 10 Hz to eliminate the noise at both of the aforementioned frequencies. 
-      Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.65.  </p>
+      at about 6 HZ. With this information, I chose the cutoff frequency of 9 Hz to eliminate the noise at both of the aforementioned frequencies. 
+      Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.629. </p>
+      
+
+      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <img src="/assets/media2/pitch_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
+    <img src="/assets/media2/pitch_ftt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <img src="/assets/media2/roll_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
+    <img src="/assets/media2/roll_ftt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
+</div>
+
+
+      <p> The results showed that the low pass did decrease the noise, however, the alpha value was not optimal and could be further tuned for better performance. </p>
+
+
      <h3>Gyroscope</h3>
+      <img src="/assets/media2/gyro_flatIMU.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
+      <img src="/assets/media2/gyro_x_rotation.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
+      <img src="/assets/media2/gyro_x_rotation.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+
+      <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
+        experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
+        should stay at appoximately 0 degrees drifts. </p>
      <h3>Sample Data</h3>
 
     <h4>Data Storage</h4>
