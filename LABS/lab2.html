@@ -29,7 +29,7 @@
     
 
     <img src="/assets/media2/IMG_6320.jpg" alt="IMU Connection"
-         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+         style="width: 50%; height: auto; border-radius: 4px; margin-bottom: 20px;">
     
     <p>
       AD0_VAL represents the last bit of the I2C address used by the IMU and also the read/write flag. On our system the bit should be set to 1.
@@ -38,11 +38,14 @@
      <h3>Running Example Code</h3>
     <div class="video-center">
     <video controls width="50%">
-      <source src="/assets/media/Blink.mp4" type="video/mp4">
+      <source src="/assets/media2/code_working.mp4" type="video/mp4">
     </video>
+
    </div>
      <p>
-      Explain what you see in both acceleration and gyroscope data.
+      In the video, you can see the acceleration data showing 1000 mg corresponding to the 1 g of acceletation due to the force of gravity. As the orientation of the IMU changes, 
+      the 1000 mg value transfers betwen the axis. The gyroscope data shows zero degrees when the IMU is flat and then shows a changing value as it is rotated 
+      since the gyroscope measures the rate of change of the angle. 
      </p>
     <h3>Accelerometer</h3>
     <h4>Pitch</h4>
@@ -62,6 +65,8 @@
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
     <p>
+
+      
       
     </p>
 
@@ -71,14 +76,22 @@
 
      <h3>Sample Data</h3>
 
+    <h4>Data Storage</h4>
+    <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
+     would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data togetehr ensures that 
+     the data is approprialy synchronized without requiring any additional index matching. </p> 
+
+
+    
+Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?
 
      <h3>Stunt</h3>
     <div style="display: flex;">
   <video controls style="width: 50%;">
-    <source src="/assets/media2/stunt.mov" type="video/mp4">
+    <source src="/assets/media2/stunt.mp4" type="video/mp4">
   </video>
   <video controls style="width: 50%;">
-    <source src="/assets/media2/turn.mov" type="video/mp4">
+    <source src="/assets/media2/turn.mp4" type="video/mp4">
   </video>
  </div>
  <h4>Observations</h4>
@@ -86,7 +99,7 @@
         forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
        I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
       turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
-      also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication.  </p>
+      also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
 
     <img src="/assets/media/MAC.png" alt="MAC Address"
          style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
@@ -122,21 +135,7 @@
   </div>
 </details>
 
-<details>
-  <summary>SEND_THREE_FLOATS</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-      <script src="https://gist.github.com/VasilisaI/afb1abae2e61fd6565cfa910b63d9f1e.js"></script>
-    </div>
-    <div style="flex: 1; padding-left: 20px; border-left: 1px solid #ccc;">
-      <h4 style="margin: 0 0 10px 0;">Jupyter Code</h4>
-      <img src="/assets/media/SEND_THREE_FLOATS.png" alt="Python Code Part 1" style="display: block; width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px;"/>
-      <h4 style="margin: 0 0 10px 0;">Arduino Serial Output</h4>
-      <img src="/assets/media/floats_received.png" alt="Python Code Part 2" style="display: block; width: 100%; height: auto; border-radius: 4px;"/>
-    </div>
-  </div>
-</details>
+
 
 <details>
   <summary>GET_TIME_MILLIS</summary>
