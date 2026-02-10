@@ -69,12 +69,15 @@
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
       <h4> Accuracy Discussion</h4>
+    <div class="info-card">
     <p>
     The accelerameter data did not exhibit a stationary offset, deviating between 0 to 20 mg offset between readings. Performing the 
     two-point calibration, I found that the average offset for the z-axis acceleration was 17.8 mg, -3.37 mg for y-axis, and 2.5 mg for x-axis. 
     Hence, the accelerameter data is fairly accurate. Adjusting the accelerameter data utilizing the offset and the scaling factor did not 
     appear to produce significantly more accurate or precise data.   
     </p>
+    </div>
+
 
     <h4>FFT</h4>
    <h5>Baseline Reading</h5>
@@ -98,11 +101,12 @@
 
     <img src="/assets/media2/equations.png" alt="Roll 90 Degrees" 
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
+    
+    <div class="info-card">
     <p> From the regular reading and the readign with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
       at about 6 HZ. With this information, I chose the cutoff frequency of 9 Hz to eliminate the noise at both of the aforementioned frequencies. 
       Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.629. </p>
-      
+      </div>
 
       <div style="display: flex; gap: 10px; margin-bottom: 20px;">
     <img src="/assets/media2/pitch_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
@@ -113,11 +117,11 @@
     <img src="/assets/media2/roll_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
     <img src="/assets/media2/roll_ftt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
 </div>
-
+       <div class="info-card">
 
       <p> The results showed that the low pass did decrease the noise, however, the alpha value was not optimal and could be further tuned for better performance. </p>
 
-
+       </div>
      <h3>Gyroscope</h3>
       <img src="/assets/media2/gyro_flatIMU.png" alt="Roll 90 Degrees" 
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
@@ -128,10 +132,11 @@
       <img src="/assets/media2/gyro_y_rotation.png" alt="Roll 90 Degrees" 
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
+       <div class="info-card">
       <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
         experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
         should stay at appoximately 0 degrees drifts. </p>
-
+      </div>
       <h4>Complementary Filter</h4>
         <img src="/assets/media2/pitch_0.96.png" alt="Roll 90 Degrees" 
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
@@ -141,19 +146,22 @@
 
         <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll 90 Degrees" 
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
+       <div class="info-card">
+       
       <p> The output from the complementary filter showed significanlty less drift for both roll and pitch data seen in the plots above.
          After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
          trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not suspetible to vibrations from the environment.  </p>
-
+        </div>
 
      <h3>Sample Data</h3>
 
     <h4>Data Storage</h4>
+
+   <div class="info-card">
     <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
      would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data togetehr ensures that 
      the data is approprialy synchronized without requiring any additional index matching. </p> 
-
+    </div>
 
     
 Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?
@@ -168,39 +176,15 @@ Consider the memory of the Artemis; how much memory can you allocate to your arr
   </video>
  </div>
  <h4>Observations</h4>
+ <div class="info-card">
+
      <p> From testing the car, I was able to observe that it can move a little less than 1 kitchen tile, with the minimal application of 
         forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
        I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
       turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
       also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
-
-    <img src="/assets/media/MAC.png" alt="MAC Address"
-         style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-    <img src="/assets/media/mac_service.png" alt="Connection YAML"
-         style="width: 60%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-   
-
-    <div style="display: flex; gap: 20px;">
-      <img src="/assets/media/commands_python.png" alt="Python Commands"
-           style="width: 20%; height: auto; border-radius: 4px;">
-      <img src="/assets/media/commands_arduino.png" alt="Arduino Commands"
-           style="width: 20%; height: auto; border-radius: 4px;">
-    </div>
-  </section>
-
-  <section>
-   
+  </div>
     
-
-
-
-
-
-
-
-   
-
   </section>
 
   <section>
