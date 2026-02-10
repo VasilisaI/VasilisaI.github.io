@@ -131,6 +131,22 @@
       <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
         experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
         should stay at appoximately 0 degrees drifts. </p>
+
+      <h4>Complementary Filter</h4>
+        <img src="/assets/media2/gyro_flatIMU.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+
+        <img src="/assets/media2/gyro_x_rotation.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+
+        <img src="/assets/media2/gyro_x_rotation.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+
+      <p> The output from the complementary filter showed significanlty less drift for both roll and pitch data seen in the plots above.
+         After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
+         trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not suspetible to vibrations from the environment.  </p>
+
+
      <h3>Sample Data</h3>
 
     <h4>Data Storage</h4>
