@@ -186,17 +186,18 @@
           be using all the data unless we are doing full sensor fusion. Keeping the data separate will allow us to only transmit the data necessary and in the case that 
           we need both of the sensors, it would be easy to match the data together using the timestamp.  </p> 
     </div>
+     <div class="info-card">
       <p> I am storing the IMU data in floats because they have a good balance between precision and memory usage. Integers take up little memory but lack precision
           while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
       </p>
-
+   </div>
     <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
      
     <h4>5 Seconds of IMU Data </h4>
      <h5> Main Loop</h5>
     <script src="https://gist.github.com/VasilisaI/e793b557ea806433dd6c380d40afbebc.js"></script>
     
-     <video controls style="width: 50%;">
+     <video controls style="width: 80%;">
         <source src="/assets/media2/data_ble.mp4" type="video/mp4">
       </video>
 
@@ -229,7 +230,9 @@
     
 
     <h3>Resources</h3>
-    <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.</p>
+    <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.
+      The low-pass filtering alpha equation and visual are from class notes. 
+    </p>
   </section>
 </div>
 </body>
