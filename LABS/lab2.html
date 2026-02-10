@@ -2,193 +2,182 @@
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab 1</title>
-  <link rel="stylesheet" href="/LABS/style.css">
-
+  <title>Lab 1: IMU & Sensor Fusion</title>
+  
   <style>
-    .video-center {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 25px;
+    :root {
+      --primary-bg: #ffffff;
+      --secondary-bg: #f8f9fa;
+      --accent-color: #007bff;
+      --text-main: #333;
+      --border-radius: 8px;
     }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-main);
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--primary-bg);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    h1, h2, h3, h4 { color: #222; margin-top: 1.5em; }
+    h1 { border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-top: 0; }
+
+    /* Media Styling */
+    img, video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      margin: 20px auto;
+    }
+
+    .img-grid {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      align-items: center;
+    }
+
+    .img-grid img {
+      width: 48%; /* Allows two side-by-side with gap */
+      margin: 0;
+    }
+
+    .video-center {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    /* Observation Text Blocks */
+    .info-card {
+      background-color: var(--secondary-bg);
+      border-left: 4px solid var(--accent-color);
+      padding: 15px 25px;
+      margin: 25px 0;
+      font-style: italic;
+    }
+
+    .setup-img {
+      width: 50% !important;
+      border: 1px solid #ddd;
+    }
+
+    section { margin-bottom: 50px; }
   </style>
 </head>
 
 <body>
 <div class="wrapper">
 
-  <h1>IMU</h1>
-  
+  <h1>Lab 1: IMU Sensor Fusion</h1>
 
   <section>
-    <h3>Set Up</h3>
-  
-
-    
-
-    <img src="/assets/media2/IMG_6320.jpg" alt="IMU Connection"
-         style="width: 40%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-    
+    <h3>System Set Up</h3>
+    <img src="/assets/media2/IMG_6320.jpg" alt="IMU Connection" class="setup-img">
     <p>
-      AD0_VAL represents the last bit of the I2C address used by the IMU and also the read/write flag. On our system the bit should be set to 1.
+      <strong>AD0_VAL</strong> represents the last bit of the I2C address used by the IMU. On our system, this bit is set to 1 to match the physical address jumper configuration.
     </p>
-    
-     <h3>Running Example Code</h3>
+
+    <h3>Running Example Code</h3>
     <div class="video-center">
-    <video controls width="80%">
-      <source src="/assets/media2/code_working.mp4" type="video/mp4">
-    </video>
-
-   </div>
-
-   <div class="info-card">
-     <p>
-      In the video, you can see the acceleration data showing 1000 mg corresponding to the 1 g of acceletation due to the force of gravity. As the orientation of the IMU changes, 
-      the 1000 mg value transfers betwen the axis. The gyroscope data shows zero degrees when the IMU is flat and then shows a changing value as it is rotated 
-      since the gyroscope measures the rate of change of the angle. 
-     </p>
-   </div>
-
-    <h3>Accelerometer</h3>
-    <h4>Pitch</h4>
-     <img src="/assets/media2/Pitch_0.png" alt="Pitch 0 Degrees"
-       style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-    <img src="/assets/media2/Pitch_90.png" alt="Pitch 90 Degrees"
-       style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-    <img src="/assets/media2/Pitch_-90.png" alt="Pitch -90 Degrees"
-      style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-   
-      <h4>Roll</h4>
-      <img src="/assets/media2/Roll_0.png" alt="Roll 0 Degrees"
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-      <img src="/assets/media2/Roll_90.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-      <img src="/assets/media2/Roll_-90.png" alt="Roll -90 Degrees"
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-      <h4> Accuracy Discussion</h4>
-    <div class="info-card">
-    <p>
-    The accelerameter data did not exhibit a stationary offset, deviating between 0 to 20 mg offset between readings. Performing the 
-    two-point calibration, I found that the average offset for the z-axis acceleration was 17.8 mg, -3.37 mg for y-axis, and 2.5 mg for x-axis. 
-    Hence, the accelerameter data is fairly accurate. Adjusting the accelerameter data utilizing the offset and the scaling factor did not 
-    appear to produce significantly more accurate or precise data.   
-    </p>
+      <video controls width="100%">
+        <source src="/assets/media2/code_working.mp4" type="video/mp4">
+      </video>
     </div>
 
+    <div class="info-card">
+      <p>
+        Orientation changes result in the 1000 mg (1g) gravity vector transferring between axes. The gyroscope correctly reports zero when stationary and tracks angular velocity during rotation.
+      </p>
+    </div>
 
-    <h4>FFT</h4>
-   <h5>Baseline Reading</h5>
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <img src="/assets/media2/acc_frr_no_rc.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-    <img src="/assets/media2/acc_frr_no_rc_freq.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-</div>
-    <h5>Reading on a Vibrating Table</h5>
-<div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <img src="/assets/media2/acc_frr_vibration.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-    <img src="/assets/media2/acc_frr_vibrationfreq.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-</div>
-<h5>Reading Nearby RC Car</h5>
-<div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <img src="/assets/media2/acc_frr_rc.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-    <img src="/assets/media2/acc_frr_rc_freq.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-</div>
+    <h3>Accelerometer: Pitch & Roll</h3>
+    <p>Visualizing gravity-based orientation at 0, 90, and -90 degrees.</p>
+    
+    <h4>Pitch Steps</h4>
+    <img src="/assets/media2/Pitch_0.png" alt="Pitch 0">
+    <img src="/assets/media2/Pitch_90.png" alt="Pitch 90">
+    <img src="/assets/media2/Pitch_-90.png" alt="Pitch -90">
 
-     
-    <h4>Filtering</h4>
+    <h4>Roll Steps</h4>
+    <img src="/assets/media2/Roll_0.png" alt="Roll 0">
+    <img src="/assets/media2/Roll_90.png" alt="Roll 90">
+    <img src="/assets/media2/Roll_-90.png" alt="Roll -90">
 
-    <img src="/assets/media2/equations.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+    <div class="info-card">
+      <h4>Accuracy Discussion</h4>
+      <p>
+        The accelerometer exhibited a minor stationary offset (Z: 17.8 mg, Y: -3.37 mg, X: 2.5 mg). Two-point calibration confirmed the data is fairly accurate without significant scaling adjustments.
+      </p>
+    </div>
+
+    <h3>FFT Analysis</h3>
+    
+    <h5>Baseline vs. Vibrating Table</h5>
+    <div class="img-grid">
+      <img src="/assets/media2/acc_frr_no_rc.png" alt="Baseline Time">
+      <img src="/assets/media2/acc_frr_no_rc_freq.png" alt="Baseline FFT">
+    </div>
+
+    <h5>Motor Vibration (Nearby RC Car)</h5>
+    <div class="img-grid">
+      <img src="/assets/media2/acc_frr_rc.png" alt="RC Time">
+      <img src="/assets/media2/acc_frr_rc_freq.png" alt="RC FFT">
+    </div>
+
+    <h3>Signal Filtering</h3>
+    <img src="/assets/media2/equations.png" alt="Filter Equations" style="width: 70%;">
     
     <div class="info-card">
-    <p> From the regular reading and the readign with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
-      at about 6 HZ. With this information, I chose the cutoff frequency of 9 Hz to eliminate the noise at both of the aforementioned frequencies. 
-      Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.629. </p>
-      </div>
-
-      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <img src="/assets/media2/pitch_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-    <img src="/assets/media2/pitch_ftt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
+      <p>
+        Analysis revealed noise peaks at 6Hz and 9Hz. I selected a <strong>9Hz cutoff frequency</strong>. With a 30ms sampling rate ($T=0.03s$), the calculated $\alpha$ is 0.629.
+      </p>
     </div>
 
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <img src="/assets/media2/roll_filt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-    <img src="/assets/media2/roll_ftt.png" alt="FFT Plot" style="width: 60%; height: auto; border-radius: 4px;">
-</div>
-       <div class="info-card">
-
-      <p> The results showed that the low pass did decrease the noise, however, the alpha value was not optimal and could be further tuned for better performance. </p>
-
-       </div>
-     <h3>Gyroscope</h3>
-      <img src="/assets/media2/gyro_flatIMU.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-      <img src="/assets/media2/gyro_x_rotation.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-      <img src="/assets/media2/gyro_y_rotation.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-       <div class="info-card">
-      <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
-        experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
-        should stay at appoximately 0 degrees drifts. </p>
-      </div>
-      <h4>Complementary Filter</h4>
-        <img src="/assets/media2/pitch_0.96.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-        <img src="/assets/media2/roll_0.96.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-
-        <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll 90 Degrees" 
-        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
-       <div class="info-card">
-       
-      <p> The output from the complementary filter showed significanlty less drift for both roll and pitch data seen in the plots above.
-         After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
-         trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not suspetible to vibrations from the environment.  </p>
-        </div>
-
-     <h3>Sample Data</h3>
-
-    <h4>Data Storage</h4>
-
-   <div class="info-card">
-    <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
-     would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data togetehr ensures that 
-     the data is approprialy synchronized without requiring any additional index matching. </p> 
+    <div class="img-grid">
+      <img src="/assets/media2/pitch_filt.png" alt="Filtered Pitch">
+      <img src="/assets/media2/pitch_ftt.png" alt="Pitch FFT">
     </div>
 
-    
-Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?
+    <h3>Sensor Fusion: Complementary Filter</h3>
+    <div class="info-card">
+      <p>
+        While the gyroscope is smooth, it suffers from drift. I implemented a <strong>Complementary Filter</strong> with $\alpha = 0.96$ to trust the gyro for fast motion and the accelerometer for long-term stability.
+      </p>
+    </div>
 
-     <h3>Stunt</h3>
-    <div style="display: flex;">
-  <video controls style="width: 50%;">
-    <source src="/assets/media2/stunt.mp4" type="video/mp4">
-  </video>
-  <video controls style="width: 50%;">
-    <source src="/assets/media2/turning.mp4" type="video/mp4">
-  </video>
- </div>
- <h4>Observations</h4>
- <div class="info-card">
+    <img src="/assets/media2/pitch_0.96.png" alt="Fusion Pitch">
+    <img src="/assets/media2/roll_vibration_0.96.png" alt="Fusion Vibration Test">
 
-     <p> From testing the car, I was able to observe that it can move a little less than 1 kitchen tile, with the minimal application of 
-        forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
-       I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
-      turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
-      also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
-  </div>
-    
+    <h3>Stunt & Observations</h3>
+    <div class="img-grid">
+      <video controls style="width: 48%; margin: 0;">
+        <source src="/assets/media2/stunt.mp4" type="video/mp4">
+      </video>
+      <video controls style="width: 48%; margin: 0;">
+        <source src="/assets/media2/turning.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="info-card">
+      <p>
+        The car demonstrates a slight natural drift during straight-line travel. 180-degree turns are achievable through simultaneous throttle and steering, though communication range remains a bottleneck.
+      </p>
+    </div>
   </section>
-
-  <section>
-    
 
 </div>
 </body>
