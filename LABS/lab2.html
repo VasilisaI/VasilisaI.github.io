@@ -156,4 +156,57 @@
     </div>
 
     <h3>Gyroscope</h3>
-    <img src="/assets/media2/gyro_flatIMU.png" alt="Flat" style="width: 8
+    <img src="/assets/media2/gyro_flatIMU.png" alt="Flat" style="width: 80%;">
+    <img src="/assets/media2/gyro_x_rotation.png" alt="X rotation" style="width: 80%;">
+    <img src="/assets/media2/gyro_y_rotation.png" alt="Y rotation" style="width: 80%;">
+
+    <div class="info-card">
+      <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
+        experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
+        should stay at appoximately 0 degrees drifts. </p>
+    </div>
+
+    <h4>Complementary Filter</h4>
+    <img src="/assets/media2/pitch_0.96.png" alt="Pitch 0.96" style="width: 80%;">
+    <img src="/assets/media2/roll_0.96.png" alt="Roll 0.96" style="width: 80%;">
+    <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll Vibration" style="width: 80%;">
+
+    <div class="info-card">
+      <p> The output from the complementary filter showed significanlty less drift for both roll and pitch data seen in the plots above.
+        After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
+        trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not suspetible to vibrations from the environment.  </p>
+    </div>
+
+    <h3>Sample Data</h3>
+    <h4>Data Storage</h4>
+    <div class="info-card">
+      <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
+        would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data togetehr ensures that 
+        the data is approprialy synchronized without requiring any additional index matching. </p> 
+    </div>
+
+    <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
+
+    <h3>Stunt</h3>
+    <div style="display: flex; gap: 10px;">
+      <video controls style="width: 50%;">
+        <source src="/assets/media2/stunt.mp4" type="video/mp4">
+      </video>
+      <video controls style="width: 50%;">
+        <source src="/assets/media2/turning.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h4>Observations</h4>
+    <div class="info-card">
+      <p> From testing the car, I was able to observe that it can move a little less than 1 kitchen tile, with the minimal application of 
+        forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
+        I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
+        turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
+        also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
+    </div>
+    
+  </section>
+</div>
+</body>
+</html>
