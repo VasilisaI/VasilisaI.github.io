@@ -182,19 +182,25 @@
     <h4>Data Storage</h4>
     <div class="info-card">
       <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
-        would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data togetehr ensures that 
-        the data is approprialy synchronized without requiring any additional index matching. </p> 
+        would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data together ensures that 
+        the data is appropriately synchronized without requiring any additional index matching. </p> 
     </div>
+      <p> I am storing the IMU data in floats because they have a good balance between precision and memory usage. Integers take up little memory but lack precision
+         while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
+      </p>
 
     <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
+     
+    <h4>5 Seconds of IMU Data </h4>
 
+    
     <h3>Stunt</h3>
     <div style="display: flex; gap: 10px;">
       <video controls style="width: 50%;">
         <source src="/assets/media2/stunt.mp4" type="video/mp4">
       </video>
       <video controls style="width: 50%;">
-        <source src="/assets/media2/turning.mp4" type="video/mp4">
+        <source src="/assets/media2/turn.mp4" type="video/mp4">
       </video>
     </div>
 
