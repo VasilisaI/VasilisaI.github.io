@@ -68,13 +68,40 @@
       <img src="/assets/media2/Roll_-90.png" alt="Roll -90 Degrees"
         style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
 
+      <h4> Accuracy Discussion</h4>
     <p>
-
-      
-      
+    The accelerameter data did not exhibit a stationary offset, deviating between 0 to 20 mg offset between readings. Performing the 
+    two-point calibration, I found that the average offset for the z-axis acceleration was 17.8 mg, -3.37 mg for y-axis, and 2.5 mg for x-axis. 
+    Hence, the accelerameter data is fairly accurate. Adjusting the accelerameter data utilizing the offset and the scaling factor did not 
+    appear to produce significantly more accurate or precise data.   
     </p>
 
+    <h4>FFT</h4>
+   <h5>Baseline Reading</h5>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <img src="/assets/media2/acc_frr_no_rc.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+    <img src="/assets/media2/acc_frr_no_rc_freq.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+</div>
+    <h5>Reading on a Vibrating Table</h5>
+<div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <img src="/assets/media2/acc_frr_vibration.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+    <img src="/assets/media2/acc_frr_vibrationfreq.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+</div>
+<h5>Reading Nearby RC Car</h5>
+<div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <img src="/assets/media2/acc_frr_rc.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+    <img src="/assets/media2/acc_frr_rc_freq.png" alt="FFT Plot" style="width: 50%; height: auto; border-radius: 4px;">
+</div>
 
+     
+    <h4>Filtering</h4>
+
+    <img src="/assets/media2/equations.png" alt="Roll 90 Degrees" 
+        style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+
+    <p> From the regular reading and the readign with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
+      at about 6 HZ. With this information, I chose the cutoff frequency of 10 Hz to eliminate the noise at both of the aforementioned frequencies. 
+      Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.65.  </p>
      <h3>Gyroscope</h3>
 
 
