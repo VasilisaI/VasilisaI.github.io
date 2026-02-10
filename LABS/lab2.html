@@ -87,8 +87,8 @@
 
     <div class="info-card">
       <p>
-        In the video, you can see the acceleration data showing 1000 mg corresponding to the 1 g of acceletation due to the force of gravity. As the orientation of the IMU changes, 
-        the 1000 mg value transfers betwen the axis. The gyroscope data shows zero degrees when the IMU is flat and then shows a changing value as it is rotated 
+        In the video, you can see the acceleration data showing 1000 mg corresponding to the 1 g of acceleration due to the force of gravity. As the orientation of the IMU changes, 
+        the 1000 mg value transfers between the axis. The gyroscope data shows zero degrees when the IMU is flat and then shows a changing value as it is rotated 
         since the gyroscope measures the rate of change of the angle. 
       </p>
     </div>
@@ -107,9 +107,9 @@
     <h4> Accuracy Discussion</h4>
     <div class="info-card">
       <p>
-        The accelerameter data did not exhibit a stationary offset, deviating between 0 to 20 mg offset between readings. Performing the 
+        The accelerometer data did not exhibit a stationary offset, deviating between 0 to 20 mg offset between readings. Performing the 
         two-point calibration, I found that the average offset for the z-axis acceleration was 17.8 mg, -3.37 mg for y-axis, and 2.5 mg for x-axis. 
-        Hence, the accelerameter data is fairly accurate. Adjusting the accelerameter data utilizing the offset and the scaling factor did not 
+        Hence, the accelerometer data is fairly accurate. Adjusting the accelerometer data utilizing the offset and the scaling factor did not 
         appear to produce significantly more accurate or precise data.   
       </p>
     </div>
@@ -137,9 +137,9 @@
     <img src="/assets/media2/equations.png" alt="Equations" style="width: 80%;">
     
     <div class="info-card">
-      <p> From the regular reading and the readign with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
-        at about 6 HZ. With this information, I chose the cutoff frequency of 9 Hz to eliminate the noise at both of the aforementioned frequencies. 
-        Using the equations provided in class, and subsituting 30 ms as the sampling rate, the alpha value was calculated to be 0.629. </p>
+      <p> From the regular reading and the reading with the rc car showed a peak at about 9Hz. The table vibration plot showed a peak 
+        at about 6 Hz. With this information, I chose the cutoff frequency of 9 Hz to eliminate the noise at both of the aforementioned frequencies. 
+        Using the equations provided in class, and substituting 30 ms as the sampling rate, the alpha value was calculated to be 0.629. </p>
     </div>
 
     <div class="img-grid">
@@ -162,9 +162,9 @@
     <img src="/assets/media2/gyro_y_rotation.png" alt="Y rotation" style="width: 80%;">
 
     <div class="info-card">
-      <p> In comparison with the accelerameter data, the gyroscope data is significantly less noisy. However, it also 
-        experiences significant drift over time. The drift is most obsevable in the flat IMU plot where the angle that 
-        should stay at appoximately 0 degrees drifts. </p>
+      <p> In comparison with the accelerometer data, the gyroscope data is significantly less noisy. However, it also 
+        experiences significant drift over time. The drift is most observable in the flat IMU plot where the angle that 
+        should stay at approximately 0 degrees drifts. </p>
     </div>
 
     <h4>Complementary Filter</h4>
@@ -173,27 +173,41 @@
     <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll Vibration" style="width: 80%;">
 
     <div class="info-card">
-      <p> The output from the complementary filter showed significanlty less drift for both roll and pitch data seen in the plots above.
+      <p> The output from the complementary filter showed significantly less drift for both roll and pitch data seen in the plots above.
         After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
-        trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not suspetible to vibrations from the environment.  </p>
+        trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not susceptible to vibrations from the environment.  </p>
     </div>
 
     <h3>Sample Data</h3>
     <h4>Data Storage</h4>
     <div class="info-card">
-      <p> I think the more effective choice for storing Accelerometer and Gyroscope data would be store them together for the purposes of sensor fusion. It is very likely that you 
-        would want to utilize both sensors for the verification of pitch and roll data. Storing the gyro and accelerometer data together ensures that 
-        the data is appropriately synchronized without requiring any additional index matching. </p> 
+      <p> I think the more effective choice for storing accelerometer and gyroscope data would be store them separately in order to limit the 
+          amount of data that needs to be transmitted over bluetooth. Since pitch and roll data can be calculated from both sensors, it is unlikely that we will 
+          be using all the data unless we are doing full sensor fusion. Keeping the data separate will allow us to only transmit the data necessary and in the case that 
+          we need both of the sensors, it would be easy to match the data together using the timestamp.  </p> 
     </div>
       <p> I am storing the IMU data in floats because they have a good balance between precision and memory usage. Integers take up little memory but lack precision
-         while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
+          while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
       </p>
 
     <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
      
     <h4>5 Seconds of IMU Data </h4>
-
+     <h5> Main Loop</h5>
+    <script src="https://gist.github.com/VasilisaI/e793b557ea806433dd6c380d40afbebc.js"></script>
     
+     <video controls style="width: 50%;">
+        <source src="/assets/media2/data_ble.mp4" type="video/mp4">
+      </video>
+
+      <div class="info-card">
+      <p> The video shows the transmission of only the z-axis acceleration data from a flat IMU, sent using the float characteristic. The main loop 
+        on the Artemis does not run faster than the IMU is able to provide new data because I'm not seeing any repeated data in my arrays. If we allocate about 
+     100kB of Artemis's 384 kB of RAM to arrays, we would be able to store about 3571 IMU samples if we are populating 7 arrays of floats (time, 3 acceleration values, 3 gyro values).
+     At my current sampling frequency of 30 Hz, that would amount to 119 seconds of data. 
+     </p>
+    </div>
+
     <h3>Stunt</h3>
     <div style="display: flex; gap: 10px;">
       <video controls style="width: 50%;">
@@ -213,6 +227,9 @@
         also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
     </div>
     
+
+    <h3>Resources</h3>
+    <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.</p>
   </section>
 </div>
 </body>
