@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2</title>
+  
+  <style>
+    /* Setting the purple background for the page */
+    body {
+      background-color: #a897d0; /* Indigo/Purple Background */
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    /* Grid for side-by-side plots */
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <h1>Lab 3: Time of Flight Sensors</h1>
+
+  <section>
+    <h2>Pre Lab</h2>
+    <img src="/assets/media2/IMG_6320.jpg" alt="IMU Connection" style="width: 40%;">
+    
+
+   
+Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
+Sketch of wiring diagram (with brief explanation if you want)
+
+
+    <div class="info-card">
+     <h3>Two-Sensor Set Up</h3>
+    <p>
+      In order to use two ToF sensors, I will use use the xshut pins to change the address of one of the sensors while it is powered. 
+      The configuration codes is seen below. 
+    </p>
+    </div>
+    <h4>Configuration</h4>
+    <script src="https://gist.github.com/VasilisaI/e9aee7171846df15a89101f028e012b8.js"></script>
+    <h3>Two Sensors Working</h3>
+    <div class="video-center">
+      <video controls width="80%">
+        <source src="/assets/media3/IMG_6446.MOV" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="info-card">
+      <p>
+        The sensors will be placed. It will miss some side obstacles if they were not first observable from the. for instance dynamic obstalces. 
+
+      </p>
+    </div>
+
+    <h2>Lab Tasks</h2>
+    <h4>Pitch</h4>
+    <img src="/assets/media2/Pitch_0.png" alt="Pitch 0 Degrees" style="width: 80%;">
+    <img src="/assets/media2/Pitch_90.png" alt="Pitch 90 Degrees" style="width: 80%;">
+    <img src="/assets/media2/Pitch_-90.png" alt="Pitch -90 Degrees" style="width: 80%;">
+   
+    <h4>I2C Address</h4>
+    <img src="/assets/media3/address_i2c.png" alt="I2C Address" style="width: 80%;">
+  
+
+    <h4> Accuracy Discussion</h4>
+    <div class="info-card">
+      <p>
+        The address displayed by the i2c is 0x29. The address matches what is expected because 0x29 is 
+         0010 1001 in binary. An I2C address consists of bits 1-7 that correlate to the unique address 
+         of the slave device that we are communicating with and a Read/Write bit at bit 0. 
+         The last bit of the address is a 1 indicating that we are reading from the ToF sensor, which is expected.
+  
+      </p>
+    </div>
+
+  
+
+    <h3>Color</h3>
+    <img src="/assets/media3/colors.png" alt="Flat" style="width: 80%;">
+    
+    <div class="info-card">
+      <p> In comparison with the accelerometer data, the gyroscope data is significantly less noisy. However, it also 
+        experiences significant drift over time. The drift is most observable in the flat IMU plot where the angle that 
+        should stay at approximately 0 degrees drifts. </p>
+    </div>
+
+    <h4>Complementary Filter</h4>
+    <img src="/assets/media2/pitch_0.96.png" alt="Pitch 0.96" style="width: 80%;">
+    <img src="/assets/media2/roll_0.96.png" alt="Roll 0.96" style="width: 80%;">
+    <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll Vibration" style="width: 80%;">
+
+    <div class="info-card">
+      <p> The output from the complementary filter showed significantly less drift for both roll and pitch data seen in the plots above.
+        After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
+        trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not susceptible to vibrations from the environment.  </p>
+    </div>
+
+    <h3>Sample Data</h3>
+    <h4>Data Storage</h4>
+    <div class="info-card">
+      <p> I think the more effective choice for storing accelerometer and gyroscope data would be store them separately in order to limit the 
+          amount of data that needs to be transmitted over bluetooth. Since pitch and roll data can be calculated from both sensors, it is unlikely that we will 
+          be using all the data unless we are doing full sensor fusion. Keeping the data separate will allow us to only transmit the data necessary and in the case that 
+          we need both of the sensors, it would be easy to match the data together using the timestamp.  </p> 
+    </div>
+     <div class="info-card">
+      <p> I am storing the IMU data in floats because they have a good balance between precision and memory usage. Integers take up little memory but lack precision
+          while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
+      </p>
+   </div>
+    <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
+     
+    <h4>5 Seconds of IMU Data </h4>
+     <h5> Main Loop</h5>
+    <script src="https://gist.github.com/VasilisaI/e793b557ea806433dd6c380d40afbebc.js"></script>
+    
+     <video controls style="width: 80%;">
+        <source src="/assets/media2/data_ble.mp4" type="video/mp4">
+      </video>
+
+      <div class="info-card">
+      <p> The video shows the transmission of only the z-axis acceleration data from a flat IMU, sent using the float characteristic. The main loop 
+        on the Artemis does not run faster than the IMU is able to provide new data because I'm not seeing any repeated data in my arrays. If we allocate about 
+     100kB of Artemis's 384 kB of RAM to arrays, we would be able to store about 3571 IMU samples if we are populating 7 arrays of floats (time, 3 acceleration values, 3 gyro values).
+     At my current sampling frequency of 30 Hz, that would amount to 119 seconds of data. 
+     </p>
+    </div>
+
+    <h3>Stunt</h3>
+    <div style="display: flex; gap: 10px;">
+      <video controls style="width: 50%;">
+        <source src="/assets/media2/stunt.mp4" type="video/mp4">
+      </video>
+      <video controls style="width: 50%;">
+        <source src="/assets/media2/turn.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h4>Observations</h4>
+    <div class="info-card">
+      <p> From testing the car, I was able to observe that it can move a little less than 1 kitchen tile, with the minimal application of 
+        forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
+        I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
+        turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
+        also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
+    </div>
+    
+
+    <h3>Resources</h3>
+    <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.
+      The low-pass filtering alpha equation and visual are from class notes. 
+    </p>
+  </section>
+</div>
+</body>
+</html>
