@@ -74,10 +74,11 @@
     <img src="/assets/media3/setup.png" alt="IMU Connection" style="width: 40%;">
     
 
-   
-Briefly discuss placement of sensors on robot and scenarios where you will miss obstacles
-Sketch of wiring diagram (with brief explanation if you want)
-
+   <h3>Sensor Placement</h3>
+    <img src="/assets/media3/setup.drawio.png" alt="Car Placement" style="width: 40%;">
+  
+   <h3>Schematic</h3>
+   <img src="/assets/media3/setup.drawio.png" alt="Schematic" style="width: 40%;">
 
     <div class="info-card">
      <h3>Two-Sensor Set Up</h3>
@@ -126,7 +127,7 @@ Sketch of wiring diagram (with brief explanation if you want)
     <img src="/assets/media3/address_i2c.png" alt="I2C Address" style="width: 80%;">
   
 
-    <h4> Accuracy Discussion</h4>
+    <h4> I2C Address Disucssion</h4>
     <div class="info-card">
       <p>
         The address displayed by the i2c is 0x29. The address matches what is expected because 0x29 is 
@@ -137,8 +138,20 @@ Sketch of wiring diagram (with brief explanation if you want)
       </p>
     </div>
 
-  
+    <h4>Mode Selection</h4>
+    <div class="info-card">
+      <p>
+        The benefit of using the short distance mode is that it has higher immunity
+         to ambient noise/light. However, a short range limits your ability to detect obstacles at farther distances.
+         The advantage of the long mode is that it is able to detect objects at a maximum distance of 4m but is more susceptile to noise. 
+         The medium mode a combination of the two. For the purpose of the RC car, I will choose the short range because 1.3 meters is a sufficient enough of a distance for the car
+          to react before hitting an obstacle and the higher immunity to noise will be beneficial for the car's performance.
 
+  
+      </p>
+    </div>
+
+  
     <h3>Color</h3>
     <img src="/assets/media3/colors.png" alt="Flat" style="width: 80%;">
     
