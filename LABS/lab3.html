@@ -8,9 +8,8 @@
   
   <link rel="stylesheet" href="/LABS/style.css">
   <style>
-    /* Setting the purple background for the page */
     body {
-      background-color: #a897d0; /* Indigo/Purple Background */
+      background-color: #a897d0;
       font-family: Arial, sans-serif;
       line-height: 1.6;
       margin: 0;
@@ -32,7 +31,6 @@
       margin-bottom: 25px;
     }
 
-    /* Grid for side-by-side plots */
     .img-grid {
       display: flex; 
       gap: 10px; 
@@ -73,7 +71,6 @@
   <section>
     <h2>Pre Lab</h2>
     <img src="/assets/media3/setup.png" alt="IMU Connection" style="width: 40%;">
-    
 
    <div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px;">
   
@@ -85,149 +82,138 @@
 </div>
 
 <div class="container">
-  
+  <h3>Sensor Placement</h3>
   <div class="info-card">
     <p>
       Both sensors will be placed at the front of the car, each slightly angled to 
-      face either left or right side of the car. Having both ToFs at the front will expand the car's field of view. However, 
-      it is likely that the car would miss some side obstacles if they were not initially observable from the front, for instance dynamic obstacles approaching from the side. 
+      face either the left or right side. Placing both ToFs at the front expands the car's field of view. However, 
+      the car may miss side obstacles if they are not initially visible from the front, for example dynamic obstacles approaching from the side. 
     </p>
   </div>
   <img src="/assets/media3/car.png" alt="RC Car Sensor Placement" class="sensor-image">
 </div>
 
-
-  <!-- <div class="info-card">
-      <p>
-        Both sensors will be placed at the front of the car, each slightly angled to 
-        face either left or right side of the car. Having both ToFs at the front will expand the car's field of view. However, 
-        it is likely that the car would miss some side obstacles if they were not initially observable from the front, for instance dynamic obstacles approaching from the side. 
-
-      </p>
-    </div>  -->
-
-
-    <div class="info-card">
-     <h3>Two-Sensor Set Up</h3>
-    <p>
-      In order to use two ToF sensors, I will use use the xshut pins to change the address of one of the sensors from 0x29 to 0x30 while it is powered. 
-      The sensor configuration codes is displayed below. 
-    </p>
-    </div>
+<div class="info-card">
+ <h3>Two-Sensor Setup</h3>
+<p>
+  To use two ToF sensors, I will use the xshut pins ( pins 7 and 8 on the MCU) to change the address of one sensor from 0x29 to 0x30 while it is powered. 
+  The sensor configuration code is shown below. 
+</p>
+</div>
    
-
-    <details>
-  <summary>Configuration</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-      <script src="https://gist.github.com/VasilisaI/e9aee7171846df15a89101f028e012b8.js"></script>
-
-    </div>
-    </div>
+<details>
+<summary>Configuration</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/e9aee7171846df15a89101f028e012b8.js"></script>
+  </div>
+</div>
 </details>
 
+<h3>Two Sensors Working</h3>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media3/IMG_6446.MOV" type="video/mp4">
+  </video>
+</div>
 
-   
+<h4>I2C Address</h4>
+<img src="/assets/media3/address_i2c.png" alt="I2C Address" style="width: 80%;">
+<div class="info-card">
+  <p>
+    The displayed I2C address is 0x29, which matches the expected value because 0x29 is 
+    0010 1001 in binary. An I2C address consists of bits 1-7 representing the unique address 
+    of the slave device, and a Read/Write bit at bit 0. 
+    The last bit being 1 indicates that we are reading from the ToF sensor, which is expected.
+  </p>
+</div>
 
-    <h3>Two Sensors Working</h3>
-    <div class="video-center">
-      <video controls width="80%">
-        <source src="/assets/media3/IMG_6446.MOV" type="video/mp4">
-      </video>
-    </div>
-
-   
-    <h4>I2C Address</h4>
-    <img src="/assets/media3/address_i2c.png" alt="I2C Address" style="width: 80%;">
-    <div class="info-card">
-      <p>
-        The address displayed by the i2c is 0x29. The address matches what is expected because 0x29 is 
-         0010 1001 in binary. An I2C address consists of bits 1-7 that correlate to the unique address 
-         of the slave device that we are communicating with and a Read/Write bit at bit 0. 
-         The last bit of the address is a 1 indicating that we are reading from the ToF sensor, which is expected.
-  
-      </p>
-    </div>
-
-    <h4>Mode Selection</h4>
-    <div class="info-card">
-      <p>
-        The benefit of using the short distance mode is that it has higher immunity
-         to ambient noise/light. However, a short range limits your ability to detect obstacles at farther distances.
-         The advantage of the long mode is that it is able to detect objects at a maximum distance of 4m but is more susceptile to noise. 
-         The medium mode a combination of the two. For the purpose of the RC car, I will choose the short range because 1.3 meters is a sufficient enough of a distance for the car
-          to react before hitting an obstacle and the higher immunity to noise will be beneficial for the car's performance.
-
-  
-      </p>
-    </div>
+<h4>Mode Selection</h4>
+<div class="info-card">
+  <p>
+    Using the short distance mode increases immunity to ambient light and noise. However, it limits the detection range. 
+    The long mode allows detecting objects up to 4 m but is more susceptible to noise. 
+    The medium mode is a compromise between the two. For the RC car, the short range is sufficient since 1.3 meters is enough for the car
+    to react to obstacles, and the higher noise immunity improves performance.
+  </p>
+</div>
     
-    <h4> Sensor Characterization</h4>
-    <p>
-       The sensor was tested in room condition with a lot of aritfical light, very little aritifical light and a combination of natural 
-       and aritficial light. The results show that the error for all three conditions starts growing linearly at about 60 cm of distance 
-       and increases drastically close to the maximum distance for this range (130 cm). The preceision graph shows that the sensor is fairly precise 
-       with the exception of when operated in dark environment. 
-  
-      </p>
-    <h4>Expected vs Measured Results</h4>
-    <img src="/assets/media3/expected_vs_measured.png" alt="Expected vs Measured Results" style="width: 60%;">
-    <h4>Accuracy</h4>
-    <img src="/assets/media3/Accuracy.png" alt="Accuracy" style="width: 60%;">
+<h4>Sensor Characterization</h4>
+<p>
+   The sensor was tested in rooms with high artificial light, low artificial light, and a mix of natural and artificial light. 
+   Errors start increasing linearly at about 60 cm and rise drastically near the maximum range of 130 cm. 
+   The precision graph shows the sensor is accurate except in dark environments. 
+</p>
 
-    <h4>Precision</h4>
-    <img src="/assets/media3/precision.png" alt="Precision" style="width: 60%;">
+<h4>Expected vs Measured Results</h4>
+<img src="/assets/media3/expected_vs_measured.png" alt="Expected vs Measured Results" style="width: 60%;">
+<h4>Accuracy</h4>
+<img src="/assets/media3/Accuracy.png" alt="Accuracy" style="width: 60%;">
+<h4>Precision</h4>
+<img src="/assets/media3/precision.png" alt="Precision" style="width: 60%;">
+
+<h4>Ranging Time</h4>
+<div class="info-card">
+  <p>
+    The average of 10 readings shows a ranging time of approximately 97.6 ms. Ranging time did not increase with different modes. 
+  </p>
+</div>
+
+<details>
+<summary>Fast Code</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/6795c22a29cc600dbc0bf5de4dfa209a.js"></script>
+  </div>
+</div>
+</details>
      
-    <h4>Ranging Time</h4>
-    <div class="info-card">
-      <p> The average of 10 readings indicated the ranging time to be approximately  97.6 ms. The ranging time did not appear to increase with 
-        the change of the ranging mode. </p>
-    </div>
+<div class="info-card">
+  <p>
+   
+    In the sped up code, the time between consecutive readings of A and B ToF sensorsvaries between 10–25 ms, and consecutive A and B readings vary between 100–200 ms. 
+    The limiting factors in the transmission speed include Serial print delays and the intrinsic time required to collect and validate data. 
+  </p>
+</div>
 
-    <h3>Color Impact</h3>
-    <img src="/assets/media3/colors.png" alt="Flat" style="width: 80%;">
-    <img src="/assets/media3/color.png" alt="Flat" style="width: 100%;">
-    
-    <div class="info-card">
-      <p> The color tests show that the sensor under reports distances for darker material due to their absorption of light. 
-        The graph also shows overreporting for very light colors like white, although that could be due to slight discrepencies in the 
-      positioning of the materials during data collection.    </p>
-    </div>
+<h3>Color Impact</h3>
+<img src="/assets/media3/colors.png" alt="Flat" style="width: 80%;">
+<img src="/assets/media3/color.png" alt="Flat" style="width: 100%;">
+<div class="info-card">
+  <p>
+    The color tests show that darker materials appear closer due to light absorption. Very light materials, like white, may over-report distances slightly due to placement discrepancies during measurement.
+  </p>
+</div>
 
-    <h4>Texture Impact</h4>
-     <img src="/assets/media3/texture.png" alt="Flat" style="width: 80%;">
-    <img src="/assets/media3/material.png" alt="Flat" style="width: 100%;">
-    
+<h4>Texture Impact</h4>
+<img src="/assets/media3/texture.png" alt="Flat" style="width: 80%;">
+<img src="/assets/media3/material.png" alt="Flat" style="width: 100%;">
+<div class="info-card">
+  <p>
+    Texture did not significantly affect measurements. Velvet overestimated distance by almost 2 cm, but other materials had minimal impact on light scattering.
+  </p>
+</div>
 
-    <div class="info-card">
-       <p> The texture tests did not show any signficiant trends. The worst perfoming material was velvet which overestimated distance by almost 2 cm. It did not 
-        appear that the textures causes signficiant scattering of light.     </p>
-    </div>
+<h4>Bluetooth</h4>
+<img src="/assets/media3/angle_v_time.png" alt="Flat" style="width: 80%;">
+<img src="/assets/media3/distance_v_time.png" alt="Flat" style="width: 100%;">
 
-    
-    <h4>5 Seconds of IMU Data </h4>
-     <h5> Main Loop</h5>
-    <script src="https://gist.github.com/VasilisaI/e793b557ea806433dd6c380d40afbebc.js"></script>
-    
-     <video controls style="width: 80%;">
-        <source src="/assets/media2/data_ble.mp4" type="video/mp4">
-      </video>
+<h3>Distance Sensors</h3>
+<div class="info-card">
+  <p>
+    Besides Time of Flight sensors, there are Amplitude-based IR sensors and IR triangulation. Amplitude-based IR has a high sampling rate and small size but is sensitive to ambient light. 
+    IR triangulation is less sensitive to surface color/texture but has a larger form factor and lower sampling rate.
+  </p>
+</div>
 
-      <div class="info-card">
-      <p> The video shows the transmission of only the z-axis acceleration data from a flat IMU, sent using the float characteristic. The main loop 
-        on the Artemis does not run faster than the IMU is able to provide new data because I'm not seeing any repeated data in my arrays. If we allocate about 
-     100kB of Artemis's 384 kB of RAM to arrays, we would be able to store about 3571 IMU samples if we are populating 7 arrays of floats (time, 3 acceleration values, 3 gyro values).
-     At my current sampling frequency of 30 Hz, that would amount to 119 seconds of data. 
-     </p>
-    </div>
-    
-    
-    <h3>Resources</h3>
-    <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.
-      The low-pass filtering alpha equation and visual are from class notes. 
-    </p>
-  </section>
+<h3>Resources</h3>
+<p>
+  Class notes were used for information on IR distance sensors, and Gemini was used to process ToF sensor characterization data.
+</p>
+
+</section>
 </div>
 </body>
 </html>
