@@ -165,7 +165,10 @@
     
     <h4> Sensor Characterization</h4>
     <p>
-       The 
+       The sensor was tested in room condition with a lot of aritfical light, very little aritifical light and a combination of natural 
+       and aritficial light. The results show that the error for all three conditions starts growing linearly at about 60 cm of distance 
+       and increases drastically close to the maximum distance for this range (130 cm). The preceision graph shows that the sensor is fairly precise 
+       with the exception of when operated in dark environment. 
   
       </p>
     <h4>Expected vs Measured Results</h4>
@@ -178,41 +181,22 @@
      
     
 
-    <h3>Color</h3>
+    <h3>Color Impact</h3>
     <img src="/assets/media3/colors.png" alt="Flat" style="width: 80%;">
     
     <div class="info-card">
-      <p> In comparison with the accelerometer data, the gyroscope data is significantly less noisy. However, it also 
-        experiences significant drift over time. The drift is most observable in the flat IMU plot where the angle that 
-        should stay at approximately 0 degrees drifts. </p>
+      <p>    </p>
     </div>
 
-    <h4>Complementary Filter</h4>
+    <h4>Texture Impact</h4>
     <img src="/assets/media2/pitch_0.96.png" alt="Pitch 0.96" style="width: 80%;">
-    <img src="/assets/media2/roll_0.96.png" alt="Roll 0.96" style="width: 80%;">
-    <img src="/assets/media2/roll_vibration_0.96.png" alt="Roll Vibration" style="width: 80%;">
+   
 
     <div class="info-card">
-      <p> The output from the complementary filter showed significantly less drift for both roll and pitch data seen in the plots above.
-        After testing a few alpha values to use with the filter, I chose an alpha of 0.96 where the value of the gyroscope is 
-        trusted 96%. The last plot was recorded on a shaky table, showing that the filter is not susceptible to vibrations from the environment.  </p>
+      <p>   </p>
     </div>
 
-    <h3>Sample Data</h3>
-    <h4>Data Storage</h4>
-    <div class="info-card">
-      <p> I think the more effective choice for storing accelerometer and gyroscope data would be store them separately in order to limit the 
-          amount of data that needs to be transmitted over bluetooth. Since pitch and roll data can be calculated from both sensors, it is unlikely that we will 
-          be using all the data unless we are doing full sensor fusion. Keeping the data separate will allow us to only transmit the data necessary and in the case that 
-          we need both of the sensors, it would be easy to match the data together using the timestamp.  </p> 
-    </div>
-     <div class="info-card">
-      <p> I am storing the IMU data in floats because they have a good balance between precision and memory usage. Integers take up little memory but lack precision
-          while doubles are too precise for our purpose. Strings would be too memory intensive and not necessary for storing numerical data.
-      </p>
-   </div>
-    <p style="margin: 20px 0;">Consider the memory of the Artemis; how much memory can you allocate to your arrays? What does that correspond to in seconds?</p>
-     
+    
     <h4>5 Seconds of IMU Data </h4>
      <h5> Main Loop</h5>
     <script src="https://gist.github.com/VasilisaI/e793b557ea806433dd6c380d40afbebc.js"></script>
@@ -228,27 +212,8 @@
      At my current sampling frequency of 30 Hz, that would amount to 119 seconds of data. 
      </p>
     </div>
-
-    <h3>Stunt</h3>
-    <div style="display: flex; gap: 10px;">
-      <video controls style="width: 50%;">
-        <source src="/assets/media2/stunt.mp4" type="video/mp4">
-      </video>
-      <video controls style="width: 50%;">
-        <source src="/assets/media2/turn.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <h4>Observations</h4>
-    <div class="info-card">
-      <p> From testing the car, I was able to observe that it can move a little less than 1 kitchen tile, with the minimal application of 
-        forward speed. That test also showed that even at very small distances, the car has a slight drift, not following a straight line.
-        I was also able to see that it is fairly easy to complete a 180-degree turn in both directions by applying the forward motion and 
-        turn simultaneously. Lastly, I observed that it is quite easy to flip the car over if you drive into a stationary object. My controller 
-        also lost contact with the car twice when I was testing, so there are definitely range limitations in terms of communication. </p>
-    </div>
     
-
+    
     <h3>Resources</h3>
     <p>I used both Jack Long's and Lucca Correia's webpages as references for formatitting the FFT graphs and used Gemini for help with FFT code.
       The low-pass filtering alpha equation and visual are from class notes. 
