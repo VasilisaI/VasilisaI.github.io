@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <h1>Lab 4: </h1>
+
+  <section>
+    <h2>Pre Lab</h2>
+    <img src="/assets/media3/setup.png" alt="IMU Connection" style="width: 40%;">
+
+   <div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px;">
+  
+  <div style="text-align: center;">
+    <h3>Schematic</h3>
+    <img src="/assets/media3/Schematic.drawio.png" alt="Schematic" style="width: 100%; max-width: 400px;">
+  </div>
+
+  <h3>Battery Discussion</h3>
+
+</div>
+
+
+
+<h3>Lab Tasks </h3>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6395.mov" type="video/mp4">
+  </video>
+</div>
+
+<h4>Oscilloscope Set Up </h4>
+<img src="/assets/media4/IMG_6398.jpg" alt="Oscilloscope Setup" style="width: 80%;">
+<div class="info-card">
+  <p>
+    
+  </p>
+</div>
+
+<h4>Power Supply</h4>
+<div class="info-card">
+  <p>
+   
+  </p>
+</div>
+
+<h4>Single Motor Testing</h4>
+<h5>Forward</h5>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6383.jpg" type="video/mp4">
+  </video>
+</div>
+
+<h5>Reverse</h5>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6384.jpg" type="video/mp4">
+  </video>
+</div>
+
+
+
+
+
+<details>
+<summary>Arduino Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/6795c22a29cc600dbc0bf5de4dfa209a.js"></script>
+  </div>
+</div>
+</details>
+
+
+
+<h4>Two Motors Powered by the Battery</h4>
+
+
+<details>
+<summary>Arduino Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/6795c22a29cc600dbc0bf5de4dfa209a.js"></script>
+  </div>
+</div>
+</details>
+
+
+<h5>Forward</h5>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6398.jpg" type="video/mp4">
+  </video>
+</div>
+
+
+<h5>Reverse</h5>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6499.MOV" type="video/mp4">
+  </video>
+</div>
+
+
+
+
+<h4>Final Set Up</h4>
+<img src="/assets/media3/expected_vs_measured.png" alt="Expected vs Measured Results" style="width: 60%;">
+
+
+<h4>PWM Limit</h4>
+
+<h4>Calibration</h4>
+
+<h4>Open Loop</h4>
+     
+
+<details>
+<summary>Arduino Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/6795c22a29cc600dbc0bf5de4dfa209a.js"></script>
+  </div>
+</div>
+</details>
+
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6398.jpg" type="video/mp4">
+  </video>
+</div>
+
+
+
+<h3>analogWrite Frequency</h3>
+<div class="info-card">
+  <p>
+    Besides Time of Flight sensors, there are Amplitude-based IR sensors and IR triangulation. Amplitude-based IR has a high sampling rate and small size but is sensitive to ambient light. 
+    IR triangulation is less sensitive to surface color/texture but has a larger form factor and lower sampling rate.
+  </p>
+</div>
+
+
+<h3>speed Disscussion</h3>
+<div class="info-card">
+  <p>
+    Besides Time of Flight sensors, there are Amplitude-based IR sensors and IR triangulation. Amplitude-based IR has a high sampling rate and small size but is sensitive to ambient light. 
+    IR triangulation is less sensitive to surface color/texture but has a larger form factor and lower sampling rate.
+  </p>
+</div>
+
+
+<h3>Resources</h3>
+<p>
+  Class notes were used for information on IR distance sensors, and Gemini was used to process ToF sensor characterization data.
+</p>
+
+</section>
+</div>
+</body>
+</html>
