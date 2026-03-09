@@ -66,11 +66,11 @@
 <body>
 <div class="wrapper">
 
-  <h1>Lab 4: </h1>
+  <h1>Lab 4: Motors and Open Loop Control </h1>
 
   <section>
     <h2>Pre Lab</h2>
-    <img src="/assets/media3/setup.png" alt="IMU Connection" style="width: 40%;">
+    
 
    <div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px;">
   
@@ -81,24 +81,41 @@
 
   <h3>Battery Discussion</h3>
     It is important to have separate batteries for the motors and the Artemis board because the motors consume a lot of current in comparison 
-    to the other, lower-power components. Separating the motors from the rest of the sensign system allows us to avoid voltage drops in the system 
+    to the other, lower-power components. Separating the motors from the rest of the sensing system allows us to avoid voltage drops in the system 
     ensures that the motors are able to draw the current they need without affecting the performance of the rest of the system. 
 </div>
 
 
 
 <h3>Lab Tasks </h3>
+
+<h4>Oscilloscope Set Up </h4>
+<img src="/assets/media4/set_up.png" alt="Oscilloscope Setup" style="width: 80%;">
+<div class="info-card">
+  <p> 
+    Prior to connecting the motors to the motor driver, I used the oscilloscope to verify that the PWM signal 
+    from the Artemis board was producing an appropriate response at the output of the motor driver. I connected the 
+    oscilloscope probe both to the to the output pin of the Artemis board and the output pin of the motor driver. The image above 
+    shows the oscilloscope connection to the output of the motor driver. 
+  </p>
+</div>
+<img src="/assets/media4/IMG_6398.jpg" alt="Oscilloscope Setup" style="width: 80%;">
+<div class="info-card">
+  <p> 
+    In the following oscilloscope image, the yellow signal is the Artemis output with a 50% duty cycle or a pwm value of 127 in the 8-bit range of 0 to 255. 
+    The blue signal is the output of the motor driver. 
+
+  </p>
+</div>
+
 <div class="video-center">
   <video controls width="80%">
     <source src="/assets/media4/IMG_6395.mov" type="video/mp4">
   </video>
 </div>
-
-<h4>Oscilloscope Set Up </h4>
-<img src="/assets/media4/IMG_6398.jpg" alt="Oscilloscope Setup" style="width: 80%;">
 <div class="info-card">
   <p> 
-    
+    The above video shows the PWM inputs and the motor driver response at changing duty cycles. 
   </p>
 </div>
 
@@ -125,30 +142,17 @@
   </video>
 </div>
 
-<h3>speed Disscussion</h3>
+
 <div class="info-card">
   <p>
-   
-  </p>
+   The above videos show the results of testing a single motor powered by a power supply. 
+   The analog pin pair (A14, A15) was used to control the motor with a pwm value of 70 being written to 
+   pin A15 via the analogWrite function to make the motor spin forward. For the reverse direction, the same pwm value was 
+   written to pin A14. A more detailed  example is shown in the code snippet in the next section. 
 </div>
-
-
-
-<details>
-<summary>Code </summary>
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/6795c22a29cc600dbc0bf5de4dfa209a.js"></script>
-  </div>
-</div>
-</details>
-
 
 
 <h4>Two Motors Powered by the Battery</h4>
-
-
 <h5>Forward</h5>
 <div class="video-center">
   <video controls width="80%">
@@ -179,13 +183,6 @@
 </details>
 
 
-<div class="info-card">
-  <p>
-    
-  </p>
-</div>
-
-
 <div class="video-center">
   <video controls width="80%">
     <source src="/assets/media4/IMG_6499.MOV" type="video/mp4">
@@ -193,20 +190,86 @@
 </div>
 
 
+<div class="info-card">
+  <p>
+    The above videos and code snippets show the results of testing two motors powered by the battery. Pin pairs (A14, A15) and (A2, A5) were used to control the two motors with a pwm value of 70 being written 
+    to pin A15 and A2 via the analogWrite function to make the motors spin forward. For the reverse direction, the same pwm value was written to pin A14 and A5.
+  </p>
+</div>
+
 
 <h4>Final Set Up</h4>
 <img src="/assets/media4/final diagram.png" alt="Expected vs Measured Results" style="width: 60%;">
 
+<div class="info-card">
+  <p>
+    In the final car set up shown above, the 2 TOF sensors and the IMU are positioned at the front of the car. The 
+    Artemis board along with the motor drivers and the 650mAh battery are positioned at the back of the car. The two motors are powered by the 
+    850 mAh battery located in the battery housing. 
+  </p>
+</div>
 
 <h4>PWM Limit</h4>
 
 <h4>Calibration</h4>
+<div class="info-card">
+  <p>
+    During the initial open loop testing, the car was turning to the right, indicating that the 
+    left motor was spinning faster than the right motor. I was able to achieve a straight line motion with a 
+    pwm value of 63 for the left motor and a value of 90 for the right motor, indicating a 
+    calibration factor of about 1.43 for the right motor. The straight line test is shown below. 
+  </p>
+</div>
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6559.MOV" type="video/mp4">
+  </video>
+</div>
+
+
+
+<h3>speed Disscussion</h3>
+<div class="info-card">
+  <p>
+    The RC car was able to overcome static friction for a forward motion with a left motor pwm value of 30 and a 
+    right motor pwm value of 32. The video below shows the car moving at these pwm values. 
+  </p>
+</div>
+
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6364.MOV" type="video/mp4">
+  </video>
+</div>
+
+
+<div class="info-card">
+  <p>
+    The RC car was able to perform an on-axis rotation with a pwm value of 110 applied to 
+    both the right and the left motor in opposite directions. However, a rotation at these values 
+    takes a long time to complete and a more reasonable starting value for an on-axis rotation would be 150 or higher. 
+     The video below shows the car rotation with a 110 pwm value applied to both motors. . 
+  </p>
+</div>
+    
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6365.MOV" type="video/mp4">
+  </video>
+</div>
+
+
 
 <h4>Open Loop</h4>
-     
+
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media4/IMG_6499.MOV" type="video/mp4">
+  </video>
+</div>
 
 <details>
-<summary>Arduino Code </summary>
+<summary>Open Loop Drive Code </summary>
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
@@ -230,14 +293,6 @@
   </p>
 </div>
 
-
-<h3>speed Disscussion</h3>
-<div class="info-card">
-  <p>
-    Besides Time of Flight sensors, there are Amplitude-based IR sensors and IR triangulation. Amplitude-based IR has a high sampling rate and small size but is sensitive to ambient light. 
-    IR triangulation is less sensitive to surface color/texture but has a larger form factor and lower sampling rate.
-  </p>
-</div>
 
 
 <h3>Resources</h3>
