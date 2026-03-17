@@ -119,7 +119,26 @@
   
 
   <h3>Frequency  Discussion</h3>
-    
+    <div class="info-card">
+  <p>
+   Since both of my TOF sensors are mounted in the front, I am able to use both of them for updating recorded distances to the wall. 
+   When testing the frquency of the updated distances, I was getting a new value from either sensor A or B about every 8-10ms, which is consistent 
+   with my results from lab 3. Since I am relying on only one of the sensors giving me an updated distance, the frequency of the updated reading 
+   ranges from about 100 to 125 Hz. The frequency of the main loop was only slightly higher at around 130 to 150 Hz due to the amount of computations being done in the loop. 
+  </p>
+</div>
+
+  <h3>Linear Interpolation</h3>
+    <div class="info-card">
+  <p>
+  To implement linear interpolation for the distance data, I found the slope of the average of the two sensors and used it, in combination with time lapsed between readings,  to estimate the distance 
+  at the next time step. A graph plotting the actual distance readings from the sensors and the linearly interpolated distance can be seen below. The linear interpolation matched the actual readings closely
+  but experienced more extreme oscillations. 
+
+  </p>
+</div>
+
+<img src="/assets/media5/expected.png" alt="Oscilloscope Setup" style="width: 80%;">
   </div>
 
 <h3>Lab Tasks </h3>
@@ -240,8 +259,6 @@ Intgeral wind up protection was also implemented to prevent accumulated integral
 </div>
 
 
-
-
 <h3>Linear Speed</h3>
 <div class="info-card">
   <p>
@@ -283,20 +300,11 @@ Intgeral wind up protection was also implemented to prevent accumulated integral
 <img src="/assets/media5/wind_up_protection.png" alt="Oscilloscope Setup" style="width: 80%;">
 <img src="/assets/media5/wind_up.png" alt="Oscilloscope Setup" style="width: 80%;">
 
-<details>
-<summary>Code </summary>
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-   <script src="https://gist.github.com/VasilisaI/a7620a7510a8ef5846f3093d1dc75771.js"></script>
-  </div>
-</div>
-</details>
 
 
 <h3>Resources</h3>
 <p>
-  Class notes were used for information on IR distance sensors, and Gemini was used to process ToF sensor characterization data.
+  I used Stephan Wagner's page as a resouce for seeing how to organize the PID controller code. 
 </p>
 
 </section>
