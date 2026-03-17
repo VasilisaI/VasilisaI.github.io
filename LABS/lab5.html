@@ -114,8 +114,7 @@
 
     </div>
 
-    <img src="/assets/media3/setup.png" alt="IMU Connection" style="width: 40%;">
-
+   
    <div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px;">
   
 
@@ -124,6 +123,87 @@
   </div>
 
 <h3>Lab Tasks </h3>
+
+<h3>PID Implementation </h3>
+
+<div class="info-card">
+  <p>
+   To account for present, future and past errors, I implemented the full PID controller outputting a control effort based on the 
+equation u(t) = Kp*e(t) + Ki*integral(e(t)) + Kd*derivative(e(t)). In the main Artemis loop, I am continuously calling the function 
+pid_step which calculates the control effort based on the current error and the PID gains, then feeding the output to a motor control function. 
+pid_step continuous to run storing the debugging data until the pid time interval has elapsed. 
+  </p>
+</div>
+
+<details>
+<summary>pid_step </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/f59a80c9f6bcfff8976a14de5a090295.js"></script>
+  </div>
+</div>
+</details>
+
+<div class="info-card">
+  <p>
+   The control effort output by the PID controller was mapped to a range suitable for the motor PWM signal via the function 
+   map_effort_to_pwm(float effort). In this function a control effort of a 100.0 corresponds to the maximum PWM signal of 255. 
+  </p>
+</div>
+
+<details>
+<summary>map_effort_to_pwm </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/32a2e3e2bf860cd17b791f2cb62f2979.js"></script>
+  </div>
+</div>
+</details>
+
+
+
+<h4>Proportional Control </h4>
+
+<div class="info-card">
+  <p>
+   Prior to tuning the derivative and integral gains, I first tuned the proportional gain. I initially selected the 
+   KPe gain in tandom with pid effort motor mapping code. The starting distances being 2m to 4m would result in a maximum error of 
+   3696 ( 4000 mm - 304 mm setpoint). Since in my motor mapping code, a control effort of 100 corresponds to a PWM signal of 255, I wanted to select a Kp gain that would result in a control effort of around 100 for the maximum error.
+  Therefore, I started tuning the proportional gain with values of 0.05 and below since 100/3696 is approximately 0.027. I tuned the gain from a distance of 2.5 to 3 meters as those starting distances resulted in more overshooting
+  at higher gains, eventully settling on 0.0161 as the gain that resulted in a good response without excessive overshooting at several 
+  starting distances.
+  </p>
+</div>
+
+<h4>Derivative Control </h4>
+
+<div class="info-card">
+  <p>
+   Implementing a derivative term further helped reduce the overshoot by aniticipating the future error based on the current rate of change of the error. 
+Initial observations of the derivative term showed large spikes in data due to noise in the TOF sensor readings, so I implemented a low pass filter seen in the code snippet below. 
+I chose to not eliminate derivative kick because I do not anticipate any large setpoint changes that would result in a large derivative kick. 
+  </p>
+</div>
+<script src="https://gist.github.com/VasilisaI/a99beaad98df0ca807b96bd9280deb8e.js"></script>
+
+
+<h4>Integral Control </h4>
+
+<div class="info-card">
+  <p>
+   The integral gain was tuned to helped close the gap between the car and the target at small distances by eliminating the steady state error. 
+Intgeral wind up protection was also implemented to prevent accumulated integral error. (More details on the protection implementation and testing can be found in the Integrator Windup section below).
+  </p>
+</div>
+
+<div class="info-card">
+  <p>
+   The final gain set up that worked for my system was Kp = 0.0161, Ki = 0.0075, and Kd = 0.0026. 
+  </p>
+</div>
+
 
 <h4>Test 1: 2 meter starting point </h4>
 <img src="/assets/media5/2m_distance.png" alt="Oscilloscope Setup" style="width: 80%;">
@@ -159,18 +239,14 @@
   </video>
 </div>
 
+
+
+
+<h3>Linear Speed</h3>
 <div class="info-card">
   <p>
-   
-  </p>
-</div>
-
-
-
-<h3>speed Disscussion</h3>
-<div class="info-card">
-  <p>
-   
+   Based off the timing and TOF sensor data, the maximum linear speed of the car was calculated to be around 3.5 m/s. 
+   This was calculated by taking the distance traveled between two TOF sensor readings and dividing it by the time elapsed between those readings.
   </p>
 </div>
 
@@ -210,7 +286,7 @@
  
 <h5>Integrator Windup Test</h5>
 <div class="video-center">
-  <video controls width="80%">
+  <video controls width="50%">
     <source src="/assets/media5/IMG_6698.mov" type="video/mp4">
   </video>
 </div>
