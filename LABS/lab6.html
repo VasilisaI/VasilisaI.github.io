@@ -243,7 +243,8 @@ imu_pid_step continuous to run storing the debugging data until the pid time int
    I implemented the integrator windup protection by constraining the possible value of the integral term as shown in the code snippet below. 
    One reason for impelementing wind up protecting is to handle the scenario where the car is temporarily stuck or blocked by an obstacle. In such a case 
    the integrator error would continue to accumulate while the car is not moving, resulting in a large integrator term that would be difficult to recover from. 
-   I tested the effectiveness of the protection by holdong the car in place for a few seconds and then releasing it. 
+   I tested the effectiveness of the protection by holdong the car in place for a few seconds and then allowing it to turn. The integral data shown below 
+   demonstrates the integral term being constraint to a max of 100, which is a value that I chose. 
   </p>
 </div>
 
@@ -251,21 +252,13 @@ imu_pid_step continuous to run storing the debugging data until the pid time int
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-   <script src="https://gist.github.com/VasilisaI/e02c699b6bdaa21af2c132e0804522a6.js"></script>
+   <script src="https://gist.github.com/VasilisaI/649aa2b232714c0b338a16c6da81be6f.js"></script>
   </div>
 </div>
 </details>
 
- 
-<h5>Integrator Windup Test</h5>
-<div class="video-center">
-  <video controls width="30%" height="auto;">
-    <source src="/assets/media5/IMG_6698.mov" type="video/mp4">
-  </video>
-</div>
-
-<img src="/assets/media5/wind_up_protection.png" alt="Oscilloscope Setup" style="width: 80%;">
-<img src="/assets/media5/wind_up.png" alt="Oscilloscope Setup" style="width: 80%;">
+<img src="/assets/media_6/windup.png" alt="Oscilloscope Setup" style="width: 80%;">
+<img src="/assets/media_6/integral.png" alt="Oscilloscope Setup" style="width: 80%;">
 
 
 
