@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <h1>Lab 6: Orientation Control</h1>
+
+
+  <section>
+    <h2>Pre Lab - Bluetooth</h2>
+    
+    <div class="info-card">
+    <p> 
+    To use the PID controller, three new bluetooth commands were added to my code - IMU_PID, IMU_PID_UPDATE, and IMU_PID_DATA. 
+    In order to be able to update the gains and the setpoint, all udatable variables are stored globally. Therefore, IMU_PID initializes the PID 
+    controller using the global gains set. IMU_PID_UPDATE receives new gains and the setpoint via the bluetooth command in the format: ble.send_command(CMD.IMU_PID_UPDATE, "0.0161|0.00|0.00 |90.0").
+    Finally, IMU_PID_DATA iterates through the arrays storing debugging data. On the python side, a single notification handler 
+    parses the incoming data for plotting and logging.  All three code snippets are shown below.
+    </p>
+    
+   
+
+      <details>
+  <summary>IMU_PID</summary>
+  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+  <script src="https://gist.github.com/VasilisaI/fb542d83691c462acbd85dce1a9bae49.js"></script>
+  </div>
+</div>
+</details>
+
+   <details>
+  <summary> IMU_PID_DATA  </summary>
+  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+  <script src="https://gist.github.com/VasilisaI/36ec4ac782c9bc67c75b2dab4010b29b.js"></script>
+  </div>
+</div>
+</details>
+
+ <details>
+  <summary> IMU_PID_UPDATE  </summary>
+  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+  <script src="https://gist.github.com/VasilisaI/3f8d61f2d63e3e5ffdc0d63886de5571.js"></script>
+  </div>
+</div>
+</details>
+
+    </div>
+
+<h3>Lab Tasks </h3>
+
+
+<h3>PID Input Signal </h3>
+
+<div class="info-card">
+  <p>
+   The input signal for the PID controller is the yaw angle of the car, which is calculated by integrating the gyroscope data from the IMU. 
+   Digital interation will lead to drift over time, which would mean that the PID controller would be overtime readjusting the position 
+   of the car due to the drift rather than the actual error in position. I did not impement the DMP for minimizing the yaw drift because as seen 
+   on the figure below, the error growth is not rapid enough to cause significant issues during testing. The limitation of the IMU itself is a maximum 
+   measurable angular velocity of 2000 degrees per second, which is sufficient for the speeds that our car is turning at. 
+
+  </p>
+  <image src="/assets/media_6/error.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+<h3>PID Implementation </h3>
+
+<div class="info-card">
+  <p>
+   To account for present, future and past errors, I implemented a PD controller outputting a control effort based on the 
+equation u(t) = Kp*e(t) + Kd*derivative(e(t)). In the main Artemis loop, I am continuously calling the function 
+imu_pid_step which calculates the control effort based on the current error and the PID gains, then feeding the output to a motor control function. 
+imu_pid_step continuous to run storing the debugging data until the pid time interval has elapsed. 
+  </p>
+</div>
+
+<details>
+<summary>imu_pid_step </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/fb542d83691c462acbd85dce1a9bae49.js"></script>
+  </div>
+</div>
+</details>
+
+<div class="info-card">
+  <p>
+    Similarly to lab 5, the control effort output by the controller was mapped to a range suitable for the motor PWM signal via the function 
+   map_effort_to_pwm_imu(float effort). In this function a control effort of a 80.0 corresponds to the maximum PWM signal of 255. It is also accounting 
+   for a minimum pwm of 140 needed to overcome the static friction and complete a turn. 
+  </p>
+</div>
+
+<details>
+<summary>map_effort_to_pwm_imu </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/3529c74ce038ba7f89f81ff6bc2af4b3.js"></script>
+  </div>
+</div>
+</details>
+
+<div class="info-card">
+  <p>
+   Once the control effort is mapped to a PWM signal, the turn_signed_pwm function is used to send the appropriate signal to each motor to complete a turn in place. 
+  </p>
+</div>
+
+
+<details>
+<summary>turn_signed_pwm</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/365402b827f6fabb079d9cf9517c81a3.js"></script>
+  </div>
+</div>
+</details>
+
+
+<h4>Proportional Control </h4>
+
+<div class="info-card">
+  <p>
+   Prior to tuning the derivative and integral gains, I first tuned the proportional gain. I started with fairly high Kp values from 
+   0.3 to 0.6 as the motors were turning too slowly with lower values. I found that the proprotional gain of 0.5 alone was able to get very 
+   close to the target angle with only a few degrees of overshoot. 
+
+  </p>
+</div>
+
+<h4>Derivative Control </h4>
+
+<div class="info-card">
+  <p>
+   Since I am integrating the gyroscope data to get the yaw estimate, it does not make sense to integrate the 
+   derivative term as well since it would be a more noisier version of the signal directly produced by the gyroscope
+   Therefore, I took the derivative term away from this implementation of a controller. An example of the noisy derivative term is shown below. </p>
+</div>
+
+<img src="/assets/media_6/Derivative.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+
+<h4>Integral Control </h4>
+
+<div class="info-card">
+  <p>
+   To tune the integral gain and help close the steady-state error, I started with a small value of 0.001 and gradually increased it until I was able to get close to the target angle without overshooting.
+   In the final implementation, the integral term is 0.002. 
+  </p>
+</div>
+
+<div class="info-card">
+  <p>
+   The final gain set up that worked for my system was Kp = 0.4, Ki = 0.00, and Kd = 0.002. 
+  </p>
+</div>
+
+
+<h4>Test 1: 48 Degree Set point </h4>
+<img src="/assets/media_6/yaw.png" alt="Oscilloscope Setup" style="width: 80%;">
+<img src="/assets/media_6/motor.png" alt="Oscilloscope Setup" style="width: 80%;">
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media_6/IMG_6717.mov" type="video/mp4">
+  </video>
+</div>
+
+
+<h3>Integrator Windup</h3>
+<div class="info-card">
+  <p>
+   I implemented the integrator windup protection by constraining the possible value of the integral term as shown in the code snippet below. 
+   One reason for impelementing wind up protecting is to handle the scenario where the car is temporarily stuck or blocked by an obstacle. In such a case 
+   the integrator error would continue to accumulate while the car is not moving, resulting in a large integrator term that would be difficult to recover from. 
+   I tested the effectiveness of the protection by holdong the car in place for a few seconds and then releasing it. 
+  </p>
+</div>
+
+<summary>Integrator Windup Code</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/e02c699b6bdaa21af2c132e0804522a6.js"></script>
+  </div>
+</div>
+</details>
+
+ 
+<h5>Integrator Windup Test</h5>
+<div class="video-center">
+  <video controls width="30%" height="auto;">
+    <source src="/assets/media5/IMG_6698.mov" type="video/mp4">
+  </video>
+</div>
+
+<img src="/assets/media5/wind_up_protection.png" alt="Oscilloscope Setup" style="width: 80%;">
+<img src="/assets/media5/wind_up.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+
+
+<h3>Resources</h3>
+<p>
+  I used Stephan Wagner's page as a resouce for seeing how to organize the PID controller code. 
+</p>
+
+</section>
+</div>
+</body>
+</html>
