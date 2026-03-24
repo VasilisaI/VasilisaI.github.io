@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en-US">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <h1>Lab 7: Kalman Filtering</h1>
+
+
+  <section>
+    <h2>Estimate drag and momentum</h2>
+
+    <div class="info-card">
+    <p> 
+    To build the A and B matrices that describe the RC car as a linear system, 
+    I first needed to estimate the drag and momentum coefficients of the car by restructuring the 
+    equation of motion of the car. The equation of motion is given by m*dv/dt = u - d*v where m is the mass of the car, u is the motor input, d is the drag coefficient and v is the velocity.
+    In a steady state scenario, the velocity of the car is constant and dv/dt = 0. This allows us to rearrange the equation to solve for the drag coefficient as d = u/v. Then, we can use 
+    the rise time to 90% of the steady state velocity to solve for the momentum coefficient using the equation m = −dt_0.9 / ln(1 − 0.9).
+
+    </p>
+    </div>
+
+    <h3>Data Collection</h3>
+
+
+    <div class="info-card">
+    <p> 
+    To collect the velocity data for my car, I used the TOF sensor data as the car moved towards the wall at a constant motor input. 
+    The maximum PWM value reached in lab 5 ranged from 150 PWM to 250 PWM. I started testing the step response with a PWM of 160, which I then lowered to 120 PWM to make 
+    sure that I was reaching the steady state velocity in the 3 m distance that I had available. The two code snippets below show the helped function I used to collect data and the 
+    bluetooth commands for data transmission. 
+
+
+    </p>
+    </div>
+
+<details>
+<summary>TOF Data Collection Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/a1ee2f25f6cf64dc0cf8d3690343cff9.js"></script>
+  </div>
+</div>
+</details>
+
+<details>
+<summary>Bluetooth Data Transmission Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/3bbe4e3ed469f5a057c72faf39c84e80.js"></script>
+  </div>
+</div>
+</details>
+
+<h2>Collected Data</h2>
+   
+<h3>TOF Sensor Output: </h3>
+<image src="/assets/media_7/Distance_final.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+<h3>Computed Velocity: </h3>
+<image src="/assets/media_7/velocity.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+  
+<div class="info-card">
+   <p> 
+    The computed velocity data was very noisy. The TOF sensor update rate resulted in several data points 
+    of the same TOF measurements which would yield a velocity of zero for that time step. To clean up
+     the data, I calculated the velocities for each distance step rather than individual TOF reading.
+      Hence, duplicate TOF values were removed to avoid 0 velocity data points. 
+  </p>
+</div>
+
+
+<h3>Motor Output: </h3>
+<image src="/assets/media_7/motor.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+<h2>Calculating Coefficients</h2>
+<image src="/assets/media_7/velocity_analysis.png" alt="Oscilloscope Setup" style="width: 80%;">
+
+ <div class="info-card">
+    <p> 
+    From the velocity graph analysis, I calculate the steady state velocity to be -2370.4309920870646 mm/s, the 90% velocity to be -2133.3878928783583 mm/s and the time 
+    to reach 90% of the steady state velocity to be 1.6552681704260717 seconds. Using these values, I calculated the coefficients to be d = 2.37 and m = 0.303267142088.
+    </p>
+    </div>
+
+<div class="info-card">
+
+$$
+A =
+\begin{bmatrix}
+0 & 1 \\
+0 & -1.3915
+\end{bmatrix}
+\qquad
+B =
+\begin{bmatrix}
+0 \\
+3.2974
+\end{bmatrix}
+$$
+
+</div>
+
+    <div class="info-card">
+    <p> 
+    
+    </p>
+    </div>
+
+
+<h2>  Initialize KF (Python)</h2>
+
+<h3> Computing A and B matrices</h3>
+
+//math 
+
+<h3> Identifying C Matrix</h3>
+  <div class="info-card">
+    <p> 
+      The C matrix will be 2x1 because we have two state variables - position and velocity.
+       The TOF measurement only directly relates to the position variable therefore the C 
+       matrix will be  in the form C = [ -1, 0] . The top entry is -1 because we are measuring 
+      negative distances to the wall and the bottom entry is 0 because the TOF does not
+       provide any direct information on the RC velocity. 
+    </p>
+    </div>
+
+<h3>Initializing State Vector</h3>
+
+
+<h3>Process and Sensor Noise Covariances</h3>
+
+<div class="info-card">
+<p> 
+   From the earlier velocity graphs it was clear that the TOF sensors are significantly more trust
+    worthy than the velocity data. To get an initial estimate for the the variance of TOF data I reused 
+    the data collected in lab 3 that captured samples of TOF readings at specific distances. I used two 
+    of my data sets one for 26 cm distance and one for 130 cm distance which yielded variances of 1.0057
+     and 23.053. From lab 3 I observed the accuracy of the sensor readings decreased significantly with distance,
+      therefore I went with the higher variance value as a starting point and rounded it to 25.
+</p>
+</div>
+
+
+<h2>Implement and test your Kalman Filter in Jupyter (Python)</h2>
+
+    <div class="info-card">
+    <p> 
+    I used the code provided in the lab manual in combination with my data from a 3m lab 5 run to simulate the Kalman filter in Python.
+    The plot above shows the true position of the robot and the Kalman filter's estimate of the position. 
+
+
+    // add more 
+    </p>
+    </div>
+
+<image src="/assets/media_7/simulation.png" alt="Oscilloscope Setup" style="width: 80%;"></image>
+
+
+<h2> Implement the Kalman Filter on the Robot</h2>
+
+
+  <div class="info-card">
+    <p> 
+    I used the Arduino basic linear algebra library to initialize and work with the matrices in the kalman filter. The A, B, C, Q and R matrices were 
+    initialized as desribed in earlier sections. The state vector was initialized to be a zero vector because the velocity of the car should be zero at the strat and the initial position 
+    would be soon updated to the first TOF measurement. 
+    </p>
+    </div>
+
+<summary>Matrix Initialization </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/7375db2465ac86c2a6c9e0ebfdaf9d9c.js"></script>
+  </div>
+</div>
+</details>
+
+<h3>KALMAN Code</h3>
+ <div class="info-card">
+  <p> 
+    The code below shows the implementation of the Kalman filter on the Artemis. 
+    The kalman function takes in the current state estimate, the control input u, and the new mesurement supplied by the 
+    TOF sensors. The function preforms a prediction step which estimates the new location of the robot using the the motor inputs 
+    and then an update step which incorporates the new measurement. The function then returns the updated state estimate and the updated error covariance matrix. 
+  </p>
+  </div>
+
+<summary>KALMAN Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/818fac0e2db5e76d71fe445f648d4e29.js"></script>
+  </div>
+</div>
+</details>
+
+<h3> PID Integration</h3>
+ <div class="info-card">
+  <p> 
+    To integrate the Kalman filter into the PID controller, I replaced the measurement estimated derived from the TOF sensors with the estimate from the Kalman filter.
+     The error is then calculated as the difference between the target angle and the Kalman filter's postional estimate. The rest of the PID control code remains unchanged.
+     In the first run of the Kalman filter, the initial mean value for the position is updated to to the first TOF measurement. The integration snippet is shown below. 
+  </p>
+  </div>
+
+<details>
+
+<summary>PID Integration </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/c35d32087e0347c80b3c347bb6c3d41f.js"></script>
+  </div>
+</div>
+</details>
+
+<h3> Testing</h3>
+
+  <div class="info-card">
+    <p> 
+    My initial testing showed that the simulation results did not translate well to the real robot. The graph below shows the 
+    comparison of the first run position estimates of the Kalman filter and the true position of the robot. Following this, I decreased 
+    my process noise covariance value to 40 and my measurement noise to 23.
+    </div>
+
+<image src="/assets/media_6/Picture15.png" alt="Oscilloscope Setup" style="width: 80%;">
+  <div class="info-card">
+    <p> 
+    The second run ( graphed below) of testing showed significant improvement in the Kalman filter's estimates but displayed 
+    a large amount of disaprity between the true position and the Kalman filter's estimate at the start of the run. 
+    I realized that I was not updating the initial position mu to the first TOF measurement which I thought was causing the large initial error. 
+    </p>
+    </div>
+
+<image src="/assets/media_7/kalma_final.png" alt="Oscilloscope Setup" style="width: 80%;"></image>
+
+  <div class="info-card">
+    <p> 
+     Even after fizing the position mu initialization the Kalman filter's intitial position estimates are significantly lower than the true position. 
+     However, the filter converges to the true position quickly, so the PID is able to perform as intented. The disparity in the initial estimates likely is still caused 
+     by the initial zero velocity/position assumption which takes some time to be corrected. 
+    </p>
+    </div>
+
+<image src="/assets/media_7/kalma_final.png" alt="Oscilloscope Setup" style="width: 80%;"></image>
+
+
+
+
+
+<h4> Video Demonstration </h4>
+<img src="/assets/media_6/yaw.png" alt="Oscilloscope Setup" style="width: 80%;">
+<img src="/assets/media_6/motor.png" alt="Oscilloscope Setup" style="width: 80%;">
+<div class="video-center">
+  <video controls width="80%">
+    <source src="/assets/media_7/IMG_6780.mov" type="video/mp4">
+  </video>
+</div>
+
+
+<h3>Resources</h3>
+<p>
+  I used Stephan Wagner's page as a resouce for seeing how to organize the PID controller code. 
+</p>
+
+</section>
+</div>
+</body>
+</html>
