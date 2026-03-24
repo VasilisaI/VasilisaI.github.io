@@ -246,10 +246,17 @@ $$
     the data collected in lab 3 that captured samples of TOF readings at specific distances. I used two 
     of my data sets one for 26 cm distance and one for 130 cm distance which yielded variances of 1.0057
      and 23.053. From lab 3 I observed the accuracy of the sensor readings decreased significantly with distance,
-      therefore I went with the higher variance value as a starting point and rounded it to 25.
+      therefore I went with the higher variance value as a starting point and rounded it to 25. For the process noise, I used the 
+      equations provided in class and a TOF sampling rate of 50 ms. My calculations yielded a process noise covariance of 44 which I increased to 70 for initial testing to give more weight to the measurements.
 </p>
 </div>
 
+$$
+v =
+\sqrt{10^{2}\cdot\frac{1}{0.05}}
+=
+44.72135955\ \text{mm/s}
+$$
 
 <h2>Implement and test your Kalman Filter in Jupyter (Python)</h2>
 
