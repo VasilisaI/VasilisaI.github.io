@@ -159,7 +159,45 @@ window.MathJax = {
 <div class="info-card">
 
 $$
+\begin{aligned}
+d &= \frac{1\,\text{N}}{2.37\,\text{m/s}} = 0.422 \\
+m &= 0.3033 \\
+\\
+\frac{d}{m} &= \frac{0.422}{0.3033} = 1.3915 \\
+-\frac{d}{m} &= -1.3915 \\
+\frac{1}{m} &= \frac{1}{0.3033} = 3.2974
+\end{aligned}
+$$
+
+</div>
+
+
+
+<h2>  Initialize KF (Python)</h2>
+
+<h3> Computing A and B matrices</h3>
+
+   <div class="info-card">
+    <p> 
+    The A matrix, descrbing the dynamics of the system and the B matrix, describing the effect of the motor control input on the system were calculated using the coefficients derived in the previous section.
+    </p>
+    </div>
+
+    <div class="info-card">
+
+      
+$$
 A =
+\begin{bmatrix}
+0 & 1 \\
+0 & -\dfrac{d}{m}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & 1 \\
+0 & -\dfrac{0.422}{0.303267142088}
+\end{bmatrix}
+\approx
 \begin{bmatrix}
 0 & 1 \\
 0 & -1.3915
@@ -168,24 +206,22 @@ A =
 B =
 \begin{bmatrix}
 0 \\
+\dfrac{1}{m}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+\dfrac{1}{0.303267142088}
+\end{bmatrix}
+\approx
+\begin{bmatrix}
+0 \\
 3.2974
 \end{bmatrix}
 $$
 
 </div>
 
-    <div class="info-card">
-    <p> 
-    
-    </p>
-    </div>
-
-
-<h2>  Initialize KF (Python)</h2>
-
-<h3> Computing A and B matrices</h3>
-
-//math 
 
 <h3> Identifying C Matrix</h3>
   <div class="info-card">
@@ -298,7 +334,7 @@ $$
     my process noise covariance value to 40 and my measurement noise to 23.
     </div>
 
-<image src="/assets/media_6/Picture15.png" alt="Oscilloscope Setup" style="width: 80%;">
+<image src="/assets/media_7/First_iter_kalman_25_100.png" alt="Oscilloscope Setup" style="width: 80%;">
   <div class="info-card">
     <p> 
     The second run ( graphed below) of testing showed significant improvement in the Kalman filter's estimates but displayed 
@@ -307,7 +343,7 @@ $$
     </p>
     </div>
 
-<image src="/assets/media_7/kalma_final.png" alt="Oscilloscope Setup" style="width: 80%;"></image>
+<image src="/assets/media_7/kalman_23_70_no_init.png" alt="Oscilloscope Setup" style="width: 80%;"></image>
 
   <div class="info-card">
     <p> 
@@ -324,8 +360,6 @@ $$
 
 
 <h4> Video Demonstration </h4>
-<img src="/assets/media_6/yaw.png" alt="Oscilloscope Setup" style="width: 80%;">
-<img src="/assets/media_6/motor.png" alt="Oscilloscope Setup" style="width: 80%;">
 <div class="video-center">
   <video controls width="80%">
     <source src="/assets/media_7/IMG_6780.mov" type="video/mp4">
