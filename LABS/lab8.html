@@ -80,33 +80,92 @@ window.MathJax = {
     <h2>Stunt Methodology </h2>
     <div class="info-card">
     <p> 
-
-
+     My approach to perfoming a flip was to drive the robot towards the wall at high speed and quickly reverse the motors to allow the robot's forward momentum to help it flip over. 
+     To aid the flip I added a bag of coins to the front of the robot (seen in the image below) to shift the center of mass forward.
     </p>
     </div>
 
-<details>
-<summary>TOF Data Collection Code </summary>
+      <img src="/assets/media_8/IMG_6871.jpg" width="80%" alt="Trial 1 Video" />
+
+     <h2>State Machine </h2>
+    <div class="info-card">
+    <p> 
+     I broke up the stunt sequence into 4 distinct phases: forward_approach, reverse_flop, orientation_control and continue_reversing. The transition 
+     from forward_approach to reverse_flip is triggered by the TOF sensor data, while the 
+     rest of the state transitions are controlled by timing. The full stunt code is available in the code section below.
+    </p>
+    </div>
+
+    <h2>FORWARD_APPROACH </h2>
+    <div class="info-card">
+    <p> 
+     In the forward phase, both motors are set to pwm value of 255 while the TOF data is monitored. The TOF threshold that triggers the transition to the reverse_flip phase is 
+     set to 530 mm instead of 304 mm to account for the added reaction time needed to reverse the motors. The value of 530 mm was experientally determined and tuned. 
+  
+    </p>
+    </div>
+
+    <h2>REVERSE_FLOP </h2>
+    <div class="info-card">
+    <p> 
+     During the reverse_flop phase, both motors are set to -255 pwm values for a duration of 260 ms. This duration was likewise tuned experimentally. 
+    </p>
+    </div>
+
+    <h2>ORIENTATION_CONTROL </h2>
+    <div class="info-card"> 
+     In the orientation_control phase, I briefly activate my orientation pid controller to help the robot drive off at an appropriate angle 
+     adter the flip. The controller values are maintained from lab 6. If the yaw error is sufficiently small the pid will not activate. 
+    <p> 
+     
+   <h2>CONTINUE_REVERSING </h2>
+    <div class="info-card"> 
+     In the continue_reversing phase, both motors are set to -255 pwm values for a duration of 500 ms in order for the robot to approximately its 
+     starting position. 
+    <p> 
+     
+   <details>
+<summary>Stunt Code </summary>
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/a1ee2f25f6cf64dc0cf8d3690343cff9.js"></script>
+    <script src="https://gist.github.com/VasilisaI/84bc016d4bb7090b12a40a57e0e1351f.js"></script>
+  </div>
+</div>
+</details>
+    
+
+
+<h2>Data Collection </h2>
+    <div class="info-card">
+    <p> 
+    I used two bluetooth commands STUNT, for starting the stunt sequence, and STUNT_DATA for transmitting the collected data. I used the same array data collection method as employed in all my previous labs, recording the TOF distance data,time, and motor command data during the stunt sequence.
+     I also added an array for capturing the state of the stunt sequence denoted as 1-4 for the 4 phases of the stunt sequence.  The logging code and the bluettoth commands are pictured below. 
+    </p>
+    </div>
+    <img src="/assets/media_8/log.png" width="80%" alt="Trial 1 Video" />
+    <img src="/assets/media_8/bluetooth.png" width="80%" alt="Trial 1 Video" />
+
+
+
+
+<details>
+<summary>Stunt Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/84bc016d4bb7090b12a40a57e0e1351f.js"></script>
   </div>
 </div>
 </details>
 
-<details>
-<summary>Bluetooth Data Transmission Code </summary>
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/3bbe4e3ed469f5a057c72faf39c84e80.js"></script>
-  </div>
-</div>
-</details>
+
 
 
 <h2> Trials</h2>
+
+
+
 <h4> Trial 1  </h4>
 <div class="video-center">
   <video controls width="80%" >
@@ -123,7 +182,12 @@ window.MathJax = {
 <h2>  Motor Commands Data</h2>
 <img src="/assets/media_8/motor_t1.png" width="80%" alt="Trial 1 Video" />
 
-
+<h2>  State Transition Data</h2>
+<img src="/assets/media_8/state_t1.png" width="80%" alt="Trial 1 Video" />
+<div class="info-card">
+    <p> 
+   The above graph is one example of a state transition graph used for debugging the timing of state transitions. The values 1-4 correlate to the 4 phases of the stunt sequence. The graph above is from trial 1, and it shows that the transition from forward_approach to reverse_flop occurs at around 530 mm as expected. The transition from reverse_flop to orientation_control occurs at around 260 ms as expected. The transition from orientation_control to continue_reversing occurs at around 500 ms as expected.
+    </div>
 
 
 <h4> Trial 2  </h4>
