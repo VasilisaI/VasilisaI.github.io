@@ -81,13 +81,13 @@ window.MathJax = {
     <div class="info-card">
     <p> 
      My approach to perfoming a flip was to drive the robot towards the wall at high speed and quickly reverse the motors to allow the robot's forward momentum to help it flip over. 
-     To aid the flip I added a bag of coins to the front of the robot (seen in the image below) to shift the center of mass forward.
+     To aid the flip, I added a bag of coins to the front of the robot (seen in the image below) to shift the center of mass forward.
     </p>
     </div>
 
-      <img src="/assets/media_8/IMG_6871.jpg" width="80%" alt="Trial 1 Video" />
+    <img src="/assets/media_8/IMG_6871.jpg" width="50%" alt="Trial 1 Video" />
 
-     <h2>State Machine </h2>
+    <h2>State Machine </h2>
     <div class="info-card">
     <p> 
      I broke up the stunt sequence into 4 distinct phases: forward_approach, reverse_flop, orientation_control and continue_reversing. The transition 
@@ -117,12 +117,15 @@ window.MathJax = {
      In the orientation_control phase, I briefly activate my orientation pid controller to help the robot drive off at an appropriate angle 
      adter the flip. The controller values are maintained from lab 6. If the yaw error is sufficiently small the pid will not activate. 
     <p> 
-     
+     </div>
+
    <h2>CONTINUE_REVERSING </h2>
     <div class="info-card"> 
+    <p> 
      In the continue_reversing phase, both motors are set to -255 pwm values for a duration of 500 ms in order for the robot to approximately its 
      starting position. 
-    <p> 
+    </p> 
+    </div>
      
    <details>
 <summary>Stunt Code </summary>
