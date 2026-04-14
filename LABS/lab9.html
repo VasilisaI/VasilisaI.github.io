@@ -84,13 +84,7 @@ window.MathJax = {
       </p>
     </div>
 
-    <h2>Accuracy</h2>
-    <div class="info-card">
-      <p>
-        The rotation was performed using my previous orientation PID controller based on integrated gyro readings.
-        I kept my original tuning from lab 6 (Kp=0.4 Ki=0.1, Kd=0.0002), as it was working well for the turns. 
-      </p>
-    </div>
+
 
 
     <h3>PID Performance</h3>
@@ -110,6 +104,14 @@ window.MathJax = {
       <video controls width="80%">
         <source src="/assets/media_9/IMG_6973.mov" type="video/mp4">
       </video>
+    </div>
+
+        <h2>Accuracy</h2>
+    <div class="info-card">
+      <p>
+        In a 4 m by 4 m empty square room, with the robot turning on axis at the center, the mapping error is dominated by yaw error rather than TOF noise. Based on the average yaw change I measured during turning, the heading error is about 1° to 3°. Using this, the average map error is about 4 to 12 cm, while the maximum error is about 5 to 15 cm for points near the corners of the room. The TOF characterization from Lab 3 showed a variance of about 1 to 25 mm, so its contribution is much smaller than the angular error. 
+        Therefore, the overall map accuracy is mainly limited by how accurately the robot turns and maintains its heading during the scan.
+      </p>
     </div>
 
   <details>
