@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-US">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 9</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <h1>Lab 9: Mapping</h1>
+
+  <section>
+    <h2>Orientation PID Controller</h2>
+    <div class="info-card">
+      <p>
+        The rotation was performed using my previous orientation PID controller based on integrated gyro readings.
+        I kept my original tuning from lab 6 (Kp=0.4 Ki=0.1, Kd=0.0002), as it was working well for the turns. 
+      </p>
+    </div>
+
+    <h3>PID Performance</h3>
+    <img src="/assets/media_9/pid_terms_vs_time.png" width="80%" alt="PID performance graph" />
+    <img src="/assets/media_9/yaw_vs_time_wrapped.png" width="80%" alt="PID performance graph" />
+    <img src="/assets/media_9/motor_command_vs_time.png" width="80%" alt="PID performance graph" />
+    
+    <div class="info-card">
+      <p>The data above shows the results of a single robot scan. The PID terms graph shows the error oscillating between 0 and 25 degrees as the robot continously completes a 25 degree turn 
+        and updates its target angle. The yaw graph ( wrapped to 360 degrees) shows robot's orientation as it completes a full scan. When testing my controller I found that 
+        the robot tyically turned within 1 to 3 degrees of the target angle. 
+      </p>
+    </div>
+
+   <h3>Turn Video</h3>
+    <div class="video-center">
+      <video controls width="80%">
+        <source src="/assets/media_9/IMG_6973.mov" type="video/mp4">
+      </video>
+    </div>
+
+  <details>
+      <summary>Mapping Code</summary>
+      <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+        <div style="flex: 1; padding-right: 20px;">
+          <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+         <script src="https://gist.github.com/VasilisaI/fa7382257dc6ffe5d0ddf84a76b551df.js"></script>
+        </div>
+      </div>
+    </details>
+   <div class="info-card">
+      <p>My code was structured around the use of my mapping() function which called via a bluetooth START_MAPPING
+        command. The function starts the orientation pid with the set point of 0 and then does a for loop 
+        of 14 measurments where while the absolute value of pid error is greater than 3 
+        my imu_pid_step() function is called. The error had to be limited to 3 to guarantee that the robot would not get 
+        stuck trying to correct a small error without finishing its full rotation. Once the error is less than 3, the robot stops and 
+       takes a TOF readings.  Then the robot records its data which can be transmitted via MAP_DATA bluetooth command and increments the 
+       next target angle by 25 degrees. The function heavily relies on all pid related terms being global variables accesible to both the 
+       pid functions and the mapping function.
+      </p>
+    </div>
+
+
+    <h2>Individual Scan Polar Plots</h2>
+    <div class="info-card">
+      <p>
+      
+      </p>
+    </div>
+
+    <h3>Location (-3, -2)</h3>
+    <img src="/assets/media_9/polar_neg3_neg2.png" width="80%" alt="Polar plot (-3,-2)" />
+    <div class="info-card">
+      <p>[PLACEHOLDER — observations for this location]</p>
+    </div>
+
+    <h3>Location (5, 3)</h3>
+    <img src="/assets/media_9/polar_5_3.png" width="80%" alt="Polar plot (5,3)" />
+    <div class="info-card">
+      <p>[PLACEHOLDER — observations for this location]</p>
+    </div>
+
+    <h3>Location (0, 3)</h3>
+    <img src="/assets/media_9/polar_0_3.png" width="80%" alt="Polar plot (0,3)" />
+    <div class="info-card">
+      <p>[PLACEHOLDER — observations for this location]</p>
+    </div>
+
+    <h3>Location (5, -3)</h3>
+    <img src="/assets/media_9/polar_5_neg3.png" width="80%" alt="Polar plot (5,-3)" />
+    <div class="info-card">
+      <p>[PLACEHOLDER — observations for this location]</p>
+    </div>
+
+
+    <h2>Transformation Matrices</h2>
+    <div class="info-card">
+      <p>
+      
+        [PLACEHOLDER — transformation matrix description]
+      </p>
+      <p>
+        The general transformation from robot frame to inertial frame is:
+        $$
+        \begin{bmatrix} x_w \\ y_w \\ 1 \end{bmatrix}
+        =
+        \begin{bmatrix} \cos\theta & -\sin\theta & x_r \\ \sin\theta & \cos\theta & y_r \\ 0 & 0 & 1 \end{bmatrix}
+        \begin{bmatrix} 0 \\ d \\ 1 \end{bmatrix}
+        $$
+        where $(x_r, y_r)$ is the robot's position and $\theta$ is the yaw angle at each reading.
+      </p>
+      <p>[PLACEHOLDER — specific matrix values for each scan location]</p>
+    </div>
+
+    <h2>Line-Based Map</h2>
+    <div class="info-card">
+      <p>
+      
+      </p>
+    </div>
+    <img src="/assets/media_9/line_map.png" width="80%" alt="Line-based map" />
+    <h3>Resources</h3>
+    <p>[PLACEHOLDER </p>
+
+  </section>
+</div>
+</body>
+</html>
