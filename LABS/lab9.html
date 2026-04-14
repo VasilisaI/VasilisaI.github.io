@@ -128,10 +128,13 @@ window.MathJax = {
      <h2>MAP</h2>
     <div class="info-card">
       <p>
-      The picture of the map I used is below. The center X marks the origin of my plane and the otther X;s mark the locations 
+      The picture of the map I used is below. The center X marks the origin of my plane and the otther Xs mark the locations 
       of test spots. The spots are reported in meters away from the origin. 
       </p>
     </div>
+ 
+
+     <img src="/assets/media_9/map.png" width="80%" alt="Polar plot (0,3)" />
 
 
     <h2>Individual Scan Polar Plots</h2>
@@ -142,44 +145,62 @@ window.MathJax = {
     </div>
 
     <h3>Location 1 (0.57, -0.16)</h3>
-    <img src="/assets/media_9/" width="80%" alt="Polar plot (-3,-2)" />
-    <img src="/assets/media_9/p1_pol.png" width="80%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/IMG_7001.jpg" width="50%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/p1_pol.png" width="50%" alt="Polar plot (-3,-2)" />
     <img src="/assets/media_9/pt1_dist.png" width="80%" alt="Polar plot (-3,-2)" />
 
     <h3>Location 2 (0.14, 0.33)</h3>
-    <img src="/assets/media_9/polar_5_3.png" width="80%" alt="Polar plot (5,3)" />
-    <img src="/assets/media_9/p2_pol.png" width="80%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/IMG_7002.jpg" width="50%" alt="Polar plot (5,3)" />
+    <img src="/assets/media_9/p2_pol.png" width="50%" alt="Polar plot (-3,-2)" />
     <img src="/assets/media_9/pt2_dist.png" width="80%" alt="Polar plot (-3,-2)" />
 
     <h3>Location 3 (-0.45, 0.33)</h3>
-    <img src="/assets/media_9/polar_0_3.png" width="80%" alt="Polar plot (0,3)" />
-    <img src="/assets/media_9/p2_pol.png" width="80%" alt="Polar plot (-3,-2)" />
-    <img src="/assets/media_9/pt2_dist.png" width="80%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/IMG_7003.jpg" width="50%" alt="Polar plot (0,3)" />
+    <img src="/assets/media_9/p3_pol.png" width="50%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/pt3_dist.png" width="80%" alt="Polar plot (-3,-2)" />
 
     <h3>Location 4 (-0.37, -0.33)</h3>
-    <img src="/assets/media_9/polar_5_neg3.png" width="80%" alt="Polar plot (5,-3)" />
-    <img src="/assets/media_9/p2_pol.png" width="80%" alt="Polar plot (-3,-2)" />
-    <img src="/assets/media_9/pt2_dist.png" width="80%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/IMG_7004.jpg" width="50%" alt="Polar plot (5,-3)" />
+    <img src="/assets/media_9/p4_pol.png" width="50%" alt="Polar plot (-3,-2)" />
+    <img src="/assets/media_9/pt4_dist.png" width="80%" alt="Polar plot (-3,-2)" />
 
 
     <h2>Transformation Matrices</h2>
-    <div class="info-card">
-      <p>
-      
-        [PLACEHOLDER — transformation matrix description]
-      </p>
-      <p>
-        The general transformation from robot frame to inertial frame is:
-        $$
-        \begin{bmatrix} x_w \\ y_w \\ 1 \end{bmatrix}
-        =
-        \begin{bmatrix} \cos\theta & -\sin\theta & x_r \\ \sin\theta & \cos\theta & y_r \\ 0 & 0 & 1 \end{bmatrix}
-        \begin{bmatrix} 0 \\ d \\ 1 \end{bmatrix}
-        $$
-        where $(x_r, y_r)$ is the robot's position and $\theta$ is the yaw angle at each reading.
-      </p>
-      <p>[PLACEHOLDER — specific matrix values for each scan location]</p>
-    </div>
+<div class="info-card">
+  <p>
+    The TOF sensor is mounted 8 cm in front of the robot center, along the robot's
+    forward direction. Since the robot frame here uses the forward axis as the
+    positive \(y\)-direction, the sensor offset in the robot frame is
+    \( \begin{bmatrix}0 \\ 0.08 \end{bmatrix} \) meters.
+  </p>
+
+  <p>
+    The general transformation from robot frame to inertial frame is:
+    $$
+    \begin{bmatrix} x_w \\ y_w \\ 1 \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \cos\theta & -\sin\theta & x_r \\
+    \sin\theta & \cos\theta  & y_r \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    d + 0.08 \\
+    1
+    \end{bmatrix}
+    $$
+    where \((x_r, y_r)\) is the robot's position, \(\theta\) is the yaw angle,
+    and \(d\) is the TOF reading in meters.
+  </p>
+
+  <p>
+    This accounts for the fact that the TOF sensor is not located at the robot
+    center, but is shifted 8 cm forward.
+  </p>
+
+  <p>[PLACEHOLDER — specific matrix values for each scan location]</p>
+</div>
 
     <h2>Line-Based Map</h2>
     <div class="info-card">
