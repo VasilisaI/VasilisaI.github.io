@@ -92,9 +92,9 @@ window.MathJax = {
 
 
   <h2>Odometry Motion Model </h2>
-    <p>A motion command , u, can be desconstructed into three separate stages: initial rotation, 
-      translation, and final rotation. Compute_control uses the robot's current and past pose 
-      to get the ideal motion command. 
+    <p>The odometry motion model calculates the probability of transition from a previous state to a new state by comparing 
+      the ideal motion command (calculated by compute_control) to the actual odometry reading. The probability calculations are 
+      shown in the image below.  
     </p>
 
 
