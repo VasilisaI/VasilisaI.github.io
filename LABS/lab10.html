@@ -84,17 +84,24 @@ to be in each cell.   </p>
   </div>
 
 
-  <h2>compute_control</h2>
+  <h2>Compute Control</h2>
   <div class="info-card">
     <p>A motion command , u, can be desconstructed into three separate stages: initial rotation, 
       translation, and final rotation. Compute_control uses the robot's current and past pose 
       to get the ideal motion command. 
     </p>
   </div>
-<img src="/assets/media10/odometry.png" width="80%" " />
-  <script src="https://gist.github.com/VasilisaI/dd305159cd6bf4ae64f8a877dfcbe943.js"></script>
+   <img src="/assets/media10/odometry.png" width="80%" " />
 
+  <details>
+  <summary> Compute Control</summary>
 
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/dd305159cd6bf4ae64f8a877dfcbe943.js"></script>
+</div>
+</details>
 
   <h2>Odometry Motion Model </h2>
     <p>The odometry motion model calculates the probability of transition from a previous state to a new state by comparing 
@@ -102,9 +109,10 @@ to be in each cell.   </p>
       shown in the image below.  
     </p>
 
+    <img src="/assets/media10/odom2.png" width="80%" " />
 <details>
   <summary>odom_motion_model</summary>
-<img src="/assets/media10/odom2.png" width="80%" " />
+
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
