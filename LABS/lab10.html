@@ -92,6 +92,12 @@ window.MathJax = {
 
 
   <h2>Odometry Motion Model </h2>
+    <p>A motion command , u, can be desconstructed into three separate stages: initial rotation, 
+      translation, and final rotation. Compute_control uses the robot's current and past pose 
+      to get the ideal motion command. 
+    </p>
+
+
   <summary>odom_motion_model</summary>
 <img src="/assets/media10/odom2.png" width="80%" " />
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
@@ -106,7 +112,12 @@ window.MathJax = {
 
   <h2>Prediction Step</h2>
   <div class="info-card">
-    <p></p>
+    <p>The prediction step uses the odometry to predict
+      its new pose, implementing the quation (). We loop 
+      over every possible previous state ( skipping states that have a probability of < 0.001 for 
+      computational efficiency) and calculate the probability of transitioning to each new state given the odometry reading.
+      The all the probabilities are normalized. 
+    </p>
   </div>
 
   <summary>Prediction Step Code </summary>
