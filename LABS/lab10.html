@@ -75,7 +75,12 @@ window.MathJax = {
 
   <h2>Overview</h2>
   <div class="info-card">
-    <p></p>
+    <p>In this lab we use a simulator to localize a robot using Bayes filter. To implement the filter, 
+      the map is broken into a grid of discrete cells. Then a motion model which predicts the likelihood 
+    of transtions between state is built. Supplementing a motion model is a measurement model that updates the belief based on sensor readings.
+  Each step of the filter is broken into a prediction step which uses the motion model and adds uncertainty to the robot's pose and 
+then an update step which incorporates the sensor readings and decreases the uncertainty. In the end, you have a grid of probabilities denoting the probability of the robot 
+to be in each cell.   </p>
   </div>
 
 
