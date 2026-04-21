@@ -130,12 +130,18 @@ window.MathJax = {
 </div>
 </details>
 
-
-
   
   <h2>Sensor Model</h2>
   <div class="info-card">
-    <p>  </p>
+    <p>The sensor model computes $p(z_t \mid x_t)$, the likelihood of the robot's 18 range 
+    measurements given a particular grid cell. For each of the 18 scan angles, a Gaussian 
+    is evaluated comparing the actual sensor reading $z_t^{(i)}$ against the expected 
+    reading $z_{true}^{(i)}$ pre-computed for that cell:
+    $$
+    p(z_t \mid x_t) = \prod_{i=1}^{18} \mathcal{N}(z_t^{(i)};\, z_{true}^{(i)}(x_t),\, \sigma_{sensor})
+    $$
+    The function returns an array of 18 individual likelihoods, which are then multiplied 
+    together in the update step to get the total likelihood for that cell.  </p>
   </div>
 
   <summary>Sensor Model</summary>
@@ -164,7 +170,7 @@ window.MathJax = {
 </div>
 
 <details>
-  <summary>▸ update_step — source</summary>
+  <summary>▸ update_step</summary>
   <div style="display: flex; align-items: flex-start; padding-top: 15px;">
     <div style="flex: 1; padding-right: 20px;">
       <h4 style="margin: 0 0 10px 0;">Python Code</h4>
@@ -185,12 +191,16 @@ window.MathJax = {
 
   <h3>Trajectory Plot</h3>
   <div class="info-card">
-    <p>[ Describe the trajectory. Note where odometry (red) diverges from ground truth (green) and how the Bayes estimate (blue) compares. ]</p>
+    <p> The trajectory plot shows that the predicted pose (shown in blue) closely tracked the ground truth (shown in green). The odometry 
+      readings (shown in red) were very noisy, at times showing the robot's pose as being outside of the world map. Nonethless, the the robot 
+      was effectively localized despite the noisy odometry readings. 
+    </p>
   </div>
   <img src="/assets/media10/Final Trajectory.png" width="80%" " />
   
 
-
+  <h3>Resources</h3>
+    <p>I refrenced Stephen Wagner and Jack Long's code. </p>
 
 </div>
 </body>
