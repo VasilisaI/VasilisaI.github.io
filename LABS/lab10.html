@@ -81,18 +81,26 @@ window.MathJax = {
 
   <h2>compute_control</h2>
   <div class="info-card">
-    <p></p>
+    <p>A motion command , u, can be desconstructed into three separate stages: initial rotation, 
+      translation, and final rotation. Compute_control uses the robot's current and past pose 
+      to get the ideal motion command. 
+    </p>
   </div>
 <img src="/assets/media10/odometry.png" width="80%" " />
   <script src="https://gist.github.com/VasilisaI/dd305159cd6bf4ae64f8a877dfcbe943.js"></script>
 
 
-  <h2>odom_motion_model</h2>
-  <div class="info-card">
-    <p></p>
+
+  <h2>Odometry Motion Model </h2>
+  <summary>odom_motion_model</summary>
+<img src="/assets/media10/odom2.png" width="80%" " />
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/4a76cfd2e3e4f2b73bbd0c82d17a6148.js"></script>
   </div>
-  <img src="/assets/media10/odom2.png" width="80%" " />
-  <script src="https://gist.github.com/VasilisaI/4a76cfd2e3e4f2b73bbd0c82d17a6148.js"></script>
+</div>
+</details>
 
 
 
@@ -100,21 +108,49 @@ window.MathJax = {
   <div class="info-card">
     <p></p>
   </div>
-  <script src="https://gist.github.com/VasilisaI/ff0f1495611a06c885c07221b272bdd7.js"></script>
+
+  <summary>Prediction Step Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+     <script src="https://gist.github.com/VasilisaI/ff0f1495611a06c885c07221b272bdd7.js"></script>
+</div>
+</details>
+
+
 
   
   <h2>Sensor Model</h2>
-  <<div class="info-card">
+  <div class="info-card">
     <p></p>
   </div>
-  <script src="https://gist.github.com/VasilisaI/200997dd1dbc47d855c4279af89544c8.js"></script>
+
+  <summary>Sensor Mode</summary>
+<img src="/assets/media10/odom2.png" width="80%" " />
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/200997dd1dbc47d855c4279af89544c8.js"></script>
+
+  </div>
+</div>
+</details>
 
 
   <h2>Update Step</h2>
   <div class="info-card">
     <p>[ Describe the trajectory. Note where odometry (red) diverges from ground truth (green) and how the Bayes estimate (blue) compares. ]</p>
   </div>
+
+  <summary>Update Step</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
   <script src="https://gist.github.com/VasilisaI/d18ab1bd38561d1f97175e31c95ef72c.js"></script>
+  
+  </div>
+</div>
+</details>
 
 
 
