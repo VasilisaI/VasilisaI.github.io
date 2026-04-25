@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en-US">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10: Localization (sim)</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  
+   h2>Simulation</h2>
+    <p>
+    </p>
+   <img src="/assets/media11/simulation.png" width="80%" />
+
+
+
+
+  <details>
+  <summary> Mapping</summary>
+
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/dd305159cd6bf4ae64f8a877dfcbe943.js"></script>
+</div>
+</details>
+
+
+
+
+
+  <h2>Perform_Observation_Loop </h2>
+    <p>The odometry motion model calculates the probability of transition from a previous state to a new state by comparing 
+      the ideal motion command (calculated by compute_control) to the actual odometry reading. The probability calculations are 
+      shown in the image below.  
+    </p>
+
+    <img src="/assets/media10/odom2.png" width="80%" />
+<details>
+  <summary>odom_motion_model</summary>
+
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/4a76cfd2e3e4f2b73bbd0c82d17a6148.js"></script>
+  </div>
+</div>
+</details>
+
+
+<h2>Prediction Step</h2>
+<div class="info-card">
+  <p>
+    The prediction step uses the odometry to predict its new pose, implementing the equation:
+    $$
+    \overline{bel}(x_t) = \sum_{x_{t-1}} p(x_t \mid x_{t-1}, u_t) \cdot bel(x_{t-1})
+    $$
+    We loop over every possible previous state (skipping states with probability below 0.0001 
+    for computational efficiency) and calculate the probability of transitioning to each new 
+    state given the odometry reading. All probabilities are then normalized to sum to 1.
+  </p>
+</div>
+
+<details>
+  <summary>Prediction Step Code </summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+     <script src="https://gist.github.com/VasilisaI/ff0f1495611a06c885c07221b272bdd7.js"></script>
+</div>
+</details>
+
+  
+  <h2>Sensor Model</h2>
+  <div class="info-card">
+    <p>The sensor model computes $p(z_t \mid x_t)$, the likelihood of the robot's 18 range 
+    measurements given a particular grid cell. For each of the 18 scan angles, a Gaussian 
+    is evaluated comparing the actual sensor reading $z_t^{(i)}$ against the expected 
+    reading $z_{true}^{(i)}$ pre-computed for that cell:
+    $$
+    p(z_t \mid x_t) = \prod_{i=1}^{18} \mathcal{N}(z_t^{(i)};\, z_{true}^{(i)}(x_t),\, \sigma_{sensor})
+    $$
+    The function returns an array of 18 individual likelihoods, which are then multiplied 
+    together in the update step to get the total likelihood for that cell.  </p>
+  </div>
+
+
+  <details>
+  <summary>Sensor Model</summary>
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <script src="https://gist.github.com/VasilisaI/200997dd1dbc47d855c4279af89544c8.js"></script>
+
+  </div>
+</div>
+</details>
+
+<h2>Update Step</h2>
+<div class="info-card">
+  <p>
+    In the update step, the measurements are incorporated to decrease uncertainty in the robot's pose:
+    $$
+    bel(x_t) = \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)
+    $$
+    where $p(z_t \mid x_t) = \prod_{i=1}^{18} \mathcal{N}(z_t^{(i)};\, z_{true}^{(i)}(x_t),\, \sigma_{sensor})$.
+    We loop over every cell in the grid and compute the likelihood by comparing the 18 expected 
+    range measurements stored in the map against the robot's actual sensor readings. 
+    The belief is then normalized to sum to 1.
+  </p>
+</div>
+
+<details>
+  <summary>▸ update_step</summary>
+  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+    <div style="flex: 1; padding-right: 20px;">
+      <h4 style="margin: 0 0 10px 0;">Python Code</h4>
+      <script src="https://gist.github.com/VasilisaI/d18ab1bd38561d1f97175e31c95ef72c.js"></script>
+    </div>
+  </div>
+</details>
+
+  <h2>Simulation Results</h2>
+
+  <h4>Localization Video  </h4>
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+  <h3>Trajectory Plot</h3>
+  <div class="info-card">
+    <p> The trajectory plot shows that the predicted pose (shown in blue) closely tracked the ground truth (shown in green). The odometry 
+      readings (shown in red) were very noisy, at times showing the robot's pose as being outside of the world map. Nonethless, the the robot 
+      was effectively localized despite the noisy odometry readings. 
+    </p>
+  </div>
+  <img src="/assets/media10/Final Trajectory.png" width="80%" " />
+  
+
+  <h3>Resources</h3>
+    <p>I refrenced Stephen Wagner and Jack Long's code. </p>
+
+</div>
+</body>
+</html>
