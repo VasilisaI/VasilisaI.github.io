@@ -88,7 +88,7 @@ window.MathJax = {
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-   <script src="https://gist.github.com/VasilisaI/dd305159cd6bf4ae64f8a877dfcbe943.js"></script>
+   <script src="https://gist.github.com/VasilisaI/bce79d0c55ab9110aab535ce97aa30e7.js"></script>
 </div>
 </details>
 
@@ -97,97 +97,119 @@ window.MathJax = {
 
 
   <h2>Perform_Observation_Loop </h2>
-    <p>The odometry motion model calculates the probability of transition from a previous state to a new state by comparing 
-      the ideal motion command (calculated by compute_control) to the actual odometry reading. The probability calculations are 
-      shown in the image below.  
+    <p>
     </p>
 
-    <img src="/assets/media10/odom2.png" width="80%" />
+
 <details>
-  <summary>odom_motion_model</summary>
+  <summary>Perform_Observation_Loop</summary>
 
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/4a76cfd2e3e4f2b73bbd0c82d17a6148.js"></script>
+    <script src="https://gist.github.com/VasilisaI/5d36adf8b95348ecf94ca45ad866480b.js"></script>
+    <script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
   </div>
 </div>
 </details>
 
 
-<h2>Prediction Step</h2>
-<div class="info-card">
-  <p>
-    The prediction step uses the odometry to predict its new pose, implementing the equation:
-    $$
-    \overline{bel}(x_t) = \sum_{x_{t-1}} p(x_t \mid x_{t-1}, u_t) \cdot bel(x_{t-1})
-    $$
-    We loop over every possible previous state (skipping states with probability below 0.0001 
-    for computational efficiency) and calculate the probability of transitioning to each new 
-    state given the odometry reading. All probabilities are then normalized to sum to 1.
-  </p>
+<script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
+
+<h2>(-3,-2,0)</h2>
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media11/IMG_7050.mov" type="video/mp4">
+  </video>
 </div>
 
-<details>
-  <summary>Prediction Step Code </summary>
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-     <script src="https://gist.github.com/VasilisaI/ff0f1495611a06c885c07221b272bdd7.js"></script>
+<img src="/assets/media11/(-3,-2)plot.png" width="80%" />
+<img src="/assets/media11/(-3,-2)tof.png" width="80%" />
+<img src="/assets/media11/(-3,-2)yaw.png" width="80%" />
+<img src="/assets/media11/(-3,-2)bel.png" width="80%" />
+
+
+
+
+<div class="info-card">
+  <p></p>
+   
 </div>
-</details>
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<h2>(0,3,0)</h2>
+<div class="info-card">
+  <p>
+   </p>
+</div>
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+
+<img src="/assets/media11/(0,3)plot.png" width="80%" />
+<img src="/assets/media11/(0,3)tof.png" width="80%" />
+<img src="/assets/media11/(0,3)yaw.png" width="80%" />
+<img src="/assets/media11/(0,3)bel.png" width="80%" />
+
+
+
+<h2>(5,-3,0)</h2>
+<div class="info-card">
+  <p></p>
+   
+</div>
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+<img src="/assets/media11/(5,-3)plot.png" width="80%" />
+<img src="/assets/media11/(5,-3)tof.png" width="80%" />
+<img src="/assets/media11/(5,-3)yaw.png" width="80%" />
+<img src="/assets/media11/(5,-3)bel.png" width="80%" />
+
+
+<h2>(5,3,0)</h2>
+<div class="info-card">
+  <p></p>
+   
+</div>
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+<img src="/assets/media11/(5,3)plot.png" width="80%" />
+<img src="/assets/media11/(5,3)tof.png" width="80%" />
+<img src="/assets/media11/(5,3)yaw.png" width="80%" />
+<img src="/assets/media11/(5,3)bel.png" width="80%" />
+
+
 
   
-  <h2>Sensor Model</h2>
-  <div class="info-card">
-    <p>The sensor model computes $p(z_t \mid x_t)$, the likelihood of the robot's 18 range 
-    measurements given a particular grid cell. For each of the 18 scan angles, a Gaussian 
-    is evaluated comparing the actual sensor reading $z_t^{(i)}$ against the expected 
-    reading $z_{true}^{(i)}$ pre-computed for that cell:
-    $$
-    p(z_t \mid x_t) = \prod_{i=1}^{18} \mathcal{N}(z_t^{(i)};\, z_{true}^{(i)}(x_t),\, \sigma_{sensor})
-    $$
-    The function returns an array of 18 individual likelihoods, which are then multiplied 
-    together in the update step to get the total likelihood for that cell.  </p>
-  </div>
+  <h3>Resources</h3>
+    <p>I refrenced Stephen Wagner and Jack Long's code. </p>
 
-
-  <details>
-  <summary>Sensor Model</summary>
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/200997dd1dbc47d855c4279af89544c8.js"></script>
-
-  </div>
-</div>
-</details>
-
-<h2>Update Step</h2>
-<div class="info-card">
-  <p>
-    In the update step, the measurements are incorporated to decrease uncertainty in the robot's pose:
-    $$
-    bel(x_t) = \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)
-    $$
-    where $p(z_t \mid x_t) = \prod_{i=1}^{18} \mathcal{N}(z_t^{(i)};\, z_{true}^{(i)}(x_t),\, \sigma_{sensor})$.
-    We loop over every cell in the grid and compute the likelihood by comparing the 18 expected 
-    range measurements stored in the map against the robot's actual sensor readings. 
-    The belief is then normalized to sum to 1.
-  </p>
 </div>
 
-<details>
-  <summary>▸ update_step</summary>
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-    <div style="flex: 1; padding-right: 20px;">
-      <h4 style="margin: 0 0 10px 0;">Python Code</h4>
-      <script src="https://gist.github.com/VasilisaI/d18ab1bd38561d1f97175e31c95ef72c.js"></script>
-    </div>
-  </div>
-</details>
 
-  <h2>Simulation Results</h2>
+
+
 
   <h4>Localization Video  </h4>
 <div class="video-center">
@@ -197,16 +219,7 @@ window.MathJax = {
 </div>
 
 
-  <h3>Trajectory Plot</h3>
-  <div class="info-card">
-    <p> The trajectory plot shows that the predicted pose (shown in blue) closely tracked the ground truth (shown in green). The odometry 
-      readings (shown in red) were very noisy, at times showing the robot's pose as being outside of the world map. Nonethless, the the robot 
-      was effectively localized despite the noisy odometry readings. 
-    </p>
-  </div>
-  <img src="/assets/media10/Final Trajectory.png" width="80%" " />
   
-
   <h3>Resources</h3>
     <p>I refrenced Stephen Wagner and Jack Long's code. </p>
 
