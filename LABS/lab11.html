@@ -75,11 +75,15 @@ window.MathJax = {
 
   
    <h2>Simulation</h2>
+
+   <div class="info-card">
     <p>
       The simulation results were similar to those from lab 10. The localization prediction 
       matched the true pose closely while the odometry data was frequenctly inaccurate, showing the robot
       moving outside the boundaries of the map. 
     </p>
+
+    </div>
    <img src="/assets/media11/simulation.png" width="80%" />
 
 
@@ -95,13 +99,17 @@ window.MathJax = {
 </div>
 </details>
 
+ <div class="info-card">
 <p> To complete the robot trajectory, I reused the mapping code from lab 9 
   only changing the number of samples I was collecting to be 18 and the angle increments to 20 degrees. 
   The videos of the robot's rotations are included below. 
 </p>
-    
+  
+</div>
 
   <h2>Perform_Observation_Loop </h2>
+   <div class="info-card">
+
     <p>
      My observation loop reuses the bluetooth commands from lab 9. I first 
      call my START_MAPPING command which performs the 360 degree robot rotation and then activate 
@@ -110,7 +118,7 @@ window.MathJax = {
      the data in sensor_data.csv. I also had to turn the function asynchronous to be able to wait for the data to be transmitted before calling the localization function.
     </p>
 
-
+</div>
 <details>
   <summary>Perform_Observation_Loop</summary>
 
