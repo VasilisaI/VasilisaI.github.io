@@ -92,29 +92,48 @@ window.MathJax = {
 </div>
 </details>
 
-
-
-
+<p> To complete the robot trajectory, I reused the mapping code from lab 9 
+  only changing the number of samples I was collecting to be 18 and the angle increments to 20 degrees. 
+  The videos of the robot's trajectory are included below. 
+</p>
+    
 
   <h2>Perform_Observation_Loop </h2>
     <p>
+     My observation loop reuses the bluetooth commands from lab 9 as well. I first 
+     call my START_MAPPING command which performs the 360 degree robot rotation and then activate 
+     my notification handler to receive time of flight and yaw data. The data transmissio is triggered by 
+     MAP_DATA command. On the python side, the handler waits for 36 readings, (18 tof and 18 yaw) and then stores 
+     the data is a sensor_data.csv file. 
     </p>
 
 
 <details>
   <summary>Perform_Observation_Loop</summary>
 
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
+<details>
+  <summary>Perform_Observation_Loop</summary>
+
+  <div style="padding-top: 15px;">
     <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-    <script src="https://gist.github.com/VasilisaI/5d36adf8b95348ecf94ca45ad866480b.js"></script>
-    <script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
+
+    <div style="margin-bottom: 25px;">
+      <script src="https://gist.github.com/VasilisaI/5d36adf8b95348ecf94ca45ad866480b.js"></script>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
+    </div>
   </div>
-</div>
 </details>
 
+<p>
+     A helper function get_Sensor_readings reads the contents of the 
+     sensor_data.csv file and converts the tof and yaw data into numpy arrays suitable for 
+     the localization function. 
+</p>
 
-<script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
+
 
 <h2>(-3,-2,0)</h2>
 
@@ -217,7 +236,7 @@ window.MathJax = {
 
 <div class="video-center">
   <video controls width="80%" >
-    <source src="/assets/media11/IMG_7054.mov" type="video/mp4">
+    <source src="/assets/media11/IMG_7055.mov" type="video/mp4">
   </video>
 </div>
 
