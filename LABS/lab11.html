@@ -235,7 +235,10 @@ window.MathJax = {
 
 <div class="info-card">
   <p> The estimated location of the robot at (5,-3) was off by 0.305 meters in 
-    the x-direction and 0.305 in the y-direction. 
+    the x-direction and 0.305 in the y-direction. The prediction here was worse than at the previous two 
+    locations because both corners of the right wall are generally less disinguashible compared to other 
+    locations in the map. It is also possible that the TOF sensors were moving during the robot rotation, leading to 
+    shorter readings and an estimate that is closer a wall.  
   </p>
    
 </div>
@@ -270,7 +273,11 @@ window.MathJax = {
 <img src="/assets/media11/(5,3)bel.png" width="90%" />
 
 <div class="info-card">
-  <p></p> 
+  <p> The estimated location of the robot at (5,3) matched the true position in 
+  the x-direction but was off by 0.304 meters in the y-direction. Similary 
+  to the last positon, the right top corner also did not produce very accurate results. The estimated position 
+  was again predicted to be closer to a wall ( in this case an obstacle wall) than the true location. The discrepency in the y-location 
+  could be attributed to the slight displacement of the robot closer to the obstacle during the 360 degree rotation.</p> 
 </div>
   
   <h3>Resources</h3>
