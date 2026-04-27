@@ -107,7 +107,7 @@ window.MathJax = {
      call my START_MAPPING command which performs the 360 degree robot rotation and then activate 
      my notification handler to receive time of flight and yaw data. The data transmission is triggered by 
      MAP_DATA command. On the python side, the handler waits for 36 readings, (18 tof and 18 yaw) and then stores 
-     the data in sensor_data.csv. 
+     the data in sensor_data.csv. I also had to turn the function asynchronous to be able to wait for the data to be transmitted before calling the localization function.
     </p>
 
 
