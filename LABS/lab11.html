@@ -102,9 +102,9 @@ window.MathJax = {
     <p>
      My observation loop reuses the bluetooth commands from lab 9 as well. I first 
      call my START_MAPPING command which performs the 360 degree robot rotation and then activate 
-     my notification handler to receive time of flight and yaw data. The data transmissio is triggered by 
+     my notification handler to receive time of flight and yaw data. The data transmission is triggered by 
      MAP_DATA command. On the python side, the handler waits for 36 readings, (18 tof and 18 yaw) and then stores 
-     the data is a sensor_data.csv file. 
+     the data in sensor_data.csv. 
     </p>
 
 
@@ -129,9 +129,6 @@ window.MathJax = {
      sensor_data.csv file and converts the tof and yaw data into numpy arrays suitable for 
      the localization function. 
 </p>
-
-
-<script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
 
 <h2>(-3,-2,0)</h2>
 
@@ -159,12 +156,16 @@ window.MathJax = {
 <h4>Belief</h4>
 <img src="/assets/media11/(-3,-2)bel.png" width="90%" />
 
+<div class="info-card">
+  <p> The prediction matched the true position very well, only 
+    being off by in the predicted orientation by 10 degrees. I did not 
+    expect the results to match the true position that well. The high accuracy 
+    of the results is likely due to the fact that at (-3,-2) robot sees 
+    two seprate obstacles and 3 close walls. 
+</div>
+
 
 <h2>(0,3,0)</h2>
-<div class="info-card">
-  <p>
-   </p>
-</div>
 
 <div class="video-center">
   <video controls width="80%" >
@@ -194,12 +195,17 @@ window.MathJax = {
 <h4>Belief</h4>
 <img src="/assets/media11/(0,3)bel.png" width="90%" />
 
+<div class="info-card">
+  <p>
+    The result at (0,3) was very similar to the result at (-3,-2) in that the predicted position was very close to the true position but the predicted orientation had 
+     a larger error of 30 degrees. Similarly to the previous position, the high accuracy is likely due to the robot seeing 
+     large portions of the map, both obstacles and close walls. 
+   </p>
+</div>
+
 
 <h2>(5,-3,0)</h2>
-<div class="info-card">
-  <p></p>
-   
-</div>
+
 <div class="video-center">
   <video controls width="80%" >
     <source src="/assets/media10/localizing2.mp4" type="video/mp4">
@@ -227,10 +233,16 @@ window.MathJax = {
 <h4>Belief</h4>
 <img src="/assets/media11/(5,-3)bel.png" width="90%" />
 
-<h2>(5,3,0)</h2>
 <div class="info-card">
-  <p></p> 
+  <p> The estimated location of the robot at (5,-3) was off by 0.305 meters in 
+    the x-direction and 0.305 in the y-direction. 
+  </p>
+   
 </div>
+
+
+<h2>(5,3,0)</h2>
+
 
 <div class="video-center">
   <video controls width="80%" >
@@ -257,7 +269,9 @@ window.MathJax = {
 <h4>Belief</h4>
 <img src="/assets/media11/(5,3)bel.png" width="90%" />
 
-
+<div class="info-card">
+  <p></p> 
+</div>
   
   <h3>Resources</h3>
     <p> I referenced Jack Long's code for ideas on how to pass the bluetooth data to the localization functions.  </p>
