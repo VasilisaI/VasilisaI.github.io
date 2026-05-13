@@ -85,6 +85,16 @@ window.MathJax = {
 
     </div>
   
+    <details>
+  <summary> </summary>
+
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
+</details>
+
+
   <h2> Complementary Filter Implementation</h2>
 
   <div class="info-card">
@@ -93,23 +103,11 @@ window.MathJax = {
   
 </div>
 
-  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-   <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
-</details>
-
-
-
-
-
-
   <h3>Test 1</h3>
-   
-  <h4>
-  <code class="inline-code">wheelie_balance_start(4.5f, 0.0f, 0.5f, 0.0f);</code>
-</h4>
 
+  <h4>
+  <code class="inline-code">(Kp=5.0, Ki=0.0f, Kd=0.05f, target=0.0f);</code>
+</h4>
    
   <div class="video-center">
   <video controls width="80%" >
@@ -129,9 +127,36 @@ window.MathJax = {
  
 <script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
 
-
   <h3>Test 2</h3>
+   <h4>
+  <code class="inline-code">(Kp=4.5f, Ki=0.0f, Kd=0.5f, target=0.0f);</code>
+</h4>
 
+
+<h4>Pitch and PWM vs. Time</h4>
+<img src="/assets/media12/v2_pitch_pwm.png" width="80%" />
+
+<div class="info-card">
+<p> I then experimented with decreasing Kp and increasing the Kd value which resulted in 
+  a lot more osscilation in the robot's response. 
+</p>
+
+
+<h3>Test 3</h3>
+   <h4>
+  <code class="inline-code">(Kp=5.5f, Ki=0.0f, Kd=0.2f, target=0.0f);</code>
+</h4>
+
+<div class="info-card">
+<p> For the following test, I added a warm up period of 500 ms which allowed the pitch measurement to stabilize berore 
+  the controller started responding. I added it because I noticed that the robot had a strong response to the initial 
+  pitch measurement and was very sensitive to the exact position that I held the robot in when I started the test. I also increased the motor 
+  deadband and swapped motor braking for motor stopping in my pid loop. 
+</p>
+
+<script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
+
+</div>
 
 
   <div class="video-center">
@@ -140,62 +165,58 @@ window.MathJax = {
   </video>
 </div>
 
+ <h4>Pitch vs. Time</h4>
+<img src="/assets/media12/pitch_v_target_better.png" width="80%" />
 
-  <h3> Test 3</h3>
+<h4>Error vs. Time</h4>
+<img src="/assets/media12/pitch_error_v_time_better.png" width="80%" />
+
+<h4>Pitch and PWM vs. Time</h4>
+<img src="/assets/media12/pitch_vs_pwm_vs_time_better.png" width="80%" />
+
+<div class="info-card">
+<p> This test resulted in a more stable response with more balancing. But the robot was still falling over. 
+</p>
 
 
-
-  <details>
-  <summary> </summary>
-
-<div style="display: flex; align-items: flex-start; padding-top: 15px;">
-  <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-   <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
-</details>
-
- <h2> DMP Implementation</h2>
-
+<h3> Test 3</h3>
+<h4>
+  <code class="inline-code">(Kp=4.0, Ki=0.0f, Kd=0.4f, target=5.0f);</code>
+</h4>
  <div class="info-card">
 <p>  
+It was difficult to determine the cause of the falling since I was catching the robot, so I tried to get a balancing result without my support. 
+</p>
 
+<h4>Pitch vs. Time</h4>
+<img src="/assets/media12/single_pitch_v_target.png" width="80%" />
+
+<h4>Pitch and PWM vs. Time</h4>
+<img src="/assets/media12/single_pitch_vs_pwm.png" width="80%" />
+
+<div class="info-card">
+<p>  
+ The test without support showed that the robot could balance but just for extremely short periods of time. Once the error 
+ got too high, the motors could not respond fast enough to correct the error and the robot would fall over.
+</p>
+
+  
+ <h2> DMP Implementation</h2>
+ <div class="info-card">
+<p>  
+After not getting significantly longer balancing times with the old PID controller, I switched my code to 
+use a DMP-based controller instead. I thought that the drift in the pitch measurments was causing the PID controller to have a hard time stabilizing the robot 
+even with tuning of the PID parameters. 
 </p>
   
 </div>
 
-  <h2></h2>
-   <div class="info-card">
 
-    <p>
-    
-    </p>
+<h3> DMP Test </h3>
+<h4>
+  <code class="inline-code">(Kp=4.0, Ki=0.0f, Kd=0.04f, target=0.0f);</code>
+</h4>
 
-</div>
-<details>
-  <summary></summary>
-
-  <div style="padding-top: 15px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
-
-    <div style="margin-bottom: 25px;">
-      <script src="https://gist.github.com/VasilisaI/5d36adf8b95348ecf94ca45ad866480b.js"></script>
-    </div>
-
-    <div style="margin-bottom: 25px;">
-      <script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
-    </div>
-  </div>
-</details>
-
-
-<div class="info-card">
-<p>
-     
-</p>
-
-</div>
-
-<h2></h2>
 
 <div class="video-center">
   <video controls width="80%" >
@@ -203,60 +224,25 @@ window.MathJax = {
   </video>
 </div>
 
-<img src="/assets/media12/pitch_error_v_time_good.png" width="80%" />
+
+<h4>Pitch vs. Time</h4>
 <img src="/assets/media12/pitch_v_time_good.png" width="80%" />
+
+<h4>Error vs. Time</h4>
+<img src="/assets/media12/pitch_error_v_time_good.png" width="80%" />
+
+<h4>Pitch and PWM vs. Time</h4>
 <img src="/assets/media12/pitch_vs_pwm_vs_time_good.png" width="80%" />
 
 
-<div class="info-card">
-  <p> 
-  </p>
+<h2>Conclusion</h2>
+   <div class="info-card">
+
+    <p>
+     
+    </p>
+
 </div>
-
-
-
-
-<div class="info-card">
-  <p>
-    
-   </p>
-</div>
-
-
-
-
-<div class="video-center">
-  <video controls width="80%" >
-    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
-  </video>
-</div>
-
-
-<img src="/assets/media11/(5,-3)plot.png" width="80%" />
-
-
-<div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start;">
-  <div style="width:45%; text-align:center;">
-    <p style="font-weight:bold; margin-bottom:5px;">ToF Measurements</p>
-    <img src="/assets/media11/(5,-3)tof.png"
-         style="width:100%; max-height:300px; object-fit:contain;" />
-  </div>
-
-  <div style="width:45%; text-align:center;">
-    <p style="font-weight:bold; margin-bottom:5px;">Yaw Angles</p>
-    <img src="/assets/media11/(5,-3)ang.png"
-         style="width:100%; max-height:300px; object-fit:contain;" />
-  </div>
-</div>
-
-
-
-<div class="info-card">
-  <p> 
-  </p>
-   
-</div>
-
 
 
 
@@ -265,7 +251,7 @@ window.MathJax = {
 </div>
   
   <h3>Resources</h3>
-    <p> I referenced Jack Long's code for ideas on how to pass the bluetooth data to the localization functions.  </p>
+    <p> I referenced   </p>
 
 </div>
 </body>
