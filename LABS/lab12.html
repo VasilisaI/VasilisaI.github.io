@@ -137,9 +137,9 @@ window.MathJax = {
   forwards. In the graphs of the pitch vs target, you could also see that the robot was not starting at a perfect zero degree vertical pitch, 
   so I also tried shifting the target pitch. 
 </p>
+</div>
 
-
-  <h3>Test 2</h3>
+<h3>Test 2</h3>
    <h4>
   <code class="inline-code">(Kp=4.5f, Ki=0.0f, Kd=0.5f, target=0.0f);</code>
 </h4>
@@ -152,7 +152,7 @@ window.MathJax = {
 <p> I then experimented with decreasing Kp and increasing the Kd value which resulted in 
   a lot more oscillation in the robot's response. 
 </p>
-
+</div>
 
 <h3>Test 3</h3>
    <h4>
@@ -171,7 +171,7 @@ window.MathJax = {
 <script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
 
 
-  <div class="video-center">
+<div class="video-center">
   <video controls width="80%" >
     <source src="/assets/media12/second.mov" type="video/mp4">
   </video>
@@ -189,7 +189,7 @@ window.MathJax = {
 <div class="info-card">
 <p> This test resulted in a more stable response with more balancing. But the robot was still falling over. 
 </p>
-
+</div>
 
 <h3> Test 3</h3>
 <h4>
@@ -199,6 +199,8 @@ window.MathJax = {
 <p>  
 It was difficult to determine the cause of the falling since I was catching the robot, so I tried to get a balancing result without my support. 
 </p>
+
+</div>
 
 <h4>Pitch vs. Time</h4>
 <img src="/assets/media12/single_pitch_v_target.png" width="80%" />
@@ -211,7 +213,7 @@ It was difficult to determine the cause of the falling since I was catching the 
  The test without support showed that the robot could balance but just for extremely short periods of time. Once the error 
  got too high, the motors could not respond fast enough to correct the error and the robot would fall over.
 </p>
-
+</div>
   
  <h2> DMP Implementation</h2>
  <div class="info-card">
