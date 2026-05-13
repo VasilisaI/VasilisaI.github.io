@@ -78,7 +78,7 @@ window.MathJax = {
 
    <div class="info-card">
     <p>
-      To implement the inverted pendulum stunt, I planned on reusing my orientation PID controller, now resturctured 
+      To implement the inverted pendulum stunt, I planned on reusing my orientation PID controller, now restructured 
       to control the motors based on the robot's pitch. The intended behavior was for the robot to balance by 
       driving forward as a response to forward pitch and driving backwards as a response to backward pitch. I eventually switched to a DMP-based controller 
       instead of a PID controller, which resulted in a significant increase in the balancing time of the robot.
@@ -94,7 +94,7 @@ window.MathJax = {
 
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
-    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+    <h4 style="margin: 0 0 10px 0;">Pitch PID Control Step</h4>
    <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
 </details>
 
@@ -130,7 +130,7 @@ window.MathJax = {
 <img src="/assets/media12/test_1_pwm_vs_time.png" width="80%" />
 
 <div class="info-card">
-<p> Visually, I saw that the robot was somewhat able to balance if driving backwards but was continously falling 
+<p> Visually, I saw that the robot was somewhat able to balance if driving backwards but was continuously falling 
   forwards. In the graphs of the pitch vs target, you could also see that the robot was not starting at a perfect zero degree vertical pitch, 
   so I also tried shifting the target pitch. 
 </p>
@@ -147,7 +147,7 @@ window.MathJax = {
 
 <div class="info-card">
 <p> I then experimented with decreasing Kp and increasing the Kd value which resulted in 
-  a lot more osscilation in the robot's response. 
+  a lot more oscillation in the robot's response. 
 </p>
 
 
@@ -214,7 +214,7 @@ It was difficult to determine the cause of the falling since I was catching the 
  <div class="info-card">
 <p>  
 After not getting significantly longer balancing times with the old PID controller, I switched my code to 
-use a DMP-based controller instead. I thought that the drift in the pitch measurments was causing the PID controller to have a hard time stabilizing the robot 
+use a DMP-based controller instead. I thought that the drift in the pitch measurements was causing the PID controller to have a hard time stabilizing the robot 
 even with tuning of the PID parameters. 
 </p>
   
@@ -248,10 +248,10 @@ even with tuning of the PID parameters.
    <div class="info-card">
 
     <p>
-     Switching from my pevious PID implementation to a DMP-based controller resulted in a significant increase in the balancing time of the robot
+     Switching from my previous PID implementation to a DMP-based controller resulted in a significant increase in the balancing time of the robot
      due to the DMP's ability to account for the drift in the pitch measurements. I also found that I needed to have a very high minimum 
-     motor response of about 70 - 80 PWM to prevent the robot from falling over. Lastly, I had a condition to break the motors when 
-     the error was too small the motors would break instead of stopping, but I found that switching to a full abrupt stop resulted in better balancing. 
+     motor response of about 70 - 80 PWM to prevent the robot from falling over. Lastly, I had a condition to brake the motors when 
+     the error was too small the motors would brake instead of stopping, but I found that switching to a full abrupt stop resulted in better balancing. 
 </div>
 
   
