@@ -239,9 +239,10 @@ even with tuning of the PID parameters.
    <div class="info-card">
 
     <p>
-     
-    </p>
-
+     Switching from my pevious PID implementation to a DMP-based controller resulted in a significant increase in the balancing time of the robot
+     due to the DMP's ability to account for the drift in the pitch measurements. I also found that I needed to have a very high minimum 
+     motor response of about 70 - 80 PWM to prevent the robot from falling over. Lastly, I had a condition to break the motors when 
+     the error was too small the motors would break instead of stopping, but I found that switching to a full abrupt stop resulted in better balancing. 
 </div>
 
 
