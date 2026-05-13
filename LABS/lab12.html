@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-US">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 12: Inverted Pendulum</title>
+  
+  <link rel="stylesheet" href="/LABS/style.css">
+  <style>
+    body {
+      background-color: #a897d0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .wrapper {
+      background: #ffffff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .img-grid {
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .img-grid img {
+      width: 49%; 
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .info-card {
+      background: #f4f4f4;
+      border-left: 5px solid #a897d0;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    img, video {
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    h1, h3, h4, h5 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  
+   <h2>Overview</h2>
+
+   <div class="info-card">
+    <p>
+      To implement the inverted pendulum stunt, I planned on reusing my orientation PID controller, now resturctured 
+      to control the motors based on the robot's pitch. The intended behavior was for the robot to balance by 
+      driving forward as a response to forward pitch and driving backwards as a response to backward pitch. 
+    </p>
+
+    </div>
+  
+  <h2> Complementary Filter Implementation</h2>
+
+  <div class="info-card">
+<p> Visually, I saw that the robot was somewhat able to balance if driving backwards but 
+</p>
+  
+</div>
+
+  <div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
+</details>
+
+
+
+
+  <h3>Test 1</h3>
+   
+   
+  <div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media12/First.mov" type="video/mp4">
+  </video>
+</div>
+ <h4>Pitch vs. Time</h4>
+<img src="/assets/media12/test1_pitch_v_target.png" width="80%" />
+
+<h4>Error vs. Time</h4>
+<img src="/assets/media12/test1_pitch_err_v_time.png" width="80%" />
+
+<h4>Pitch and PWM vs. Time</h4>
+<img src="/assets/media12/test_1_pwm_vs_time.png" width="80%" />
+
+
+ 
+<script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
+
+
+  <h3>Test 2</h3>
+
+
+
+  <div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media12/second.mov" type="video/mp4">
+  </video>
+</div>
+
+
+  <h3> Test 3</h3>
+
+
+
+  <details>
+  <summary> </summary>
+
+<div style="display: flex; align-items: flex-start; padding-top: 15px;">
+  <div style="flex: 1; padding-right: 20px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+   <script src="https://gist.github.com/VasilisaI/28e598f8706bbb77d00f3e51623b630b.js"></script>
+</details>
+
+ <h2> DMP Implementation</h2>
+
+ <div class="info-card">
+<p>  
+
+</p>
+  
+</div>
+
+  <h2></h2>
+   <div class="info-card">
+
+    <p>
+    
+    </p>
+
+</div>
+<details>
+  <summary></summary>
+
+  <div style="padding-top: 15px;">
+    <h4 style="margin: 0 0 10px 0;">Artemis Code</h4>
+
+    <div style="margin-bottom: 25px;">
+      <script src="https://gist.github.com/VasilisaI/5d36adf8b95348ecf94ca45ad866480b.js"></script>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <script src="https://gist.github.com/VasilisaI/28f31d1bc806bbb288cf5f509186b28c.js"></script>
+    </div>
+  </div>
+</details>
+
+
+<div class="info-card">
+<p>
+     
+</p>
+
+</div>
+
+<h2></h2>
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media12/good.mov" type="video/mp4">
+  </video>
+</div>
+
+<img src="/assets/media12/pitch_error_v_time_good.png" width="80%" />
+<img src="/assets/media12/pitch_v_time_good.png" width="80%" />
+<img src="/assets/media12/pitch_vs_pwm_vs_time_good.png" width="80%" />
+
+
+<h4>Belief</h4>
+<img src="/assets/media11/(-3,-2)bel.png" width="90%" />
+
+<div class="info-card">
+  <p> 
+  </p>
+</div>
+
+
+
+
+<div class="info-card">
+  <p>
+    
+   </p>
+</div>
+
+
+
+
+<div class="video-center">
+  <video controls width="80%" >
+    <source src="/assets/media10/localizing2.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<img src="/assets/media11/(5,-3)plot.png" width="80%" />
+
+
+<div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start;">
+  <div style="width:45%; text-align:center;">
+    <p style="font-weight:bold; margin-bottom:5px;">ToF Measurements</p>
+    <img src="/assets/media11/(5,-3)tof.png"
+         style="width:100%; max-height:300px; object-fit:contain;" />
+  </div>
+
+  <div style="width:45%; text-align:center;">
+    <p style="font-weight:bold; margin-bottom:5px;">Yaw Angles</p>
+    <img src="/assets/media11/(5,-3)ang.png"
+         style="width:100%; max-height:300px; object-fit:contain;" />
+  </div>
+</div>
+
+
+
+<div class="info-card">
+  <p> 
+  </p>
+   
+</div>
+
+
+
+
+<div class="info-card">
+  <p> </p> 
+</div>
+  
+  <h3>Resources</h3>
+    <p> I referenced Jack Long's code for ideas on how to pass the bluetooth data to the localization functions.  </p>
+
+</div>
+</body>
+</html>
