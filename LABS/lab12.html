@@ -80,13 +80,17 @@ window.MathJax = {
     <p>
       To implement the inverted pendulum stunt, I planned on reusing my orientation PID controller, now resturctured 
       to control the motors based on the robot's pitch. The intended behavior was for the robot to balance by 
-      driving forward as a response to forward pitch and driving backwards as a response to backward pitch. 
+      driving forward as a response to forward pitch and driving backwards as a response to backward pitch. I eventually switched to a DMP-based controller 
+      instead of a PID controller, which resulted in a significant increase in the balancing time of the robot.
     </p>
 
     </div>
   
     <details>
   <summary> </summary>
+
+  <h2> Complementary Filter Implementation</h2>
+  
 
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
@@ -98,7 +102,9 @@ window.MathJax = {
   <h2> Complementary Filter Implementation</h2>
 
   <div class="info-card">
-<p> Visually, I saw that the robot was somewhat able to balance if driving backwards but 
+<p> My first implementation reused my PID code and had pitch calculated via raw IMU readings that were filtered using the 
+  complementary filter. In my implementation, forward pitch is registered as negative and backward pitch is registred as positive, so the 
+  motor response signs are flipped as well. 
 </p>
   
 </div>
@@ -123,9 +129,12 @@ window.MathJax = {
 <h4>Pitch and PWM vs. Time</h4>
 <img src="/assets/media12/test_1_pwm_vs_time.png" width="80%" />
 
+<div class="info-card">
+<p> Visually, I saw that the robot was somewhat able to balance if driving backwards but was continously falling 
+  forwards. In the graphs of the pitch vs target, you could also see that the robot was not starting at a perfect zero degree vertical pitch, 
+  so I also tried shifting the target pitch. 
+</p>
 
- 
-<script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
 
   <h3>Test 2</h3>
    <h4>
@@ -148,15 +157,15 @@ window.MathJax = {
 </h4>
 
 <div class="info-card">
-<p> For the following test, I added a warm up period of 500 ms which allowed the pitch measurement to stabilize berore 
+<p> For the following test, I added a warm up period of 500 ms which allowed the pitch measurement to stabilize before 
   the controller started responding. I added it because I noticed that the robot had a strong response to the initial 
   pitch measurement and was very sensitive to the exact position that I held the robot in when I started the test. I also increased the motor 
-  deadband and swapped motor braking for motor stopping in my pid loop. 
+  deadband and swapped motor braking for motor stopping in my PID loop. 
 </p>
 
-<script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
-
 </div>
+
+<script src="https://gist.github.com/VasilisaI/6a4c9c0921de3dc449b38c6837f832cb.js"></script>
 
 
   <div class="video-center">
@@ -245,11 +254,6 @@ even with tuning of the PID parameters.
      the error was too small the motors would break instead of stopping, but I found that switching to a full abrupt stop resulted in better balancing. 
 </div>
 
-
-
-<div class="info-card">
-  <p> </p> 
-</div>
   
   <h3>Resources</h3>
     <p> I referenced Stephan Wagner's code.   </p>
