@@ -86,11 +86,22 @@ window.MathJax = {
 
     </div>
   
-    <details>
-  <summary> </summary>
-
-  <h2> Complementary Filter Implementation</h2>
   
+
+  
+  
+  <h2> Complementary Filter Implementation</h2>
+
+  <div class="info-card">
+<p> My first implementation reused my PID code and had pitch calculated via raw IMU readings that were filtered using the 
+  complementary filter. In my implementation, forward pitch is registered as negative and backward pitch is registred as positive, so the 
+  motor response signs are flipped as well. 
+</p>
+
+</div>
+
+ <details>
+  <summary> </summary> 
 
 <div style="display: flex; align-items: flex-start; padding-top: 15px;">
   <div style="flex: 1; padding-right: 20px;">
@@ -99,15 +110,7 @@ window.MathJax = {
 </details>
 
 
-  <h2> Complementary Filter Implementation</h2>
 
-  <div class="info-card">
-<p> My first implementation reused my PID code and had pitch calculated via raw IMU readings that were filtered using the 
-  complementary filter. In my implementation, forward pitch is registered as negative and backward pitch is registred as positive, so the 
-  motor response signs are flipped as well. 
-</p>
-  
-</div>
 
   <h3>Test 1</h3>
 
